@@ -1,4 +1,5 @@
 import flet as ft
+import flet_route
 from flet_route import Params, Basket
 
 def home(page: ft.Page, params: Params, basket: Basket):
