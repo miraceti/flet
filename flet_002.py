@@ -16,7 +16,7 @@ def main(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.add(ft.SafeArea(ft.Text("Hello, Flet! \nil y a \n\n" + 
                                  str(nb_exo) + 
-                                 " \n\nexoplanètes de découvertes actuellement")))
+                                 " \n\nexoplanètes découvertes actuellement")))
 
 
 ft.app(main)
