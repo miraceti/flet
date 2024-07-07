@@ -176,7 +176,7 @@ class Expense(UserControl):
             runs_count=0,
             spacing=12,
             run_spacing=5,
-            horizontal=True,
+           
         )
 
         self.main_content_area = Container(
