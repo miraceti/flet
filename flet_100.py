@@ -19,7 +19,7 @@ def main(page:Page):
 	selected_index = 0,
 	destinations = [
 	NavigationBarDestination(icon="home"),
-	NavigationBarDestination(icon="explore"),
+	NavigationBarDestination(icon="explore"),  
 	NavigationBarDestination(icon="settings"),
     NavigationBarDestination(icon=icons.ROCKET),
 	]
