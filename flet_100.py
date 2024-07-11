@@ -18,10 +18,10 @@ def main(page:Page):
 	on_change=changetab,
 	selected_index = 0,
 	destinations = [
-	NavigationDestination(icon="home"),
-	NavigationDestination(icon="explore"),
-	NavigationDestination(icon="settings"),
-    NavigationDestination(icon=icons.ROCKET),
+	NavigationBarDestination(icon="home"),
+	NavigationBarDestination(icon="explore"),
+	NavigationBarDestination(icon="settings"),
+    NavigationBarDestination(icon=icons.ROCKET),
 	]
 	)
 
