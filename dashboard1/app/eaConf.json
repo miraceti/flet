@@ -1,0 +1,23 @@
+[
+    {
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>": "<VOTABLE version=\"1.4\" xmlns=\"http://www.ivoa.net/xml/VOTable/v1.3\">"
+    },
+    {
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>": "<RESOURCE type=\"results\">"
+    },
+    {
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>": "<INFO name=\"QUERY_STATUS\" value=\"ERROR\">"
+    },
+    {
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>": "ORA-00904: 'SY_DISTDISC_YEAR': invalid identifier"
+    },
+    {
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>": "</INFO>"
+    },
+    {
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>": "</RESOURCE>"
+    },
+    {
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>": "</VOTABLE>"
+    }
+]

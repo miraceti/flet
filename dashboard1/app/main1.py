@@ -22,15 +22,39 @@ def main(page: ft.Page):
     page.add(
         ft.Row(
             expand= True,
+            height= 5.0,
             controls=[
             ft.Column(
                 expand= True,
                 controls=[graph_one],
 
             ),
+            ft.Column(
+                expand= True,
+                controls=[graph_one],
+
+            )
+              
+            ]
+        ),
+        ft.Row(
+            expand= True,
+            height= 5.0,
+            controls=[
+            ft.Column(
+                expand= True,
+                controls=[graph_one],
+
+            ),
+            ft.Column(
+                expand= True,
+                controls=[graph_one],
+
+            )
               
             ]
         )
+        
     )
 
     
