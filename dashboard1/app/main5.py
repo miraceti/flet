@@ -3,7 +3,7 @@ import flet as ft
 name = "NavigationBar Example"
 
 
-def example():
+def example(self):
     class Example(ft.Column):
         def __init__(self):
             super().__init__()
@@ -37,3 +37,5 @@ def example():
     navigation_bar_example = Example()
 
     return navigation_bar_example
+
+ft.app(target=example)
