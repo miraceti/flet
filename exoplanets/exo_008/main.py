@@ -180,6 +180,7 @@ class Exoplanet(Stack):
                                                     margin=10,
                                                     padding=10,
                                                     alignment=ft.alignment.center,
+                                                    bgcolor=ft.colors.RED_200,
                                                     width=20,
                                                     height=30,
                                                     border_radius=10,
@@ -225,13 +226,13 @@ class Exoplanet(Stack):
                                                     alignment='center',
                                                     horizontal_alignment='start',
                                                     controls=[
-                                                        Container(
-                                                            width=40,
-                                                            height=150,
-                                                            bgcolor='white10',
-                                                            border_radius=14,
-                                                            content=self.icon_column,
-                                                        )
+                                                        # Container(
+                                                        #     width=40,
+                                                        #     height=150,
+                                                        #     bgcolor='white10',
+                                                        #     border_radius=14,
+                                                        #     # content=self.icon_column,
+                                                        # )
                                                     ]
                                                 )
                                             ],
