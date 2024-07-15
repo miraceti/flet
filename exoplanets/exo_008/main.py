@@ -79,20 +79,20 @@ class Exoplanet(Stack):
 
         )
 
-        self.notification = self.icon(icons.NOTIFICATIONS, 'white54', True)
-        self.hide = self.icon(icons.HIDE_SOURCE, 'white54', False)
-        self.chat = self.icon(icons.CHAT_ROUNDED, 'white54', False)
+        # self.notification = self.icon(icons.NOTIFICATIONS, 'white54', True)
+        # self.hide = self.icon(icons.HIDE_SOURCE, 'white54', False)
+        # self.chat = self.icon(icons.CHAT_ROUNDED, 'white54', False)
 
 
-        self.icon_column=Column(
-            alignment='center',
-            spacing=5,
-            controls=[
-                self.notification,
-                self.hide,
-                self.chat,
-            ],
-        )
+        # self.icon_column=Column(
+        #     alignment='center',
+        #     spacing=5,
+        #     controls=[
+        #         self.notification,
+        #         self.hide,
+        #         self.chat,
+        #     ],
+        # )
 
         self.inner_green_container = Container(
             width=self.green_container.width,
@@ -143,7 +143,7 @@ class Exoplanet(Stack):
                                                 Row(
                                                     [
                                                 ft.Container(
-                                                    content=ft.Text("Non clickable"),
+                                                    content=ft.Text("C0"),
                                                     margin=10,
                                                     padding=10,
                                                     alignment=ft.alignment.center,
@@ -151,9 +151,10 @@ class Exoplanet(Stack):
                                                     width=20,
                                                     height=30,
                                                     border_radius=10,
+                                                    on_click=lambda e: print("JAUNE"),
                                                 ),
                                                 ft.Container(
-                                                    content=ft.Text("Clickable without Ink"),
+                                                    content=ft.Text("C1"),
                                                     margin=10,
                                                     padding=10,
                                                     alignment=ft.alignment.center,
@@ -161,10 +162,10 @@ class Exoplanet(Stack):
                                                     width=20,
                                                     height=30,
                                                     border_radius=10,
-                                                    on_click=lambda e: print("Clickable without Ink clicked!"),
+                                                    on_click=lambda e: print("VERT"),
                                                 ),
                                                 ft.Container(
-                                                    content=ft.Text("Clickable with Ink"),
+                                                    content=ft.Text("C2"),
                                                     margin=10,
                                                     padding=10,
                                                     alignment=ft.alignment.center,
@@ -173,10 +174,10 @@ class Exoplanet(Stack):
                                                     height=30,
                                                     border_radius=10,
                                                     ink=True,
-                                                    on_click=lambda e: print("Clickable with Ink clicked!"),
+                                                    on_click=lambda e: print("CYAN"),
                                                 ),
                                                 ft.Container(
-                                                    content=ft.Text("Clickable transparent with Ink"),
+                                                    content=ft.Text("C3"),
                                                     margin=10,
                                                     padding=10,
                                                     alignment=ft.alignment.center,
@@ -185,7 +186,7 @@ class Exoplanet(Stack):
                                                     height=30,
                                                     border_radius=10,
                                                     ink=True,
-                                                    on_click=lambda e: print("Clickable transparent with Ink clicked!"),
+                                                    on_click=lambda e: print("ROUGE"),
                                                 ),
                                             ],
                                             alignment=ft.MainAxisAlignment.CENTER,
@@ -389,9 +390,9 @@ class Exoplanet(Stack):
 
         self.main.content = self.main_col
 
-        for icon in self.icon_column.controls[:]:
-            if icon.selected== True:
-                icon.icon_color = 'white'
+        # for icon in self.icon_column.controls[:]:
+        #     if icon.selected== True:
+        #         icon.icon_color = 'white'
         
         return self.main
 
