@@ -3,13 +3,22 @@ from flet import (
     UserControl, Page, Column, Row, icons,
     Container, Text, padding, alignment,
     LinearGradient,IconButton,GridView,
-    transform, animation,colors,Stack
-    )
-
+    transform, animation,colors,Stack,
+        )
 import flet as ft
 from urllib.request import urlopen
 import json
+from flet_route import(
+    Routing, path,
+)
 
+from views import home
+from views import page1
+from views import page2
+import datetime
+import pandas as pd
+
+#######################
 urlexo1 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+count(pl_name)+as+nbe+from+ps+where+default_flag=1&format=json"
 print(urlexo1)
 data = json.loads(urlopen(urlexo1).read().decode("utf-8"))
@@ -18,7 +27,32 @@ data0=data[0]
 # print(data0)
 nb_exoplanets= data0['nbe']
 print(nb_exoplanets)
+######################
+now = datetime.date.today()
+y0 = now.year
+print(y0)
 
+############################################################
+#data de champs multiples
+urlexo7 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+\
+pl_name,hostname,pl_letter,pl_bmasse,pl_bmassj,pl_rade,pl_radj,pl_orbper,pl_dens,pl_trandur,pl_ratror,\
+sy_snum,sy_pnum,sy_mnum,st_mass,st_lum,st_age,st_dens,sy_dist,disc_year,disc_telescope,discoverymethod\
++from+ps+where+default_flag=1&format=json"
+
+list7 = json.loads(urlopen(urlexo7).read().decode("utf-8"))
+df_exo7 = pd.DataFrame.from_records(list7)
+print(df_exo7)
+
+#############################################################
+#nombre de planetes par années
+nb_df_exo7_disc_year_now0=df_exo7[df_exo7['disc_year'] == (y0)].groupby(['disc_year'])['pl_name'].count()[y0]
+nb_df_exo7_disc_year_now1=df_exo7[df_exo7['disc_year'] == (y0-1)].groupby(['disc_year'])['pl_name'].count()[y0-1]
+nb_df_exo7_disc_year_now2=df_exo7[df_exo7['disc_year'] == (y0-2)].groupby(['disc_year'])['pl_name'].count()[y0-2]
+nb_df_exo7_disc_year_now3=df_exo7[df_exo7['disc_year'] == (y0-3)].groupby(['disc_year'])['pl_name'].count()[y0-3]
+nb_df_exo7_disc_year_now4=df_exo7[df_exo7['disc_year'] == (y0-4)].groupby(['disc_year'])['pl_name'].count()[y0-4]
+nb_df_exo7_disc_year_now5=df_exo7[df_exo7['disc_year'] == (y0-5)].groupby(['disc_year'])['pl_name'].count()[y0-5]
+
+#############################################################
 
 class Exoplanet(Stack):
 
@@ -61,7 +95,7 @@ class Exoplanet(Stack):
 
     def MainContainer(self):
         self.main =Container(
-            width=290, height=600, bgcolor='black', 
+            width=300, height=600, bgcolor='black', 
             border_radius=35, padding=8,
         )
 
@@ -173,7 +207,7 @@ class Exoplanet(Stack):
                                                     width=20,
                                                     height=30,
                                                     border_radius=10,
-                                                    ink=True,
+                                                    # ink=True,
                                                     on_click=lambda e: print("CYAN"),
                                                 ),
                                                 ft.Container(
@@ -185,7 +219,7 @@ class Exoplanet(Stack):
                                                     width=20,
                                                     height=30,
                                                     border_radius=10,
-                                                    ink=True,
+                                                    # ink=True,
                                                     on_click=lambda e: print("ROUGE"),
                                                 ),
                                             ],
@@ -280,18 +314,10 @@ class Exoplanet(Stack):
                         controls=[
                             Container(
                                 content=Text(
-                                    'Recent Transfert',
+                                    'Nombres planètes par distances',
                                     size=14,
                                     color='white',
                                     weight='bold',
-                                )
-                            ),
-                            Container(
-                                content=Text(
-                                    'view all',
-                                    size=10,
-                                    color='white54',
-                                    weight='w400',
                                 )
                             ),
                         ]
@@ -306,18 +332,10 @@ class Exoplanet(Stack):
                         controls=[
                             Container(
                                 content=Text(
-                                    'Pending Patments',
+                                    'Nombres planetes par années',
                                     size=14,
                                     color='white',
                                     weight='bold',
-                                )
-                            ),
-                            Container(
-                                content=Text(
-                                    'view all',
-                                    size=10,
-                                    color='white54',
-                                    weight='w400',
                                 )
                             ),
                         ],
@@ -340,12 +358,12 @@ class Exoplanet(Stack):
             self.grid_transfers.controls.append(__)
 
         payment_list = [
-            ["utilities", "$523.23"],
-            ["Phone Bill", "$102.32"],
-            ["Insurance", "$128.51"],
-            ["Gas", "$45.65"],
-            ["Groceries", "$289.42"],
-            ["Documents", "$77.82"],
+            [str(y0), str(nb_df_exo7_disc_year_now0)],
+            [str(y0 - 1), str(nb_df_exo7_disc_year_now1)],
+            [str(y0 - 2), str(nb_df_exo7_disc_year_now2)],
+            [str(y0 - 3), str(nb_df_exo7_disc_year_now3)],
+            [str(y0 - 4), str(nb_df_exo7_disc_year_now4)],
+            [str(y0 - 5), str(nb_df_exo7_disc_year_now5)],
         ]
         for i in payment_list:
             __ = Container(
@@ -390,11 +408,13 @@ class Exoplanet(Stack):
 
         self.main.content = self.main_col
 
+            
         # for icon in self.icon_column.controls[:]:
         #     if icon.selected== True:
         #         icon.icon_color = 'white'
         
         return self.main
+    
 
     def build(self):
         return Column(controls=[self.MainContainer(),])
