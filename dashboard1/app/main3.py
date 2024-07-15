@@ -56,7 +56,7 @@ def new_scrape():
         # Table columns: https://exoplanetarchive.ipac.caltech.edu/docs/API_PS_columns.html
         "select"   : "pl_name,hostname,pl_letter,pl_bmasse,pl_bmassj,pl_rade,pl_radj,"
                      "pl_orbper,pl_dens,pl_trandur,pl_ratror,"
-                     "sy_snum,sy_pnum,sy_mnum,st_mass,st_lum,st_age,st_dens,sy_dist"
+                     "sy_snum,sy_pnum,sy_mnum,st_mass,st_lum,st_age,st_dens,sy_dist,"
                      "disc_year,disc_telescope,discoverymethod",
         "from"     : "pscomppars", # Table name
         "order by" : "pl_name",
