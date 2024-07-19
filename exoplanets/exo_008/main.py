@@ -53,6 +53,18 @@ nb_df_exo7_disc_year_now4=df_exo7[df_exo7['disc_year'] == (y0-4)].groupby(['disc
 nb_df_exo7_disc_year_now5=df_exo7[df_exo7['disc_year'] == (y0-5)].groupby(['disc_year'])['pl_name'].count()[y0-5]
 
 #############################################################
+#############################################################
+#nombre de planetes par distances
+nb_df_exo7_disc_dist_y0=df_exo7[df_exo7['sy_dist'] < 10.00]['pl_name'].count()
+nb_df_exo7_disc_dist_y1=df_exo7[(df_exo7['sy_dist'] >= 10.00)&(df_exo7['sy_dist'] < 20.00)]['pl_name'].count()
+nb_df_exo7_disc_dist_y2=df_exo7[(df_exo7['sy_dist'] >= 20.00)&(df_exo7['sy_dist'] < 30.00)]['pl_name'].count()
+nb_df_exo7_disc_dist_y3=df_exo7[(df_exo7['sy_dist'] >= 30.00)&(df_exo7['sy_dist'] < 40.00)]['pl_name'].count()
+nb_df_exo7_disc_dist_y4=df_exo7[(df_exo7['sy_dist'] >= 40.00)&(df_exo7['sy_dist'] < 50.00)]['pl_name'].count()
+nb_df_exo7_disc_dist_y5=df_exo7[(df_exo7['sy_dist'] >= 50.00)&(df_exo7['sy_dist'] < 60.00)]['pl_name'].count()
+nb_df_exo7_disc_dist_y6=df_exo7[(df_exo7['sy_dist'] >= 60.00)&(df_exo7['sy_dist'] < 70.00)]['pl_name'].count()
+nb_df_exo7_disc_dist_y7=df_exo7[(df_exo7['sy_dist'] >= 70.00)]['pl_name'].count()
+print(nb_df_exo7_disc_dist_y0)
+#############################################################
 
 class Exoplanet(Stack):
 
@@ -177,9 +189,9 @@ class Exoplanet(Stack):
                                                 Row(
                                                     [
                                                 ft.Container(
-                                                    content=ft.Text("C0"),
-                                                    margin=10,
-                                                    padding=10,
+                                                    content=ft.Text("0"),
+                                                    margin=5,
+                                                    padding=5,
                                                     alignment=ft.alignment.center,
                                                     bgcolor=ft.colors.AMBER,
                                                     width=20,
@@ -188,9 +200,9 @@ class Exoplanet(Stack):
                                                     on_click=lambda e: print("JAUNE"),
                                                 ),
                                                 ft.Container(
-                                                    content=ft.Text("C1"),
-                                                    margin=10,
-                                                    padding=10,
+                                                    content=ft.Text("1"),
+                                                    margin=5,
+                                                    padding=5,
                                                     alignment=ft.alignment.center,
                                                     bgcolor=ft.colors.GREEN_200,
                                                     width=20,
@@ -199,9 +211,9 @@ class Exoplanet(Stack):
                                                     on_click=lambda e: print("VERT"),
                                                 ),
                                                 ft.Container(
-                                                    content=ft.Text("C2"),
-                                                    margin=10,
-                                                    padding=10,
+                                                    content=ft.Text("2"),
+                                                    margin=5,
+                                                    padding=5,
                                                     alignment=ft.alignment.center,
                                                     bgcolor=ft.colors.CYAN_200,
                                                     width=20,
@@ -211,9 +223,9 @@ class Exoplanet(Stack):
                                                     on_click=lambda e: print("CYAN"),
                                                 ),
                                                 ft.Container(
-                                                    content=ft.Text("C3"),
-                                                    margin=10,
-                                                    padding=10,
+                                                    content=ft.Text("3"),
+                                                    margin=5,
+                                                    padding=5,
                                                     alignment=ft.alignment.center,
                                                     bgcolor=ft.colors.RED_200,
                                                     width=20,
@@ -345,7 +357,14 @@ class Exoplanet(Stack):
             ),
         )
 
-        info_list = ["PH","SD","WQ","KG","TY","SB","LP","LK"]
+        info_list = [["10", str(nb_df_exo7_disc_dist_y0)],
+                     ["20", str(nb_df_exo7_disc_dist_y1)],
+                     ["30", str(nb_df_exo7_disc_dist_y2)],
+                     ["40", str(nb_df_exo7_disc_dist_y3)],
+                     ["50", str(nb_df_exo7_disc_dist_y4)],
+                     ["60", str(nb_df_exo7_disc_dist_y5)],
+                     ["70", str(nb_df_exo7_disc_dist_y6)],
+                     ["80", str(nb_df_exo7_disc_dist_y7)]]
         for i in info_list:
             __ = Container(
                 width=100,
@@ -356,6 +375,16 @@ class Exoplanet(Stack):
                 content = Text( f'{i}',color='white', weight='bold' ),
             )
             self.grid_transfers.controls.append(__)
+
+            for x in i:
+                __.content = Column(
+                    alignment='center',
+                    horizontal_alignment='center',
+                    controls=[
+                        Text(f'{i[0]}', size=11, color='yellow54'),
+                        Text(f'{i[1]}', size=16,color='white', weight='bold'),
+                    ]
+                )
 
         payment_list = [
             [str(y0), str(nb_df_exo7_disc_year_now0)],
@@ -382,7 +411,7 @@ class Exoplanet(Stack):
                     alignment='center',
                     horizontal_alignment='center',
                     controls=[
-                        Text(f'{i[0]}', size=11, color='white54'),
+                        Text(f'{i[0]}', size=11, color='yellow54'),
                         Text(f'{i[1]}', size=16,color='white', weight='bold'),
 
                         Text(
