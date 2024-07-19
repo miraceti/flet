@@ -8,13 +8,7 @@ from flet import (
 import flet as ft
 from urllib.request import urlopen
 import json
-from flet_route import(
-    Routing, path,
-)
 
-from views import home
-from views import page1
-from views import page2
 import datetime
 import pandas as pd
 
