@@ -186,7 +186,7 @@ class Exoplanet(Stack):
 
     def MainContainer(self):
         self.main =Container(
-            width=300, height=600, bgcolor='black', 
+            width=350, height=700, bgcolor='black', 
             border_radius=35, padding=8,
         )
 
@@ -268,7 +268,7 @@ class Exoplanet(Stack):
                                                 Row(
                                                     [
                                                 ft.Container(
-                                                    content=ft.Text("0"),
+                                                    content=ft.Text("0",color=colors.BLACK,weight='bold'),
                                                     margin=5,
                                                     padding=5,
                                                     alignment=ft.alignment.center,
@@ -279,7 +279,7 @@ class Exoplanet(Stack):
                                                     on_click=lambda e: print("JAUNE"),
                                                 ),
                                                 ft.Container(
-                                                    content=ft.Text("1"),
+                                                    content=ft.Text("1",color=colors.BLACK,weight='bold'),
                                                     margin=5,
                                                     padding=5,
                                                     alignment=ft.alignment.center,
@@ -290,7 +290,7 @@ class Exoplanet(Stack):
                                                     on_click=lambda e: print("VERT"),
                                                 ),
                                                 ft.Container(
-                                                    content=ft.Text("2"),
+                                                    content=ft.Text("2",color=colors.BLACK,weight='bold'),
                                                     margin=5,
                                                     padding=5,
                                                     alignment=ft.alignment.center,
@@ -302,7 +302,7 @@ class Exoplanet(Stack):
                                                     on_click=lambda e: print("CYAN"),
                                                 ),
                                                 ft.Container(
-                                                    content=ft.Text("3"),
+                                                    content=ft.Text("3",color=colors.BLACK,weight='bold'),
                                                     margin=5,
                                                     padding=5,
                                                     alignment=ft.alignment.center,
@@ -373,7 +373,7 @@ class Exoplanet(Stack):
             ),
         )
 
-        self.grid_transfers = GridView(
+        self.grid_distances = GridView(
             expand=True,
             max_extent=150,
             runs_count=0,
@@ -382,7 +382,7 @@ class Exoplanet(Stack):
             horizontal=True,
         )
 
-        self.grid_payments = GridView(
+        self.grid_decouverte = GridView(
             expand=True,
             max_extent=150,
             runs_count=0,
@@ -415,7 +415,7 @@ class Exoplanet(Stack):
                     ),
                     Container(
                         height=50,
-                        content=self.grid_transfers,
+                        content=self.grid_distances,
                     ),
                     Row(
                         alignment='spaceBetween',
@@ -431,12 +431,12 @@ class Exoplanet(Stack):
                             ),
                         ],
                     ),
-                    self.grid_payments,
+                    self.grid_decouverte,
                 ],
             ),
         )
 
-        info_list = [["10", str(d10)],
+        distance_list = [["10", str(d10)],
                      ["20", str(d20)],
                      ["30", str(d30)],
                      ["40", str(d40)],
@@ -447,7 +447,7 @@ class Exoplanet(Stack):
                      ["90", str(d90)],
                      ["100", str(d100)],
                      ]
-        for i in info_list:
+        for i in distance_list:
             __ = Container(
                 width=100,
                 height=100,
@@ -456,7 +456,7 @@ class Exoplanet(Stack):
                 alignment=alignment.center,
                 content = Text( f'{i}',color='white', weight='bold' ),
             )
-            self.grid_transfers.controls.append(__)
+            self.grid_distances.controls.append(__)
 
             for x in i:
                 __.content = Column(
@@ -468,7 +468,7 @@ class Exoplanet(Stack):
                     ]
                 )
 
-        payment_list = [
+        decouverte_list = [
             [str(y0), str(y1)],
             [str(y0 - 1), str(y2)],
             [str(y0 - 2), str(y3)],
@@ -480,7 +480,7 @@ class Exoplanet(Stack):
             [str(y0 - 8), str(y9)],
             [str(y0 - 9), str(y10)],       
         ]
-        for i in payment_list:
+        for i in decouverte_list:
             __ = Container(
                 width=100,
                 height=100,
@@ -490,7 +490,7 @@ class Exoplanet(Stack):
                 content = Text( f'{i}',color='white', weight='bold' ),
                 on_hover=lambda e: self.hover_animation(e),
             )
-            self.grid_payments.controls.append(__)
+            self.grid_decouverte.controls.append(__)
 
             for x in i:
                 __.content = Column(
