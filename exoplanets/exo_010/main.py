@@ -146,9 +146,16 @@ print(d80)
 print(d90)
 print(d100)
 
+col1=str("col1")
+col2=str("col2")
+col3=str("col3")
+
 #############################################################
 
 class Exoplanet(Stack):
+
+    def colnom_0(self,e):
+            datatable.columns[0].label="col01"
 
     def hover_animation(self, e):
         if e.data == 'true':
@@ -279,7 +286,7 @@ class Exoplanet(Stack):
                                                     width=20,
                                                     height=30,
                                                     border_radius=10,
-                                                    on_click=lambda e: print("JAUNE"),
+                                                    on_click=lambda e: self.colnom_0(e),
                                                 ),
                                                 ft.Container(
                                                     content=ft.Text("1",color=colors.BLACK,weight='bold'),
@@ -319,19 +326,58 @@ class Exoplanet(Stack):
                                             ],
                                             alignment=ft.MainAxisAlignment.CENTER,
                                                 ),
-                                                Text(
-                                                    'TOTAL CURRENT BALANCE',
-                                                    color='white',
-                                                    size=10,
-                                                    weight='bold',
+                                                ft.DataTable(
+                                                    width=280,
+                                                    bgcolor="yellow",
+                                                    heading_row_height=20,
+                                                    heading_row_color="#5e0b66",
+                                                    data_row_min_height=35,
+                                                    data_row_max_height=35,
+                                                    data_row_color =({"hovered":"0x30FF0000"}),
+                                                    border_radius=30,
+                                                    columns=[
+                                                        ft.DataColumn(ft.Text(str(col1),
+                                                                              color="yellow",
+                                                                              weight="bold")),
+                                                        ft.DataColumn(ft.Text(str(col2),
+                                                                              color="yellow",
+                                                                              weight="bold",
+                                                                              )),
+                                                        ft.DataColumn(ft.Text(str(col3),
+                                                                              color="yellow",
+                                                                              weight="bold"
+                                                                              )),
+                                                                              
+                                                    ],
+                                                    rows=[
+                                                        ft.DataRow(
+                                                           cells=[
+                                                                ft.DataCell(ft.Text("cel11")),
+                                                                ft.DataCell(ft.Text("cel12")),
+                                                                ft.DataCell(ft.Text("cel13")), 
+                                                                # ft.DataCell(ft.Text("cel14")),                                                             
+                                                           ],   
+                                                       ),
+                                                        ft.DataRow(
+                                                            cells=[
+                                                                ft.DataCell(ft.Text("cel21")),
+                                                                ft.DataCell(ft.Text("cel22")),
+                                                                ft.DataCell(ft.Text("cel23")), 
+                                                                # ft.DataCell(ft.Text("cel24")),                                                             
+                                                           ],
+                                                       ),
+                                                        ft.DataRow(
+                                                           cells=[
+                                                               ft.DataCell(ft.Text("cel31")),
+                                                               ft.DataCell(ft.Text("cel32")),
+                                                               ft.DataCell(ft.Text("cel33")), 
+                                                            #    ft.DataCell(ft.Text("cel43")),                                                             
+                                                           ],
+                                                       ),    
+                                                   ],
+
                                                 ),
-                                                Text(
-                                                    '11,764.28 €',
-                                                    color='white',
-                                                    size=22,
-                                                    weight='bold',
-                                                ),
-                                            ]
+                                            ],
                                         ),
                                     ]
                                 ),
@@ -426,7 +472,7 @@ class Exoplanet(Stack):
                         controls=[
                             Container(
                                 content=Text(
-                                    'Nombres planetes par années',
+                                    'Nombres planetes découvertes par années',
                                     size=14,
                                     color='white',
                                     weight='bold',
@@ -491,7 +537,7 @@ class Exoplanet(Stack):
                 border_radius=15,
                 alignment=alignment.center,
                 content = Text( f'{i}',color='white', weight='bold' ),
-                on_hover=lambda e: self.hover_animation(e),
+                # on_hover=lambda e: self.hover_animation(e),
             )
             self.grid_decouverte.controls.append(__)
 
