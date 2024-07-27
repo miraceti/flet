@@ -230,6 +230,8 @@ class Exoplanet(Stack):
         #     ],
         # )
 
+        
+
         self.inner_green_container = Container(
             width=self.green_container.width,
             height=self.green_container.height,
