@@ -10,11 +10,6 @@ from urllib.request import urlopen
 import json
 
 import datetime
-import matplotlib
-import matplotlib.pyplot as plt
-from flet.matplotlib_chart import MatplotlibChart
-
-matplotlib.use("svg")
 
 #######################
 urlexo1 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+count(pl_name)+as+nbe+from+ps+where+default_flag=1&format=json"
