@@ -352,4 +352,8 @@ def main(page: Page):
     exoplanet = Exoplanet()
     page.add(exoplanet)
 
+<<<<<<< HEAD
 flet.app(target=main)
+=======
+flet.app(target=main)
+>>>>>>> 477f23eda12ecc7febe4cfa7f7d451442ffad093
