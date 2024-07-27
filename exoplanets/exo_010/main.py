@@ -153,9 +153,10 @@ col3=str("col3")
 #############################################################
 
 class Exoplanet(Stack):
-
+    
     def colnom_0(self,e):
-            datatable.columns[0].label="col01"
+            self.datatable.columns[0].label="col01"
+            self.datatable.update()
 
     def hover_animation(self, e):
         if e.data == 'true':
@@ -326,7 +327,7 @@ class Exoplanet(Stack):
                                             ],
                                             alignment=ft.MainAxisAlignment.CENTER,
                                                 ),
-                                                ft.DataTable(
+                                                datatable := ft.DataTable(
                                                     width=280,
                                                     bgcolor="yellow",
                                                     heading_row_height=20,
@@ -580,8 +581,8 @@ class Exoplanet(Stack):
         return self.main
     
 
-    def build(self):
-        return Column(controls=[self.MainContainer(),])
+    # def build(self):
+    #     return Column(controls=[self.MainContainer(),])
 
 
 def start(page: Page):
