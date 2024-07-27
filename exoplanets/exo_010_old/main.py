@@ -10,6 +10,7 @@ from urllib.request import urlopen
 import json
 
 import datetime
+
 #######################
 urlexo1 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+count(pl_name)+as+nbe+from+ps+where+default_flag=1&format=json"
 print(urlexo1)
@@ -142,6 +143,10 @@ print(d80)
 print(d90)
 print(d100)
 
+col1=str("col1")
+col2=str("col2")
+col3=str("col3")
+
 #############################################################
 
 class Exoplanet(Stack):
@@ -217,6 +222,58 @@ class Exoplanet(Stack):
         #         self.chat,
         #     ],
         # )
+
+        self.datatable=ft.DataTable(
+                    width=280,
+                    bgcolor="yellow",
+                    heading_row_height=20,
+                    heading_row_color="#5e0b66",
+                    data_row_min_height=35,
+                    data_row_max_height=35,
+                    data_row_color =({"hovered":"0x30FF0000"}),
+                    border_radius=30,
+                    columns=[
+                        ft.DataColumn(ft.Text(str(col1),
+                                                color="yellow",
+                                                weight="bold")),
+                        ft.DataColumn(ft.Text(str(col2),
+                                                color="yellow",
+                                                weight="bold",
+                                                )),
+                        ft.DataColumn(ft.Text(str(col3),
+                                                color="yellow",
+                                                weight="bold"
+                                                )),
+                                                
+                    ],
+                    rows=[
+                        ft.DataRow(
+                            cells=[
+                                ft.DataCell(ft.Text("cel11")),
+                                ft.DataCell(ft.Text("cel12")),
+                                ft.DataCell(ft.Text("cel13")), 
+                                # ft.DataCell(ft.Text("cel14")),                                                             
+                            ],   
+                        ),
+                        ft.DataRow(
+                            cells=[
+                                ft.DataCell(ft.Text("cel21")),
+                                ft.DataCell(ft.Text("cel22")),
+                                ft.DataCell(ft.Text("cel23")), 
+                                # ft.DataCell(ft.Text("cel24")),                                                             
+                            ],
+                        ),
+                        ft.DataRow(
+                            cells=[
+                                ft.DataCell(ft.Text("cel31")),
+                                ft.DataCell(ft.Text("cel32")),
+                                ft.DataCell(ft.Text("cel33")), 
+                            #    ft.DataCell(ft.Text("cel43")),                                                             
+                            ],
+                        ),    
+                    ],
+
+                )
 
         self.inner_green_container = Container(
             width=self.green_container.width,
@@ -340,18 +397,7 @@ class Exoplanet(Stack):
                                             ],
                                             alignment=ft.MainAxisAlignment.CENTER,
                                                 ),
-                                                Text(
-                                                    'TOTAL CURRENT BALANCE',
-                                                    color='white',
-                                                    size=10,
-                                                    weight='bold',
-                                                ),
-                                                Text(
-                                                    '11,764.28 €',
-                                                    color='white',
-                                                    size=22,
-                                                    weight='bold',
-                                                ),
+                                                self.datatable,
                                             ],
                                         ),
                                     ]
