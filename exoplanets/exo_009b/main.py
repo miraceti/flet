@@ -10,6 +10,11 @@ from urllib.request import urlopen
 import json
 
 import datetime
+import matplotlib
+import matplotlib.pyplot as plt
+from flet.matplotlib_chart import MatplotlibChart
+
+matplotlib.use("svg")
 
 #######################
 urlexo1 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+count(pl_name)+as+nbe+from+ps+where+default_flag=1&format=json"
@@ -227,7 +232,7 @@ class Exoplanet(Stack):
                 spacing=0,
                 controls=[
                     Column(
-                        expand=4,
+                        expand=8,
                         controls=[
                             Container(
                                 padding=20, 
@@ -235,25 +240,26 @@ class Exoplanet(Stack):
                                 content=Row(
                                     controls=[
                                         Column(
+                                            expand=True,
                                             horizontal_alignment='center',
                                             controls=[
                                                 Text(
                                                     'EXOPLANETES CONFIRMEES',
-                                                    color='white',
-                                                    size=18,
+                                                    color=colors.LIGHT_BLUE,
+                                                    size=16,
                                                     weight='bold',
 
                                                 ),
                                                 Text(
                                                     str(nb_exoplanets),
                                                     color='white',
-                                                    size=18,
+                                                    size=20,
                                                     weight='bold',
                                                     #text_align=ft.TextAlign.CENTER,
                                                 ),
                                                 Text(
                                                     disabled=False,
-                                                    color=colors.BLACK,
+                                                    color=colors.YELLOW,
                                                     text_align=ft.TextAlign.CENTER,
                                                     spans=[
                                                         ft.TextSpan(
@@ -313,6 +319,30 @@ class Exoplanet(Stack):
                                                     # ink=True,
                                                     on_click=lambda e: print("ROUGE"),
                                                 ),
+                                                ft.Container(
+                                                    content=ft.Text("4",color=colors.BLACK,weight='bold'),
+                                                    margin=5,
+                                                    padding=5,
+                                                    alignment=ft.alignment.center,
+                                                    bgcolor=ft.colors.PURPLE_200,
+                                                    width=20,
+                                                    height=30,
+                                                    border_radius=10,
+                                                    # ink=True,
+                                                    on_click=lambda e: print("ROUGE"),
+                                                ),
+                                                ft.Container(
+                                                    content=ft.Text("5",color=colors.BLACK,weight='bold'),
+                                                    margin=5,
+                                                    padding=5,
+                                                    alignment=ft.alignment.center,
+                                                    bgcolor=ft.colors.DEEP_ORANGE,
+                                                    width=20,
+                                                    height=30,
+                                                    border_radius=10,
+                                                    # ink=True,
+                                                    on_click=lambda e: print("ROUGE"),
+                                                ),
                                             ],
                                             alignment=ft.MainAxisAlignment.CENTER,
                                                 ),
@@ -328,45 +358,11 @@ class Exoplanet(Stack):
                                                     size=22,
                                                     weight='bold',
                                                 ),
-                                            ]
-                                        )
-                                    ]
-                                ),
-                            )
-                        ],
-                    ),
-                    Column(
-                        expand=1,
-                        controls=[
-                            Container(
-                                padding=padding.only(right=10),
-                                expand=True,
-                                content=Row(
-                                    alignment='center',
-                                    controls=[
-                                        Column(
-                                            alignment='center',
-                                            horizontal_alignment='center',
-                                            controls=[
-                                                Column(
-                                                    alignment='center',
-                                                    horizontal_alignment='start',
-                                                    controls=[
-                                                        # Container(
-                                                        #     width=40,
-                                                        #     height=150,
-                                                        #     bgcolor='white10',
-                                                        #     border_radius=14,
-                                                        #     # content=self.icon_column,
-                                                        # )
-                                                    ]
-                                                )
                                             ],
                                         ),
-                                    ],
+                                    ]
                                 ),
                             ),
-                            
                         ],
                     ),
                 ],
@@ -405,7 +401,7 @@ class Exoplanet(Stack):
                         controls=[
                             Container(
                                 content=Text(
-                                    'Nombres planètes par distances',
+                                    'Nombres planètes par distances (parsec)',
                                     size=14,
                                     color='white',
                                     weight='bold',
@@ -488,7 +484,7 @@ class Exoplanet(Stack):
                 border_radius=15,
                 alignment=alignment.center,
                 content = Text( f'{i}',color='white', weight='bold' ),
-                on_hover=lambda e: self.hover_animation(e),
+                # on_hover=lambda e: self.hover_animation(e),
             )
             self.grid_decouverte.controls.append(__)
 

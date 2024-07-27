@@ -14,8 +14,6 @@ import matplotlib
 import matplotlib.pyplot as plt
 from flet.matplotlib_chart import MatplotlibChart
 
-matplotlib.use("svg")
-
 #######################
 urlexo1 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+count(pl_name)+as+nbe+from+ps+where+default_flag=1&format=json"
 print(urlexo1)
@@ -148,9 +146,17 @@ print(d80)
 print(d90)
 print(d100)
 
+col1=str("col1")
+col2=str("col2")
+col3=str("col3")
+
 #############################################################
 
 class Exoplanet(Stack):
+    
+    def colnom_0(self,e):
+            self.datatable.columns[0].label="col01"
+            self.datatable.update()
 
     def hover_animation(self, e):
         if e.data == 'true':
@@ -191,7 +197,7 @@ class Exoplanet(Stack):
 
     def MainContainer(self):
         self.main =Container(
-            width=350, height=700, bgcolor='black', 
+            width=340, height=680, bgcolor='black', 
             border_radius=35, padding=8,
         )
 
@@ -232,7 +238,7 @@ class Exoplanet(Stack):
                 spacing=0,
                 controls=[
                     Column(
-                        expand=8,
+                        expand=4,
                         controls=[
                             Container(
                                 padding=20, 
@@ -240,26 +246,25 @@ class Exoplanet(Stack):
                                 content=Row(
                                     controls=[
                                         Column(
-                                            expand=True,
                                             horizontal_alignment='center',
                                             controls=[
                                                 Text(
                                                     'EXOPLANETES CONFIRMEES',
-                                                    color=colors.LIGHT_BLUE,
-                                                    size=16,
+                                                    color='white',
+                                                    size=18,
                                                     weight='bold',
 
                                                 ),
                                                 Text(
                                                     str(nb_exoplanets),
                                                     color='white',
-                                                    size=20,
+                                                    size=18,
                                                     weight='bold',
                                                     #text_align=ft.TextAlign.CENTER,
                                                 ),
                                                 Text(
                                                     disabled=False,
-                                                    color=colors.YELLOW,
+                                                    color=colors.BLACK,
                                                     text_align=ft.TextAlign.CENTER,
                                                     spans=[
                                                         ft.TextSpan(
@@ -282,7 +287,7 @@ class Exoplanet(Stack):
                                                     width=20,
                                                     height=30,
                                                     border_radius=10,
-                                                    on_click=lambda e: print("JAUNE"),
+                                                    on_click=lambda e: self.colnom_0(e),
                                                 ),
                                                 ft.Container(
                                                     content=ft.Text("1",color=colors.BLACK,weight='bold'),
@@ -319,50 +324,99 @@ class Exoplanet(Stack):
                                                     # ink=True,
                                                     on_click=lambda e: print("ROUGE"),
                                                 ),
-                                                ft.Container(
-                                                    content=ft.Text("4",color=colors.BLACK,weight='bold'),
-                                                    margin=5,
-                                                    padding=5,
-                                                    alignment=ft.alignment.center,
-                                                    bgcolor=ft.colors.PURPLE_200,
-                                                    width=20,
-                                                    height=30,
-                                                    border_radius=10,
-                                                    # ink=True,
-                                                    on_click=lambda e: print("ROUGE"),
-                                                ),
-                                                ft.Container(
-                                                    content=ft.Text("5",color=colors.BLACK,weight='bold'),
-                                                    margin=5,
-                                                    padding=5,
-                                                    alignment=ft.alignment.center,
-                                                    bgcolor=ft.colors.DEEP_ORANGE,
-                                                    width=20,
-                                                    height=30,
-                                                    border_radius=10,
-                                                    # ink=True,
-                                                    on_click=lambda e: print("ROUGE"),
-                                                ),
                                             ],
                                             alignment=ft.MainAxisAlignment.CENTER,
                                                 ),
-                                                Text(
-                                                    'TOTAL CURRENT BALANCE',
-                                                    color='white',
-                                                    size=10,
-                                                    weight='bold',
-                                                ),
-                                                Text(
-                                                    '11,764.28 €',
-                                                    color='white',
-                                                    size=22,
-                                                    weight='bold',
+                                                datatable := ft.DataTable(
+                                                    width=280,
+                                                    bgcolor="yellow",
+                                                    heading_row_height=20,
+                                                    heading_row_color="#5e0b66",
+                                                    data_row_min_height=35,
+                                                    data_row_max_height=35,
+                                                    data_row_color =({"hovered":"0x30FF0000"}),
+                                                    border_radius=30,
+                                                    columns=[
+                                                        ft.DataColumn(ft.Text(str(col1),
+                                                                              color="yellow",
+                                                                              weight="bold")),
+                                                        ft.DataColumn(ft.Text(str(col2),
+                                                                              color="yellow",
+                                                                              weight="bold",
+                                                                              )),
+                                                        ft.DataColumn(ft.Text(str(col3),
+                                                                              color="yellow",
+                                                                              weight="bold"
+                                                                              )),
+                                                                              
+                                                    ],
+                                                    rows=[
+                                                        ft.DataRow(
+                                                           cells=[
+                                                                ft.DataCell(ft.Text("cel11")),
+                                                                ft.DataCell(ft.Text("cel12")),
+                                                                ft.DataCell(ft.Text("cel13")), 
+                                                                # ft.DataCell(ft.Text("cel14")),                                                             
+                                                           ],   
+                                                       ),
+                                                        ft.DataRow(
+                                                            cells=[
+                                                                ft.DataCell(ft.Text("cel21")),
+                                                                ft.DataCell(ft.Text("cel22")),
+                                                                ft.DataCell(ft.Text("cel23")), 
+                                                                # ft.DataCell(ft.Text("cel24")),                                                             
+                                                           ],
+                                                       ),
+                                                        ft.DataRow(
+                                                           cells=[
+                                                               ft.DataCell(ft.Text("cel31")),
+                                                               ft.DataCell(ft.Text("cel32")),
+                                                               ft.DataCell(ft.Text("cel33")), 
+                                                            #    ft.DataCell(ft.Text("cel43")),                                                             
+                                                           ],
+                                                       ),    
+                                                   ],
+
                                                 ),
                                             ],
                                         ),
                                     ]
                                 ),
+                            )
+                        ],
+                    ),
+                    Column(
+                        expand=1,
+                        controls=[
+                            Container(
+                                padding=padding.only(right=10),
+                                expand=True,
+                                content=Row(
+                                    alignment='center',
+                                    controls=[
+                                        Column(
+                                            alignment='center',
+                                            horizontal_alignment='center',
+                                            controls=[
+                                                Column(
+                                                    alignment='center',
+                                                    horizontal_alignment='start',
+                                                    controls=[
+                                                        # Container(
+                                                        #     width=40,
+                                                        #     height=150,
+                                                        #     bgcolor='white10',
+                                                        #     border_radius=14,
+                                                        #     # content=self.icon_column,
+                                                        # )
+                                                    ]
+                                                )
+                                            ],
+                                        ),
+                                    ],
+                                ),
                             ),
+                            
                         ],
                     ),
                 ],
@@ -401,7 +455,7 @@ class Exoplanet(Stack):
                         controls=[
                             Container(
                                 content=Text(
-                                    'Nombres planètes par distances (parsec)',
+                                    'Nombres planètes par distances',
                                     size=14,
                                     color='white',
                                     weight='bold',
@@ -419,7 +473,7 @@ class Exoplanet(Stack):
                         controls=[
                             Container(
                                 content=Text(
-                                    'Nombres planetes par années',
+                                    'Nombres planetes découvertes par années',
                                     size=14,
                                     color='white',
                                     weight='bold',
@@ -496,19 +550,20 @@ class Exoplanet(Stack):
                         Text(f'{i[0]}', size=11, color='yellow54'),
                         Text(f'{i[1]}', size=16,color='white', weight='bold'),
 
-                        # Text(
-                        #     'Pay Now?',
-                        #     color='white',
-                        #     size=12, 
-                        #     text_align='start',
-                        #     weight='w600',
-                        #     offset= transform.Offset(0, 1),
-                        #     animate_offset = animation.Animation(duration=900, curve='decelerate'),
-                        #     animate_opacity=300,
-                        #     opacity=0,
-                        # ),
-                    ],
-                ),
+                        Text(
+                            'Pay Now?',
+                            color='white',
+                            size=12, 
+                            text_align='start',
+                            weight='w600',
+                            offset= transform.Offset(0, 1),
+                            animate_offset = animation.Animation(duration=900, curve='decelerate'),
+                            animate_opacity=300,
+                            opacity=0,
+
+                        )
+                    ]
+                )
 
 
         self.green_container.content = self.inner_green_container
@@ -526,12 +581,12 @@ class Exoplanet(Stack):
         return self.main
     
 
-    def build(self):
-        return Column(controls=[self.MainContainer(),])
+    # def build(self):
+    #     return Column(controls=[self.MainContainer(),])
 
 
 def start(page: Page):
-    page.title='Flet Expense Concept'
+    page.title='Flet Exoplanets Concept'
     page.horizontal_alignment='center'
     page.vertical_alignment='center'
     #page.theme_mode = flet.ThemeMode.DARK
