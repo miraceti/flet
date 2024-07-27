@@ -496,19 +496,20 @@ class Exoplanet(Stack):
                         Text(f'{i[0]}', size=11, color='yellow54'),
                         Text(f'{i[1]}', size=16,color='white', weight='bold'),
 
-                        # Text(
-                        #     'Pay Now?',
-                        #     color='white',
-                        #     size=12, 
-                        #     text_align='start',
-                        #     weight='w600',
-                        #     offset= transform.Offset(0, 1),
-                        #     animate_offset = animation.Animation(duration=900, curve='decelerate'),
-                        #     animate_opacity=300,
-                        #     opacity=0,
-                        # ),
-                    ],
-                ),
+                        Text(
+                            'Pay Now?',
+                            color='white',
+                            size=12, 
+                            text_align='start',
+                            weight='w600',
+                            offset= transform.Offset(0, 1),
+                            animate_offset = animation.Animation(duration=900, curve='decelerate'),
+                            animate_opacity=300,
+                            opacity=0,
+
+                        )
+                    ]
+                )
 
 
         self.green_container.content = self.inner_green_container
