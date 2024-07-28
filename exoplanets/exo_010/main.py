@@ -415,7 +415,7 @@ class Exoplanet(Stack):
             Exoplanet.update(self)
 
         self.datatable=ft.DataTable(
-                    width=340,
+                    width=250,
                     bgcolor="yellow",
                     column_spacing=1,
                     heading_row_height=20,
