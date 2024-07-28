@@ -10,6 +10,7 @@ from urllib.request import urlopen
 import json
 
 import datetime
+
 #######################
 urlexo1 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+count(pl_name)+as+nbe+from+ps+where+default_flag=1&format=json"
 print(urlexo1)
@@ -32,11 +33,11 @@ sy_snum,sy_pnum,sy_mnum,st_mass,st_lum,st_age,st_dens,sy_dist,disc_year,disc_tel
 +from+ps+where+default_flag=1&format=json"
 
 list7 = json.loads(urlopen(urlexo7).read().decode("utf-8"))
-print((list7[0]).keys())
-print((list7[0]).values())
-print((list7[0]).items())
+print("keys : ",(list7[0]).keys())
+print("values : ",(list7[0]).values())
+print("items : ",(list7[0]).items())
 dict_7_0 = list7[0]
-print(dict_7_0)
+print("dict_7-0 : ",dict_7_0)
 
 #############################################################
 #nombre de planetes par années
@@ -142,9 +143,103 @@ print(d80)
 print(d90)
 print(d100)
 
+#liste des planetes les plus proches : 3
+distmax = 100000
+p1="vide"
+p=0
+planete_dist=[]
+for planete in list7:
+    if planete['sy_dist'] is None:
+        pass
+    else:
+        p+=1
+        planete_dist.append((planete['pl_name'], 
+                             planete['sy_dist'], 
+                             planete['pl_bmasse'], 
+                             planete['pl_rade'],
+                             planete['pl_dens'],))
+        if planete['sy_dist'] < distmax:
+            pl = planete['pl_name']#planete la plus proche 
+            distmax = planete['sy_dist']
+
+planete_la_plus_proche = pl
+print("planete la plus proche : ", pl)
+
+#tri par ordre de distance
+proche_list = sorted(planete_dist, key= lambda x: x[1])
+print(proche_list[:3])
+
+#entete tableau depart
+col1=str("col01")
+col2=str("col02")
+col3=str("col03")
+
+#entete tableau new
+ncol1 = str("ncoll1")
+ncol2 = str("ncoll2")
+ncol3 = str("ncoll3")
+
+################################################tableau 0
+n0col01 = str("pl_name")
+n0col02 = str("sy_dist")
+n0col03 = str("pl_bmasse")
+
+n0cel01 = proche_list[0][0]
+n0cel02 = proche_list[0][1]
+n0cel03 = proche_list[0][2]
+
+n0cel11 = proche_list[1][0]
+n0cel12 = proche_list[1][1]
+n0cel13 = proche_list[1][2]
+
+n0cel21 = proche_list[2][0]
+n0cel22 = proche_list[2][1]
+n0cel23 = proche_list[2][2]
+##########################################################
+
+
+##################################################tableau 1
+n1col01 = str("pl_name")
+n1col02 = str("pl_rade")
+n1col03 = str("pl_dens")
+
+n1cel01 = proche_list[0][0]
+n1cel02 = proche_list[0][3]
+n1cel03 = proche_list[0][4]
+
+n1cel11 = proche_list[1][0]
+n1cel12 = proche_list[1][3]
+n1cel13 = proche_list[1][4]
+
+n1cel21 = proche_list[2][0]
+n1cel22 = proche_list[2][3]
+n1cel23 = proche_list[2][4]
+#########################################################
+
+
+#################################################tableau 2
+
+#########################################################
+
+
+################################################tableau 3
+
+########################################################
+
+
+###############################################tableau 4
+
+########################################################
+
+
+###############################################tableau 5
+
+#######################################################
+
 #############################################################
 
 class Exoplanet(Stack):
+    
 
     def hover_animation(self, e):
         if e.data == 'true':
@@ -217,6 +312,160 @@ class Exoplanet(Stack):
         #         self.chat,
         #     ],
         # )
+        def table_0(e):
+            print(self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[3].controls[0].content)
+            #text {'value': '0', 'weight': 'bold', 'color': 'black', 'n': 'content'}
+
+            #nom des colonne
+            print(self.datatable.columns[0].label) 
+            print(self.datatable.columns[0].label.value) 
+            self.datatable.columns[0].label.value=str(n0col01)
+            self.datatable.columns[1].label.value=str(n0col02)
+            self.datatable.columns[2].label.value=str(n0col03)
+            print(self.datatable.bgcolor)
+            self.datatable.bgcolor = ft.colors.AMBER
+
+            #valeur des cellules par ligne
+            print(self.datatable.rows[0].cells[1].content.value)
+            self.datatable.rows[0].cells[0].content.value = str(n0cel01)
+            self.datatable.rows[0].cells[1].content.value = str(n0cel02)
+            self.datatable.rows[0].cells[2].content.value = str(n0cel03)
+
+            self.datatable.rows[1].cells[0].content.value = str(n0cel11)
+            self.datatable.rows[1].cells[1].content.value = str(n0cel12)
+            self.datatable.rows[1].cells[2].content.value = str(n0cel13)
+
+            self.datatable.rows[2].cells[0].content.value = str(n0cel21)
+            self.datatable.rows[2].cells[1].content.value = str(n0cel22)
+            self.datatable.rows[2].cells[2].content.value = str(n0cel23)
+            print(self.datatable.rows[0].cells[1].content.value)
+
+            Exoplanet.update(self)
+
+        def table_1(e):
+            #nom des colonnes
+            self.datatable.columns[0].label.value=str(ncol2)
+            print(self.datatable.bgcolor)
+            self.datatable.bgcolor = ft.colors.GREEN_200
+            self.datatable.columns[0].label.value=str(n1col01)
+            self.datatable.columns[1].label.value=str(n1col02)
+            self.datatable.columns[2].label.value=str(n1col03)
+
+            #valeur des cellules par ligne
+            self.datatable.rows[0].cells[0].content.value = str(n1cel01)
+            self.datatable.rows[0].cells[1].content.value = str(n1cel02)
+            self.datatable.rows[0].cells[2].content.value = str(n1cel03)
+
+            self.datatable.rows[1].cells[0].content.value = str(n1cel11)
+            self.datatable.rows[1].cells[1].content.value = str(n1cel12)
+            self.datatable.rows[1].cells[2].content.value = str(n1cel13)
+
+            self.datatable.rows[2].cells[0].content.value = str(n1cel21)
+            self.datatable.rows[2].cells[1].content.value = str(n1cel22)
+            self.datatable.rows[2].cells[2].content.value = str(n1cel23)
+            print(self.datatable.rows[0].cells[1].content.value)
+
+            Exoplanet.update(self)
+
+        def table_2(e):
+            #nom des colonnes
+            self.datatable.columns[0].label.value=str(ncol2)
+            print(self.datatable.bgcolor)
+            self.datatable.bgcolor = ft.colors.CYAN_200
+
+            #valeur des cellules par ligne
+            self.datatable.rows[0].cells[1].content.value = "cel112"
+
+            Exoplanet.update(self)
+
+        def table_3(e):
+            #nom des colonnes
+            self.datatable.columns[0].label.value=str(ncol2)
+            print(self.datatable.bgcolor)
+            self.datatable.bgcolor = ft.colors.RED_200
+
+            #valeur des cellules par ligne
+            self.datatable.rows[0].cells[1].content.value = "cel112"
+
+            Exoplanet.update(self)
+
+        def table_4(e):
+            #nom des colonnes
+            self.datatable.columns[0].label.value=str(ncol2)
+            print(self.datatable.bgcolor)
+            self.datatable.bgcolor = ft.colors.PURPLE_200
+
+            #valeur des cellules par ligne
+            self.datatable.rows[0].cells[1].content.value = "cel112"
+
+            Exoplanet.update(self)
+
+        def table_5(e):
+            #nom des colonnes
+            self.datatable.columns[0].label.value=str(ncol2)
+            print(self.datatable.bgcolor)
+            self.datatable.bgcolor = ft.colors.DEEP_ORANGE
+
+            #valeur des cellules par ligne
+
+            self.datatable.rows[0].cells[1].content.value = "cel112"
+            print(self.datatable.rows[0].cells[1].content.value)
+
+
+            Exoplanet.update(self)
+
+        self.datatable=ft.DataTable(
+                    width=340,
+                    bgcolor="yellow",
+                    column_spacing=1,
+                    heading_row_height=20,
+                    heading_row_color="#5e0b66",
+                    data_row_min_height=25,
+                    data_row_max_height=25,
+                    data_row_color =({"hovered":"0x30FF0000"}),
+                    border_radius=30,
+                    columns=[
+                        ft.DataColumn(ft.Text(str(col1),
+                                                color="yellow",
+                                                weight="bold")),
+                        ft.DataColumn(ft.Text(str(col2),
+                                                color="yellow",
+                                                weight="bold",
+                                                )),
+                        ft.DataColumn(ft.Text(str(col3),
+                                                color="yellow",
+                                                weight="bold"
+                                                )),
+                                                
+                    ],
+                    rows=[
+                        ft.DataRow(
+                            cells=[
+                                ft.DataCell(ft.Text("cel11", size=10, weight="bold")),
+                                ft.DataCell(ft.Text("cel12", size=10, weight="bold")),
+                                ft.DataCell(ft.Text("cel13", size=10, weight="bold")), 
+                                # ft.DataCell(ft.Text("cel14")),                                                             
+                            ],   
+                        ),
+                        ft.DataRow(
+                            cells=[
+                                ft.DataCell(ft.Text("cel21", size=10, weight="bold")),
+                                ft.DataCell(ft.Text("cel22", size=10, weight="bold")),
+                                ft.DataCell(ft.Text("cel23", size=10, weight="bold")), 
+                                # ft.DataCell(ft.Text("cel24")),                                                             
+                            ],
+                        ),
+                        ft.DataRow(
+                            cells=[
+                                ft.DataCell(ft.Text("cel31", size=10, weight="bold")),
+                                ft.DataCell(ft.Text("cel32", size=10, weight="bold")),
+                                ft.DataCell(ft.Text("cel33", size=10, weight="bold")), 
+                            #    ft.DataCell(ft.Text("cel43")),                                                             
+                            ],
+                        ),    
+                    ],
+
+                )
 
         self.inner_green_container = Container(
             width=self.green_container.width,
@@ -276,7 +525,7 @@ class Exoplanet(Stack):
                                                     width=20,
                                                     height=30,
                                                     border_radius=10,
-                                                    on_click=lambda e: print("JAUNE"),
+                                                    on_click= table_0,
                                                 ),
                                                 ft.Container(
                                                     content=ft.Text("1",color=colors.BLACK,weight='bold'),
@@ -287,7 +536,7 @@ class Exoplanet(Stack):
                                                     width=20,
                                                     height=30,
                                                     border_radius=10,
-                                                    on_click=lambda e: print("VERT"),
+                                                    on_click=table_1,
                                                 ),
                                                 ft.Container(
                                                     content=ft.Text("2",color=colors.BLACK,weight='bold'),
@@ -299,7 +548,7 @@ class Exoplanet(Stack):
                                                     height=30,
                                                     border_radius=10,
                                                     # ink=True,
-                                                    on_click=lambda e: print("CYAN"),
+                                                    on_click=table_2,
                                                 ),
                                                 ft.Container(
                                                     content=ft.Text("3",color=colors.BLACK,weight='bold'),
@@ -311,7 +560,7 @@ class Exoplanet(Stack):
                                                     height=30,
                                                     border_radius=10,
                                                     # ink=True,
-                                                    on_click=lambda e: print("ROUGE"),
+                                                    on_click=table_3,
                                                 ),
                                                 ft.Container(
                                                     content=ft.Text("4",color=colors.BLACK,weight='bold'),
@@ -323,7 +572,7 @@ class Exoplanet(Stack):
                                                     height=30,
                                                     border_radius=10,
                                                     # ink=True,
-                                                    on_click=lambda e: print("ROUGE"),
+                                                    on_click=table_4,
                                                 ),
                                                 ft.Container(
                                                     content=ft.Text("5",color=colors.BLACK,weight='bold'),
@@ -335,23 +584,19 @@ class Exoplanet(Stack):
                                                     height=30,
                                                     border_radius=10,
                                                     # ink=True,
-                                                    on_click=lambda e: print("ROUGE"),
+                                                    on_click=table_5,
                                                 ),
                                             ],
                                             alignment=ft.MainAxisAlignment.CENTER,
                                                 ),
                                                 Text(
-                                                    'TOTAL CURRENT BALANCE',
+                                                    "planetes les plus proches",
                                                     color='white',
-                                                    size=10,
+                                                    size=15,
                                                     weight='bold',
+                                                    #text_align=ft.TextAlign.CENTER,
                                                 ),
-                                                Text(
-                                                    '11,764.28 €',
-                                                    color='white',
-                                                    size=22,
-                                                    weight='bold',
-                                                ),
+                                                self.datatable,
                                             ],
                                         ),
                                     ]
