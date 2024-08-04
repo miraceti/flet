@@ -234,6 +234,7 @@ planete_dist_list = sorted(planete_dist_list1, key=lambda x: x['sy_dist'])
 print("les 5 planetes les plus proches : ",planete_dist_list[:5])
 
 #################################################bouton 0
+#planete les plus proches distance
 plpp0_name=planete_dist_list[:5][0]['pl_name']
 plpp0_dist=planete_dist_list[:5][0]['sy_dist']
 plpp1_name=planete_dist_list[:5][1]['pl_name']
@@ -248,6 +249,33 @@ plpp4_dist=planete_dist_list[:5][4]['sy_dist']
 
 
 ################################################bouton 1
+#planete methode decouverte nombre
+discoverymethod_counts = {}
+for track in planete_name_list:
+    method = track.get('discoverymethod')
+    try:
+        discoverymethod_counts[method]+=1
+    except KeyError:
+        discoverymethod_counts[method] = 1
+
+print('C : ',discoverymethod_counts)
+
+ordered_discoverymethod_counts_key = dict(sorted(discoverymethod_counts.items()))
+print('K : ',ordered_discoverymethod_counts_key)
+
+ordered_discoverymethod_counts_value = sorted(discoverymethod_counts.items(), key=lambda x: x[1], reverse=True)
+print('V : ',ordered_discoverymethod_counts_value)
+v = ordered_discoverymethod_counts_value
+pmdn_0_name = v[0][0]
+pmdn_0_count = v[0][1]
+pmdn_1_name = v[1][0]
+pmdn_1_count = v[1][1]
+pmdn_2_name = v[2][0]
+pmdn_2_count = v[2][1]
+pmdn_3_name = v[3][0]
+pmdn_3_count = v[3][1]
+pmdn_4_name = v[4][0]
+pmdn_4_count = v[4][1]
 
 ########################################################
 
@@ -322,7 +350,7 @@ class Exoplanet(Stack):
 
         self.green_container = Container(
             width=self.main.width,
-            height=self.main.height * 0.46,
+            height=self.main.height * 0.50,
             border_radius=30,
             gradient=LinearGradient(
                 begin=alignment.top_left,
@@ -420,17 +448,18 @@ class Exoplanet(Stack):
 
             print(self.table_container.bgcolor)
             self.table_container.bgcolor = ft.colors.GREEN_200
+            self.table_container.alignment = ft.alignment.center
             print(self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4])
-            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="un"
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="Les 5 méthodes de détections"
             self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].bgcolor=colors.BLACK
             self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].color=colors.GREEN_200
 
             #valeurs
-            self.table_container.content.controls[0].controls[0].content.value = ""
-            self.table_container.content.controls[0].controls[1].content.value = ""
-            self.table_container.content.controls[0].controls[2].content.value = ""
-            self.table_container.content.controls[0].controls[3].content.value = ""
-            self.table_container.content.controls[0].controls[4].content.value = ""
+            self.table_container.content.controls[0].controls[0].content.value = str(pmdn_0_name)+str('\t\t\t\t\t')+' : '+str(pmdn_0_count)
+            self.table_container.content.controls[0].controls[1].content.value = str(pmdn_1_name)+str('\t\t\t\t\t')+' : '+str(pmdn_1_count)
+            self.table_container.content.controls[0].controls[2].content.value = str(pmdn_2_name)+str('\t\t\t\t\t')+' : '+str(pmdn_2_count)
+            self.table_container.content.controls[0].controls[3].content.value = str(pmdn_3_name)+str('\t\t\t\t\t')+' : '+str(pmdn_3_count)
+            self.table_container.content.controls[0].controls[4].content.value = str(pmdn_4_name)+str('\t\t\t\t\t')+' : '+str(pmdn_4_count)
            
 
             Exoplanet.update(self)
@@ -597,8 +626,9 @@ class Exoplanet(Stack):
         
         self.table_container = Container(
             width=self.main.width,
-            height=self.main.height * 0.16,
+            height=self.main.height * 0.20,
             border_radius=30,
+            border=ft.border.all(2,colors.BLACK),
             # gradient=LinearGradient(
             #     begin=alignment.top_right,
             #     end=alignment.bottom_left,
@@ -616,23 +646,23 @@ class Exoplanet(Stack):
                         controls=[
                             Container(
                                 content = Text(str(plpp0_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp0_dist)+str(' parsecs'), 
-                                               size=10, weight='bold',color=colors.BLACK,),
+                                               size=12, weight='bold',color=colors.BLACK,),
                             ),
                             Container(
                                 content = Text(str(plpp1_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp1_dist)+str(' parsecs'), 
-                                               size=10, weight='bold', color=colors.BLACK,),
+                                               size=12, weight='bold', color=colors.BLACK,),
                             ),
                             Container(
                                 content = Text(str(plpp2_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp2_dist)+str(' parsecs'), 
-                                               size=10, weight='bold',color=colors.BLACK,),
+                                               size=12, weight='bold',color=colors.BLACK,),
                             ),
                             Container(
                                 content = Text(str(plpp3_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp3_dist)+str(' parsecs'), 
-                                               size=10, weight='bold',color=colors.BLACK,),
+                                               size=12, weight='bold',color=colors.BLACK,),
                             ),
                             Container(
                                 content = Text(str(plpp4_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp4_dist)+str(' parsecs'), 
-                                               size=10, weight='bold',color=colors.BLACK,),
+                                               size=12, weight='bold',color=colors.BLACK,),
                             ),
                         ]
                     )
@@ -776,8 +806,9 @@ class Exoplanet(Stack):
                                             alignment=ft.MainAxisAlignment.CENTER,
                                                 ),
                                                 Text(
-                                                    "planetes les plus proches",
-                                                    color='white',
+                                                    "Les 5 planetes les plus proches",
+                                                    color=colors.AMBER,
+                                                    bgcolor=colors.BLACK,
                                                     size=15,
                                                     weight='bold',
                                                     #text_align=ft.TextAlign.CENTER,
