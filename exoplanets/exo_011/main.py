@@ -215,14 +215,35 @@ n1cel21 = proche_list[2][0]
 n1cel22 = proche_list[2][3]
 n1cel23 = proche_list[2][4]
 #########################################################
+planete_name_list = sorted(list7, key= lambda x: x['pl_name'])#créer une liste ordonné par nom
+planete_name_list[0]
 
+from operator import is_not
+from functools import partial
+
+planete_dist_list0 = list(filter(partial(is_not, None),planete_name_list))
+keyValList = [None]
+exampleSet = planete_dist_list0
+
+#on retire les  sy_dist qui sont None
+planete_dist_list1 = list(filter(lambda d: d['sy_dist'] not in keyValList, exampleSet))
+
+#on tris la liste propre obtenue par sy_dist croissant
+planete_dist_list = sorted(planete_dist_list1, key=lambda x: x['sy_dist'])
+
+print("les 5 planetes les plus proches : ",planete_dist_list[:5])
 
 #################################################bouton 0
-plpp0="zero"
-plpp1="un"
-plpp2="deux"
-plpp3="trois"
-plpp4="quatre"
+plpp0_name=planete_dist_list[:5][0]['pl_name']
+plpp0_dist=planete_dist_list[:5][0]['sy_dist']
+plpp1_name=planete_dist_list[:5][1]['pl_name']
+plpp1_dist=planete_dist_list[:5][1]['sy_dist']
+plpp2_name=planete_dist_list[:5][2]['pl_name']
+plpp2_dist=planete_dist_list[:5][2]['sy_dist']
+plpp3_name=planete_dist_list[:5][3]['pl_name']
+plpp3_dist=planete_dist_list[:5][3]['sy_dist']
+plpp4_name=planete_dist_list[:5][4]['pl_name']
+plpp4_dist=planete_dist_list[:5][4]['sy_dist']
 #########################################################
 
 
@@ -353,6 +374,25 @@ class Exoplanet(Stack):
             self.datatable.rows[2].cells[2].content.value = str(n0cel23)
             print(self.datatable.rows[0].cells[1].content.value)
 
+            print(self.table_container.bgcolor)
+            self.table_container.bgcolor = ft.colors.AMBER
+            print(self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4])
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="les 5 planetes les plus proches"
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].bgcolor=colors.BLACK
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].color=colors.AMBER
+
+            #maj des valeurs
+            print(self.table_container.content.controls[0].controls[0].content)
+            print(self.table_container.content.controls[0].controls[1].content)
+
+            #valeurs
+            self.table_container.content.controls[0].controls[0].content.value = str(plpp0_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp0_dist)+str(' parsecs')
+            self.table_container.content.controls[0].controls[1].content.value = str(plpp1_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp1_dist)+str(' parsecs')
+            self.table_container.content.controls[0].controls[2].content.value = str(plpp2_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp2_dist)+str(' parsecs')
+            self.table_container.content.controls[0].controls[3].content.value = str(plpp3_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp3_dist)+str(' parsecs')
+            self.table_container.content.controls[0].controls[4].content.value = str(plpp4_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp4_dist)+str(' parsecs')
+           
+
             Exoplanet.update(self)
 
         def table_1(e):
@@ -380,6 +420,18 @@ class Exoplanet(Stack):
 
             print(self.table_container.bgcolor)
             self.table_container.bgcolor = ft.colors.GREEN_200
+            print(self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4])
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="un"
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].bgcolor=colors.BLACK
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].color=colors.GREEN_200
+
+            #valeurs
+            self.table_container.content.controls[0].controls[0].content.value = ""
+            self.table_container.content.controls[0].controls[1].content.value = ""
+            self.table_container.content.controls[0].controls[2].content.value = ""
+            self.table_container.content.controls[0].controls[3].content.value = ""
+            self.table_container.content.controls[0].controls[4].content.value = ""
+           
 
             Exoplanet.update(self)
 
@@ -394,6 +446,18 @@ class Exoplanet(Stack):
 
             print(self.table_container.bgcolor)
             self.table_container.bgcolor = ft.colors.CYAN_200
+            print(self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4])
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="deux"
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].bgcolor=colors.BLACK
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].color=colors.CYAN_200
+
+            #valeurs
+            self.table_container.content.controls[0].controls[0].content.value = ""
+            self.table_container.content.controls[0].controls[1].content.value = ""
+            self.table_container.content.controls[0].controls[2].content.value = ""
+            self.table_container.content.controls[0].controls[3].content.value = ""
+            self.table_container.content.controls[0].controls[4].content.value = ""
+           
 
             Exoplanet.update(self)
 
@@ -408,7 +472,18 @@ class Exoplanet(Stack):
 
             print(self.table_container.bgcolor)
             self.table_container.bgcolor = ft.colors.RED_200
+            print(self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4])
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="trois"
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].bgcolor=colors.BLACK
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].color=colors.RED_200
 
+            #valeurs
+            self.table_container.content.controls[0].controls[0].content.value = ""
+            self.table_container.content.controls[0].controls[1].content.value = ""
+            self.table_container.content.controls[0].controls[2].content.value = ""
+            self.table_container.content.controls[0].controls[3].content.value = ""
+            self.table_container.content.controls[0].controls[4].content.value = ""
+           
 
             Exoplanet.update(self)
 
@@ -423,7 +498,18 @@ class Exoplanet(Stack):
 
             print(self.table_container.bgcolor)
             self.table_container.bgcolor = ft.colors.PURPLE_200
+            print(self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4])
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="quatre"
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].bgcolor=colors.BLACK
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].color=colors.PURPLE_200
 
+            #valeurs
+            self.table_container.content.controls[0].controls[0].content.value = ""
+            self.table_container.content.controls[0].controls[1].content.value = ""
+            self.table_container.content.controls[0].controls[2].content.value = ""
+            self.table_container.content.controls[0].controls[3].content.value = ""
+            self.table_container.content.controls[0].controls[4].content.value = ""
+           
 
             Exoplanet.update(self)
 
@@ -440,7 +526,18 @@ class Exoplanet(Stack):
 
             print(self.table_container.bgcolor)
             self.table_container.bgcolor = ft.colors.DEEP_ORANGE
+            print(self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4])
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="cinq"
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].bgcolor=colors.BLACK
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].color=colors.DEEP_ORANGE
 
+            #valeurs
+            self.table_container.content.controls[0].controls[0].content.value = ""
+            self.table_container.content.controls[0].controls[1].content.value = ""
+            self.table_container.content.controls[0].controls[2].content.value = ""
+            self.table_container.content.controls[0].controls[3].content.value = ""
+            self.table_container.content.controls[0].controls[4].content.value = ""
+           
 
 
             Exoplanet.update(self)
@@ -518,29 +615,24 @@ class Exoplanet(Stack):
                         alignment=alignment.center,
                         controls=[
                             Container(
-                                content = Text(str(plpp0), size=10, weight='bold',color=colors.BLACK,),
-                                margin=0,
-                                padding=0,
+                                content = Text(str(plpp0_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp0_dist)+str(' parsecs'), 
+                                               size=10, weight='bold',color=colors.BLACK,),
                             ),
                             Container(
-                                content = Text(str(plpp1), size=10, weight='bold', color=colors.BLACK,),
-                                margin=0,
-                                padding=0,
+                                content = Text(str(plpp1_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp1_dist)+str(' parsecs'), 
+                                               size=10, weight='bold', color=colors.BLACK,),
                             ),
                             Container(
-                                content = Text(str(plpp2), size=10, weight='bold',color=colors.BLACK,),
-                                margin=0,
-                                padding=0,
+                                content = Text(str(plpp2_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp2_dist)+str(' parsecs'), 
+                                               size=10, weight='bold',color=colors.BLACK,),
                             ),
                             Container(
-                                content = Text(str(plpp3), size=10, weight='bold',color=colors.BLACK,),
-                                margin=0,
-                                padding=0,
+                                content = Text(str(plpp3_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp3_dist)+str(' parsecs'), 
+                                               size=10, weight='bold',color=colors.BLACK,),
                             ),
                             Container(
-                                content = Text(str(plpp4), size=10, weight='bold',color=colors.BLACK,),
-                                margin=0,
-                                padding=0,
+                                content = Text(str(plpp4_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp4_dist)+str(' parsecs'), 
+                                               size=10, weight='bold',color=colors.BLACK,),
                             ),
                         ]
                     )
