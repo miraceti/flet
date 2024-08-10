@@ -9,6 +9,7 @@ def main(page: ft.Page):
     values = [4500, 2500, 1053, 500]
 
     fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
+    fig.update_layout(paper_bgcolor="black")
 
     page.add(PlotlyChart(fig, expand=True))
 

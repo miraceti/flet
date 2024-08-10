@@ -4,12 +4,14 @@ from flet import (
     Container, Text, padding, alignment,
     LinearGradient,IconButton,GridView,
     transform, animation,colors,Stack,
+    PieChart,PieChartSection,
         )
 import flet as ft
 from urllib.request import urlopen
 import json
 
 import datetime
+
 
 #######################
 urlexo1 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+count(pl_name)+as+nbe+from+ps+where+default_flag=1&format=json"
@@ -235,19 +237,28 @@ print("les 5 planetes les plus proches : ",planete_dist_list[:5])
 
 #################################################bouton 0
 #planete les plus proches distance
-plpp0_name=planete_dist_list[:5][0]['pl_name']
-plpp0_dist=planete_dist_list[:5][0]['sy_dist']
-plpp1_name=planete_dist_list[:5][1]['pl_name']
-plpp1_dist=planete_dist_list[:5][1]['sy_dist']
-plpp2_name=planete_dist_list[:5][2]['pl_name']
-plpp2_dist=planete_dist_list[:5][2]['sy_dist']
-plpp3_name=planete_dist_list[:5][3]['pl_name']
-plpp3_dist=planete_dist_list[:5][3]['sy_dist']
-plpp4_name=planete_dist_list[:5][4]['pl_name']
-plpp4_dist=planete_dist_list[:5][4]['sy_dist']
+plpp0_name=planete_dist_list[:10][0]['pl_name']
+plpp0_dist=planete_dist_list[:10][0]['sy_dist']
+plpp1_name=planete_dist_list[:10][1]['pl_name']
+plpp1_dist=planete_dist_list[:10][1]['sy_dist']
+plpp2_name=planete_dist_list[:10][2]['pl_name']
+plpp2_dist=planete_dist_list[:10][2]['sy_dist']
+plpp3_name=planete_dist_list[:10][3]['pl_name']
+plpp3_dist=planete_dist_list[:10][3]['sy_dist']
+plpp4_name=planete_dist_list[:10][4]['pl_name']
+plpp4_dist=planete_dist_list[:10][4]['sy_dist']
+plpp5_name=planete_dist_list[:10][5]['pl_name']
+plpp5_dist=planete_dist_list[:10][5]['sy_dist']
+plpp6_name=planete_dist_list[:10][6]['pl_name']
+plpp6_dist=planete_dist_list[:10][6]['sy_dist']
+plpp7_name=planete_dist_list[:10][7]['pl_name']
+plpp7_dist=planete_dist_list[:10][7]['sy_dist']
+plpp8_name=planete_dist_list[:10][8]['pl_name']
+plpp8_dist=planete_dist_list[:10][8]['sy_dist']
+plpp9_name=planete_dist_list[:10][9]['pl_name']
+plpp9_dist=planete_dist_list[:10][9]['sy_dist']
+
 #########################################################
-
-
 ################################################bouton 1
 #planete methode decouverte nombre
 discoverymethod_counts = {}
@@ -276,28 +287,69 @@ pmdn_3_name = v[3][0]
 pmdn_3_count = v[3][1]
 pmdn_4_name = v[4][0]
 pmdn_4_count = v[4][1]
+pmdn_5_name = v[5][0]
+pmdn_5_count = v[5][1]
+pmdn_6_name = v[6][0]
+pmdn_6_count = v[6][1]
+pmdn_7_name = v[7][0]
+pmdn_7_count = v[7][1]
+pmdn_8_name = v[8][0]
+pmdn_8_count = v[8][1]
+pmdn_9_name = v[9][0]
+pmdn_9_count = v[9][1]
 
 ########################################################
-
-
 ###############################################bouton 2 
-
+#graphique  calcule pourcentage
+print("méthodes : ",v)
+total_methode = sum(ordered_discoverymethod_counts_key.values())
+print("total_methode : ",total_methode)
+m0p = float("{:.2f}".format((v[0][1] / total_methode)*100))
+m0n = v[0][0]
+print("m0p :", m0p, '% pour la méthode ', str(m0n))
+m1p = float("{:.2f}".format((v[1][1] / total_methode)*100))
+m1n = v[1][0]
+print("m1p :", m1p, '% pour la méthode ', str(m1n))
+m2p = float("{:.2f}".format((v[2][1] / total_methode)*100))
+m2n = v[2][0]
+print("m2p :", m2p, '% pour la méthode ', str(m2n))
+m3p = float("{:.2f}".format((v[3][1] / total_methode)*100))
+m3n = v[3][0]
+print("m3p :", m3p, '% pour la méthode ', str(m3n))
+m4p = float("{:.2f}".format((v[4][1] / total_methode)*100))
+m4n = v[4][0]
+print("m4p :", m4p, '% pour la méthode ', str(m4n))
+m5p = float("{:.2f}".format((v[5][1] / total_methode)*100))
+m5n = v[5][0]
+print("m5p :", m5p, '% pour la méthode ', str(m5n))
+m6p = float("{:.2f}".format((v[6][1] / total_methode)*100))
+m6n = v[6][0]
+print("m6p :", m6p, '% pour la méthode ', str(m6n))
+m7p = float("{:.2f}".format((v[7][1] / total_methode)*100))
+m7n = v[7][0]
+print("m7p :", m7p, '% pour la méthode ', str(m7n))
+m8p = float("{:.2f}".format((v[8][1] / total_methode)*100))
+m8n = v[8][0]
+print("m8p :", m8p, '% pour la méthode ', str(m8n))
+m9p = float("{:.2f}".format((v[9][1] / total_methode)*100))
+m9n = v[9][0]
+print("m9p :", m9p, '% pour la méthode ', str(m9n))
+#autres
+mautrep = float("{:.2f}".format(m4p+m5p+m6p+m7p+m8p+m9p))
+mautren = "autres"
 ########################################################
-
-
 ###############################################bouton 3 
 
-#######################################################
 
+#######################################################
 ###############################################bouton 4 
 
-#######################################################
 
+#######################################################
 ###############################################bouton 5 
 
+
 #######################################################
-
-
 #############################################################
 
 class Exoplanet(Stack):
@@ -343,14 +395,14 @@ class Exoplanet(Stack):
     def MainContainer(self):
         self.main =Container(
             width=350, height=700, bgcolor='black', 
-            border_radius=35, padding=8,
+            border_radius=35, padding=4,
         )
 
         self.main_col = Column()
 
         self.green_container = Container(
             width=self.main.width,
-            height=self.main.height * 0.50,
+            height=self.main.height * 0.70,
             border_radius=30,
             gradient=LinearGradient(
                 begin=alignment.top_left,
@@ -402,12 +454,18 @@ class Exoplanet(Stack):
             self.datatable.rows[2].cells[2].content.value = str(n0cel23)
             print(self.datatable.rows[0].cells[1].content.value)
 
+            self.table_container.content.controls[0].controls[0].content.visible=False
+            self.table_container.content.controls[0].controls[0].content = Text("",
+                                                                                size=12, weight='bold',color=colors.BLACK,)
+
             print(self.table_container.bgcolor)
             self.table_container.bgcolor = ft.colors.AMBER
             print(self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4])
-            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="les 5 planetes les plus proches"
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="les 10 planetes les plus proches"
             self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].bgcolor=colors.BLACK
             self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].color=colors.AMBER
+
+            self.table_container.content.controls[0].controls[0].content.value = ""
 
             #maj des valeurs
             print(self.table_container.content.controls[0].controls[0].content)
@@ -419,7 +477,13 @@ class Exoplanet(Stack):
             self.table_container.content.controls[0].controls[2].content.value = str(plpp2_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp2_dist)+str(' parsecs')
             self.table_container.content.controls[0].controls[3].content.value = str(plpp3_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp3_dist)+str(' parsecs')
             self.table_container.content.controls[0].controls[4].content.value = str(plpp4_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp4_dist)+str(' parsecs')
+            self.table_container.content.controls[0].controls[5].content.value = str(plpp5_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp5_dist)+str(' parsecs')
+            self.table_container.content.controls[0].controls[6].content.value = str(plpp6_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp6_dist)+str(' parsecs')
+            self.table_container.content.controls[0].controls[7].content.value = str(plpp7_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp7_dist)+str(' parsecs')
+            self.table_container.content.controls[0].controls[8].content.value = str(plpp8_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp8_dist)+str(' parsecs')
+            self.table_container.content.controls[0].controls[9].content.value = str(plpp9_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp9_dist)+str(' parsecs')
            
+            print(self.table_container.content)
 
             Exoplanet.update(self)
 
@@ -446,11 +510,20 @@ class Exoplanet(Stack):
             self.datatable.rows[2].cells[2].content.value = str(n1cel23)
             print(self.datatable.rows[0].cells[1].content.value)
 
+            # self.table_container.content.controls[0].controls[0].PieChart.visible=False
+            print("pichart")
+            print(self.table_container.content.controls[0])
+            print(self.table_container.content.controls[0].controls[0])
+            print(self.table_container.content.controls[0].controls[0].content)
+            self.table_container.content.controls[0].controls[0].content.visible=False
+            self.table_container.content.controls[0].controls[0].content = Text("",
+                                                                                size=12, weight='bold',color=colors.BLACK,)
+
             print(self.table_container.bgcolor)
             self.table_container.bgcolor = ft.colors.GREEN_200
             self.table_container.alignment = ft.alignment.center
             print(self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4])
-            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="Les 5 méthodes de détections"
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="Les 10 méthodes de détections"
             self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].bgcolor=colors.BLACK
             self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].color=colors.GREEN_200
 
@@ -460,7 +533,13 @@ class Exoplanet(Stack):
             self.table_container.content.controls[0].controls[2].content.value = str(pmdn_2_name)+str('\t\t\t\t\t')+' : '+str(pmdn_2_count)
             self.table_container.content.controls[0].controls[3].content.value = str(pmdn_3_name)+str('\t\t\t\t\t')+' : '+str(pmdn_3_count)
             self.table_container.content.controls[0].controls[4].content.value = str(pmdn_4_name)+str('\t\t\t\t\t')+' : '+str(pmdn_4_count)
-           
+            self.table_container.content.controls[0].controls[5].content.value = str(pmdn_5_name)+str('\t\t\t\t\t')+' : '+str(pmdn_5_count)
+            self.table_container.content.controls[0].controls[6].content.value = str(pmdn_6_name)+str('\t\t\t\t\t')+' : '+str(pmdn_6_count)
+            self.table_container.content.controls[0].controls[7].content.value = str(pmdn_7_name)+str('\t\t\t\t\t')+' : '+str(pmdn_7_count)
+            self.table_container.content.controls[0].controls[8].content.value = str(pmdn_8_name)+str('\t\t\t\t\t')+' : '+str(pmdn_8_count)
+            self.table_container.content.controls[0].controls[9].content.value = str(pmdn_9_name)+str('\t\t\t\t\t')+' : '+str(pmdn_9_count)
+            
+            print(self.table_container.content)
 
             Exoplanet.update(self)
 
@@ -468,15 +547,17 @@ class Exoplanet(Stack):
             #nom des colonnes
             self.datatable.columns[0].label.value=str(ncol2)
             print(self.datatable.bgcolor)
-            self.datatable.bgcolor = ft.colors.CYAN_200
+            self.datatable.bgcolor = '#18ACEF'
 
             #valeur des cellules par ligne
             self.datatable.rows[0].cells[1].content.value = "cel112"
 
+
+            print(self.table_container.content)
             print(self.table_container.bgcolor)
-            self.table_container.bgcolor = ft.colors.CYAN_200
+            self.table_container.bgcolor = '#18ACEF'
             print(self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4])
-            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="deux"
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="Répartition des méthodes de détection"
             self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].bgcolor=colors.BLACK
             self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].color=colors.CYAN_200
 
@@ -486,7 +567,104 @@ class Exoplanet(Stack):
             self.table_container.content.controls[0].controls[2].content.value = ""
             self.table_container.content.controls[0].controls[3].content.value = ""
             self.table_container.content.controls[0].controls[4].content.value = ""
-           
+            self.table_container.content.controls[0].controls[5].content.value = ""
+            self.table_container.content.controls[0].controls[6].content.value = ""
+            self.table_container.content.controls[0].controls[7].content.value = ""
+            self.table_container.content.controls[0].controls[8].content.value = ""
+            self.table_container.content.controls[0].controls[9].content.value = ""
+            
+            #insertion chart
+            labels = ["Oxygen", "Hydrogen", "Carbon_Dioxide", "Nitrogen"]
+            values = [4500, 2500, 1053, 500]
+            normal_title_style = ft.TextStyle(
+                size=10, color=colors.BLACK, weight=ft.FontWeight.BOLD
+            )
+
+            chart=PieChart(
+                sections=[
+                    PieChartSection(
+                        m0p,
+                        title=str(m0n)+'\n'+str(m0p)+"%",
+                        title_style=normal_title_style,
+                        color=colors.BLUE,
+                        radius=120,
+                    ),
+                    PieChartSection(
+                        m1p,
+                        title=str(m1n)+'\n'+str(m1p)+"%",
+                        title_style=normal_title_style,
+                        color=colors.YELLOW,
+                        radius=120,
+                    ),
+                    PieChartSection(
+                        m2p,
+                        title=str(m2n)+str(m2p)+"%",
+                        title_style=normal_title_style,
+                        color=colors.PURPLE,
+                        radius=120,
+                        title_position=0.8,
+                    ),
+                    PieChartSection(
+                        m3p,
+                        title=str(m3n)+str(m3p)+"%",
+                        title_style=normal_title_style,
+                        color=colors.GREEN,
+                        radius=120,
+                        title_position=0.8,
+                    ),
+                    PieChartSection(
+                        mautrep,
+                        title=str(mautren)+str(mautrep)+"%",
+                        title_style=normal_title_style,
+                        color=colors.RED,
+                        radius=120,
+                    ),
+                    # PieChartSection(
+                    #     m5p,
+                    #     title=str(m5n)+'\n'+str(m5p)+"%",
+                    #     title_style=normal_title_style,
+                    #     color=colors.PINK,
+                    #     radius=120,
+                    # ),
+                    # PieChartSection(
+                    #     m6p,
+                    #     title=str(m6n)+'\n'+str(m6p)+"%",
+                    #     title_style=normal_title_style,
+                    #     color=colors.CYAN,
+                    #     radius=120,
+                    # ),
+                    # PieChartSection(
+                    #     m7p,
+                    #     title=str(m7n)+'\n'+str(m7p)+"%",
+                    #     title_style=normal_title_style,
+                    #     color=colors.ORANGE,
+                    #     radius=120,
+                    # ),
+                    # PieChartSection(
+                    #     m8p,
+                    #     title=str(m8n)+'\n'+str(m8p)+"%",
+                    #     title_style=normal_title_style,
+                    #     color=colors.BROWN,
+                    #     radius=120,
+                    # ),
+                    # PieChartSection(
+                    #     m9p,
+                    #     title=str(m9n)+'\n'+str(m9p)+"%",
+                    #     title_style=normal_title_style,
+                    #     color=colors.GREY,
+                    #     radius=120,
+                    # ),
+                    
+                    
+                ],
+                sections_space=0,
+                center_space_radius=0,
+                expand=True,
+            )
+
+
+            self.table_container.content.controls[0].controls[0].content = chart
+            
 
             Exoplanet.update(self)
 
@@ -498,6 +676,10 @@ class Exoplanet(Stack):
 
             #valeur des cellules par ligne
             self.datatable.rows[0].cells[1].content.value = "cel112"
+
+            self.table_container.content.controls[0].controls[0].content.visible=False
+            self.table_container.content.controls[0].controls[0].content = Text("",
+                                                                                size=12, weight='bold',color=colors.BLACK,)
 
             print(self.table_container.bgcolor)
             self.table_container.bgcolor = ft.colors.RED_200
@@ -512,7 +694,12 @@ class Exoplanet(Stack):
             self.table_container.content.controls[0].controls[2].content.value = ""
             self.table_container.content.controls[0].controls[3].content.value = ""
             self.table_container.content.controls[0].controls[4].content.value = ""
-           
+            self.table_container.content.controls[0].controls[5].content.value = ""
+            self.table_container.content.controls[0].controls[6].content.value = ""
+            self.table_container.content.controls[0].controls[7].content.value = ""
+            self.table_container.content.controls[0].controls[8].content.value = ""
+            self.table_container.content.controls[0].controls[9].content.value = ""
+            
 
             Exoplanet.update(self)
 
@@ -524,6 +711,10 @@ class Exoplanet(Stack):
 
             #valeur des cellules par ligne
             self.datatable.rows[0].cells[1].content.value = "cel112"
+
+            self.table_container.content.controls[0].controls[0].content.visible=False
+            self.table_container.content.controls[0].controls[0].content = Text("",
+                                                                                size=12, weight='bold',color=colors.BLACK,)
 
             print(self.table_container.bgcolor)
             self.table_container.bgcolor = ft.colors.PURPLE_200
@@ -538,7 +729,12 @@ class Exoplanet(Stack):
             self.table_container.content.controls[0].controls[2].content.value = ""
             self.table_container.content.controls[0].controls[3].content.value = ""
             self.table_container.content.controls[0].controls[4].content.value = ""
-           
+            self.table_container.content.controls[0].controls[5].content.value = ""
+            self.table_container.content.controls[0].controls[6].content.value = ""
+            self.table_container.content.controls[0].controls[7].content.value = ""
+            self.table_container.content.controls[0].controls[8].content.value = ""
+            self.table_container.content.controls[0].controls[9].content.value = ""
+            
 
             Exoplanet.update(self)
 
@@ -553,6 +749,10 @@ class Exoplanet(Stack):
             self.datatable.rows[0].cells[1].content.value = "cel112"
             print(self.datatable.rows[0].cells[1].content.value)
 
+            self.table_container.content.controls[0].controls[0].content.visible=False
+            self.table_container.content.controls[0].controls[0].content = Text("",
+                                                                                size=12, weight='bold',color=colors.BLACK,)
+
             print(self.table_container.bgcolor)
             self.table_container.bgcolor = ft.colors.DEEP_ORANGE
             print(self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4])
@@ -566,7 +766,12 @@ class Exoplanet(Stack):
             self.table_container.content.controls[0].controls[2].content.value = ""
             self.table_container.content.controls[0].controls[3].content.value = ""
             self.table_container.content.controls[0].controls[4].content.value = ""
-           
+            self.table_container.content.controls[0].controls[5].content.value = ""
+            self.table_container.content.controls[0].controls[6].content.value = ""
+            self.table_container.content.controls[0].controls[7].content.value = ""
+            self.table_container.content.controls[0].controls[8].content.value = ""
+            self.table_container.content.controls[0].controls[9].content.value = ""
+            
 
 
             Exoplanet.update(self)
@@ -626,7 +831,7 @@ class Exoplanet(Stack):
         
         self.table_container = Container(
             width=self.main.width,
-            height=self.main.height * 0.20,
+            height=self.main.height * 0.40,
             border_radius=30,
             border=ft.border.all(2,colors.BLACK),
             # gradient=LinearGradient(
@@ -662,6 +867,26 @@ class Exoplanet(Stack):
                             ),
                             Container(
                                 content = Text(str(plpp4_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp4_dist)+str(' parsecs'), 
+                                               size=12, weight='bold',color=colors.BLACK,),
+                            ),
+                            Container(
+                                content = Text(str(plpp5_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp5_dist)+str(' parsecs'), 
+                                               size=12, weight='bold',color=colors.BLACK,),
+                            ),
+                            Container(
+                                content = Text(str(plpp6_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp6_dist)+str(' parsecs'), 
+                                               size=12, weight='bold',color=colors.BLACK,),
+                            ),
+                            Container(
+                                content = Text(str(plpp7_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp7_dist)+str(' parsecs'), 
+                                               size=12, weight='bold',color=colors.BLACK,),
+                            ),
+                            Container(
+                                content = Text(str(plpp8_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp8_dist)+str(' parsecs'), 
+                                               size=12, weight='bold',color=colors.BLACK,),
+                            ),
+                            Container(
+                                content = Text(str(plpp9_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp9_dist)+str(' parsecs'), 
                                                size=12, weight='bold',color=colors.BLACK,),
                             ),
                         ]
@@ -759,7 +984,7 @@ class Exoplanet(Stack):
                                                     margin=5,
                                                     padding=5,
                                                     alignment=ft.alignment.center,
-                                                    bgcolor=ft.colors.CYAN_200,
+                                                    bgcolor='#18ACEF',
                                                     width=20,
                                                     height=30,
                                                     border_radius=10,
@@ -806,7 +1031,7 @@ class Exoplanet(Stack):
                                             alignment=ft.MainAxisAlignment.CENTER,
                                                 ),
                                                 Text(
-                                                    "Les 5 planetes les plus proches",
+                                                    "Les 10 planetes les plus proches",
                                                     color=colors.AMBER,
                                                     bgcolor=colors.BLACK,
                                                     size=15,
@@ -841,16 +1066,16 @@ class Exoplanet(Stack):
             runs_count=0,
             spacing=12,
             run_spacing=5,
-           
+            horizontal=True,
         )
 
         self.main_content_area = Container(
             width=self.main.width,
-            height=self.main.height * 0.50,
+            height=self.main.height * 0.40,
             #bgcolor='blue',
-            padding=padding.only(top=10, left=10, right=10),
+            padding=padding.only(top=2, left=10, right=10),
             content=Column(
-                spacing=20,
+                spacing=10,
                 controls=[
                     Row(
                         alignment='spaceBetween',
@@ -871,7 +1096,7 @@ class Exoplanet(Stack):
                         content=self.grid_distances,
                     ),
                     Row(
-                        alignment='spaceBetween',
+                        # alignment='spaceBetween',
                         vertical_alignment='end',
                         controls=[
                             Container(
@@ -884,7 +1109,11 @@ class Exoplanet(Stack):
                             ),
                         ],
                     ),
-                    self.grid_decouverte,
+                    Container(
+                        height=50,
+                        content=self.grid_decouverte,
+                    ),
+                    
                 ],
             ),
         )
@@ -917,7 +1146,7 @@ class Exoplanet(Stack):
                     horizontal_alignment='center',
                     controls=[
                         Text(f'{i[0]}', size=11, color='yellow54'),
-                        Text(f'{i[1]}', size=16,color='white', weight='bold'),
+                        Text(f'{i[1]}', size=12,color='white', weight='bold'),
                     ]
                 )
 
@@ -937,7 +1166,7 @@ class Exoplanet(Stack):
             __ = Container(
                 width=100,
                 height=100,
-                bgcolor='white10',
+                bgcolor='#0A0D1E',
                 border_radius=15,
                 alignment=alignment.center,
                 content = Text( f'{i}',color='white', weight='bold' ),
@@ -951,20 +1180,19 @@ class Exoplanet(Stack):
                     horizontal_alignment='center',
                     controls=[
                         Text(f'{i[0]}', size=11, color='yellow54'),
-                        Text(f'{i[1]}', size=16,color='white', weight='bold'),
+                        Text(f'{i[1]}', size=12,color='white', weight='bold'),
 
-                        Text(
-                            'Pay Now?',
-                            color='white',
-                            size=12, 
-                            text_align='start',
-                            weight='w600',
-                            offset= transform.Offset(0, 1),
-                            animate_offset = animation.Animation(duration=900, curve='decelerate'),
-                            animate_opacity=300,
-                            opacity=0,
-
-                        )
+                        # Text(
+                        #     'Pay Now?',
+                        #     color='white',
+                        #     size=12, 
+                        #     text_align='start',
+                        #     weight='w600',
+                        #     offset= transform.Offset(0, 1),
+                        #     animate_offset = animation.Animation(duration=900, curve='decelerate'),
+                        #     animate_opacity=300,
+                        #     opacity=0,
+                        # )
                     ]
                 )
 
