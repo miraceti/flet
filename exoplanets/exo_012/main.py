@@ -586,7 +586,7 @@ class Exoplanet(Stack):
                         m0p,
                         title=str(m0n)+'\n'+str(m0p)+"%",
                         title_style=normal_title_style,
-                        color=colors.BLUE,
+                        color=colors.INDIGO,
                         radius=120,
                     ),
                     PieChartSection(
@@ -598,7 +598,7 @@ class Exoplanet(Stack):
                     ),
                     PieChartSection(
                         m2p,
-                        title=str(m2n)+str(m2p)+"%",
+                        title=str(m2n)+' ' +str(m2p)+"%",
                         title_style=normal_title_style,
                         color=colors.PURPLE,
                         radius=120,
@@ -606,7 +606,7 @@ class Exoplanet(Stack):
                     ),
                     PieChartSection(
                         m3p,
-                        title=str(m3n)+str(m3p)+"%",
+                        title=str(m3n)+' ' +str(m3p)+"%",
                         title_style=normal_title_style,
                         color=colors.GREEN,
                         radius=120,
@@ -614,10 +614,11 @@ class Exoplanet(Stack):
                     ),
                     PieChartSection(
                         mautrep,
-                        title=str(mautren)+str(mautrep)+"%",
+                        title=str(mautren)+' ' +str(mautrep)+"%",
                         title_style=normal_title_style,
                         color=colors.RED,
                         radius=120,
+                        title_position=0.8,
                     ),
                     # PieChartSection(
                     #     m5p,
