@@ -342,7 +342,17 @@ mautren = "autres"
 ###############################################bouton 3 
 planete_list =[]
 #suggestions=[         ft.AutoCompleteSuggestion(key="one 1", value="One"),]
-
+planete_list=[
+                    ft.AutoCompleteSuggestion(key="one 1", value="One"),
+                    ft.AutoCompleteSuggestion(key="two 2", value="Two"),
+                    ft.AutoCompleteSuggestion(key="three 3", value="Three"),
+                ]
+data_p = [
+    {"name": f"Language {i}", "description": f"Description for language Description for language Description for language {i}"} 
+    for i in range(1, 5001)
+]
+print(planete_name_list[0])
+data_p = planete_name_list
 
 #######################################################
 ###############################################bouton 4 
@@ -433,36 +443,13 @@ class Exoplanet(Stack):
             print(self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[3].controls[0].content)
             #text {'value': '0', 'weight': 'bold', 'color': 'black', 'n': 'content'}
 
-            #nom des colonne
-            print(self.datatable.columns[0].label) 
-            print(self.datatable.columns[0].label.value) 
-            self.datatable.columns[0].label.value=str(n0col01)
-            self.datatable.columns[1].label.value=str(n0col02)
-            self.datatable.columns[2].label.value=str(n0col03)
-            print(self.datatable.bgcolor)
-            self.datatable.bgcolor = ft.colors.AMBER
-
-            #valeur des cellules par ligne
-            print(self.datatable.rows[0].cells[1].content.value)
-            self.datatable.rows[0].cells[0].content.value = str(n0cel01)
-            self.datatable.rows[0].cells[1].content.value = str(n0cel02)
-            self.datatable.rows[0].cells[2].content.value = str(n0cel03)
-
-            self.datatable.rows[1].cells[0].content.value = str(n0cel11)
-            self.datatable.rows[1].cells[1].content.value = str(n0cel12)
-            self.datatable.rows[1].cells[2].content.value = str(n0cel13)
-
-            self.datatable.rows[2].cells[0].content.value = str(n0cel21)
-            self.datatable.rows[2].cells[1].content.value = str(n0cel22)
-            self.datatable.rows[2].cells[2].content.value = str(n0cel23)
-            print(self.datatable.rows[0].cells[1].content.value)
-
             self.table_container.content.controls[0].controls[0].content.visible=False
             self.table_container.content.controls[0].controls[0].content = Text("",
                                                                                 size=12, weight='bold',color=colors.BLACK,)
 
             print(self.table_container.bgcolor)
             self.table_container.bgcolor = ft.colors.AMBER
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4]=Text("")
             print(self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4])
             self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="les 10 planetes les plus proches"
             self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].bgcolor=colors.BLACK
@@ -525,6 +512,7 @@ class Exoplanet(Stack):
             print(self.table_container.bgcolor)
             self.table_container.bgcolor = ft.colors.GREEN_200
             self.table_container.alignment = ft.alignment.center
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4]=Text("")
             print(self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4])
             self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="Les 10 méthodes de détections"
             self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].bgcolor=colors.BLACK
@@ -555,6 +543,8 @@ class Exoplanet(Stack):
             #valeur des cellules par ligne
             self.datatable.rows[0].cells[1].content.value = "cel112"
 
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4]=Text("")
+            self.table_container.content.controls[0].controls[0].content= Text("")
 
             print(self.table_container.content)
             print(self.table_container.bgcolor)
@@ -685,35 +675,70 @@ class Exoplanet(Stack):
             self.datatable.rows[0].cells[1].content.value = "cel112"
 
             self.table_container.content.controls[0].controls[0].content.visible=False
-            self.table_container.content.controls[0].controls[0].content = Text("",
-                                                                                size=12, weight='bold',color=colors.BLACK,)
+            self.table_container.content.controls[0].controls[0].content =Text(
+                             "",size=12, weight='bold',color=colors.BLACK,bgcolor=colors.RED_200,
+                             )
             print(self.table_container.bgcolor)
             self.table_container.bgcolor = ft.colors.RED_200
             print(self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4])
-            # ct_input = ft.TextField(label="Search planet",
-            #                         height=20,
-            #                         content_padding=ft.Padding(left=5, top=0,right=5, bottom=5) ,
-                                    
-            #             )
-            ct_input = ft.AutoComplete(
-                suggestions=[
-                    ft.AutoCompleteSuggestion(key="one 1", value="One"),
-                    ft.AutoCompleteSuggestion(key="two 2", value="Two"),
-                    ft.AutoCompleteSuggestion(key="three 3", value="Three"),
-                ],
-            on_select=lambda e: print(e.control.selected_index, e.selection),
+            normal_title_style = ft.TextStyle(
+                size=20, color=colors.BLACK, weight=ft.FontWeight.BOLD
             )
-            print("cti : ",ct_input)
-            ct_search = ft.Container(visible = True,bgcolor="yellow400", width=350, padding=10, content=Column() )
-            # self.table_container.content.controls[0].controls[0].content = ct_search
+            # ct_input = ft.AutoComplete(
+            #     suggestions=planete_list,
+            #     on_select=lambda e: print(e.control.selected_index, e.selection),
+            #     text_style = ft.TextStyle(size=10),
+            # )
+            suggestion_list = ft.ListView(height=50)
+
+            def on_text_change(e):
+                # Filtrer les données en fonction de la saisie
+                query = e.control.value.lower()
+                filtered_data = [item for item in data_p if query in item["pl_name"].lower()]
+                
+                # Limiter les résultats à 10 éléments
+                suggestion_list.controls.clear()
+                for item in filtered_data[:10]:
+                    suggestion_list.controls.append(
+                        ft.TextButton(item["pl_name"], on_click=lambda e, item=item: select_item(e, item))
+                    )
+                Exoplanet.update(self)
+
+            def select_item(e, item):
+                text_field.value = item["pl_name"]
+                suggestion_list.controls.clear()
+                print(item["sy_dist"])
+
+                self.table_container.content.controls[0].controls[1].content.value = str(
+                  'Planète : '+  str(item["pl_name"]) + 
+                  "\ndistance: " +  str(item["sy_dist"])+
+                  "\nEtoile: " +  str(item["hostname"])+
+                  "\nmasse(t): " +  str(item["pl_bmasse"])+
+                  "\nrayon(t): " +  str(item["pl_rade"])
+                    )
+
+                Exoplanet.update(self)
+
+            text_field = ft.TextField(
+                label="recherche par nom d'exoplanetes",
+                on_change=on_text_change,
+                text_style=normal_title_style,
+            )
+
+            # print("cti : ",ct_input)
             print(self.table_container.content.controls[0].controls[0].content)
             self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="trois"
-            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4] = ct_input
+            # self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4] = ct_input
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4] = text_field
+            # self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[5] = suggestion_list
 
             self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].bgcolor=colors.WHITE
             self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].color=colors.BLACK
 
             #valeurs
+            print("1: ",self.table_container.content.controls[0].controls[0].content)
+            self.table_container.content.controls[0].controls[0].content=suggestion_list
+            print("2: ",self.table_container.content.controls[0].controls[0].content)
             self.table_container.content.controls[0].controls[0].content.value = ""
             self.table_container.content.controls[0].controls[1].content.value = ""
             self.table_container.content.controls[0].controls[2].content.value = ""
