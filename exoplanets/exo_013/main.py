@@ -340,6 +340,8 @@ mautrep = float("{:.2f}".format(m4p+m5p+m6p+m7p+m8p+m9p))
 mautren = "autres"
 ########################################################
 ###############################################bouton 3 
+planete_list =[]
+#suggestions=[         ft.AutoCompleteSuggestion(key="one 1", value="One"),]
 
 
 #######################################################
@@ -587,7 +589,7 @@ class Exoplanet(Stack):
                         m0p,
                         title=str(m0n)+'\n'+str(m0p)+"%",
                         title_style=normal_title_style,
-                        color=colors.INDIGO,
+                        color="#c27ce6",
                         radius=120,
                     ),
                     PieChartSection(
@@ -596,14 +598,15 @@ class Exoplanet(Stack):
                         title_style=normal_title_style,
                         color=colors.YELLOW,
                         radius=120,
+                        title_position=0.7,
                     ),
                     PieChartSection(
                         m2p,
                         title=str(m2n)+' ' +str(m2p)+"%",
                         title_style=normal_title_style,
-                        color=colors.PURPLE,
+                        color="#afbeed",
                         radius=120,
-                        title_position=0.8,
+                        title_position=0.9,
                     ),
                     PieChartSection(
                         m3p,
@@ -611,7 +614,7 @@ class Exoplanet(Stack):
                         title_style=normal_title_style,
                         color=colors.GREEN,
                         radius=120,
-                        title_position=0.8,
+                        title_position=0.9,
                     ),
                     PieChartSection(
                         mautrep,
@@ -619,7 +622,7 @@ class Exoplanet(Stack):
                         title_style=normal_title_style,
                         color=colors.RED,
                         radius=120,
-                        title_position=0.8,
+                        title_position=0.4,
                     ),
                     # PieChartSection(
                     #     m5p,
@@ -670,6 +673,8 @@ class Exoplanet(Stack):
 
             Exoplanet.update(self)
 
+        
+
         def table_3(e):
             #nom des colonnes
             self.datatable.columns[0].label.value=str(ncol2)
@@ -682,13 +687,31 @@ class Exoplanet(Stack):
             self.table_container.content.controls[0].controls[0].content.visible=False
             self.table_container.content.controls[0].controls[0].content = Text("",
                                                                                 size=12, weight='bold',color=colors.BLACK,)
-
             print(self.table_container.bgcolor)
             self.table_container.bgcolor = ft.colors.RED_200
             print(self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4])
+            # ct_input = ft.TextField(label="Search planet",
+            #                         height=20,
+            #                         content_padding=ft.Padding(left=5, top=0,right=5, bottom=5) ,
+                                    
+            #             )
+            ct_input = ft.AutoComplete(
+                suggestions=[
+                    ft.AutoCompleteSuggestion(key="one 1", value="One"),
+                    ft.AutoCompleteSuggestion(key="two 2", value="Two"),
+                    ft.AutoCompleteSuggestion(key="three 3", value="Three"),
+                ],
+            on_select=lambda e: print(e.control.selected_index, e.selection),
+            )
+            print("cti : ",ct_input)
+            ct_search = ft.Container(visible = True,bgcolor="yellow400", width=350, padding=10, content=Column() )
+            # self.table_container.content.controls[0].controls[0].content = ct_search
+            print(self.table_container.content.controls[0].controls[0].content)
             self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="trois"
-            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].bgcolor=colors.BLACK
-            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].color=colors.RED_200
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4] = ct_input
+
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].bgcolor=colors.WHITE
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].color=colors.BLACK
 
             #valeurs
             self.table_container.content.controls[0].controls[0].content.value = ""

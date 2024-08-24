@@ -1,2 +1,1 @@
 flet==0.22.*
-matplotlib==3.8.*
