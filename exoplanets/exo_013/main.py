@@ -32,7 +32,8 @@ print(y0)
 #data de champs multiples
 urlexo7 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+\
 pl_name,hostname,pl_letter,pl_bmasse,pl_bmassj,pl_rade,pl_radj,pl_orbper,pl_dens,pl_trandur,pl_ratror,\
-sy_snum,sy_pnum,sy_mnum,st_mass,st_lum,st_age,st_dens,sy_dist,disc_year,disc_telescope,discoverymethod\
+sy_snum,sy_pnum,sy_mnum,st_mass,st_lum,st_age,st_dens,sy_dist,disc_year,disc_telescope,discoverymethod,\
+st_spectype,st_teff,st_rad,st_mass,pl_eqt\
 +from+ps+where+default_flag=1&format=json"
 
 list7 = json.loads(urlopen(urlexo7).read().decode("utf-8"))
@@ -569,8 +570,8 @@ class Exoplanet(Stack):
             #insertion chart
             labels = ["Oxygen", "Hydrogen", "Carbon_Dioxide", "Nitrogen"]
             values = [4500, 2500, 1053, 500]
-            normal_title_style = ft.TextStyle(
-                size=10, color=colors.BLACK, weight=ft.FontWeight.BOLD
+            normal_title_style2 = ft.TextStyle(
+                size=12, color=colors.BLACK, weight=ft.FontWeight.BOLD
             )
 
             chart=PieChart(
@@ -578,14 +579,14 @@ class Exoplanet(Stack):
                     PieChartSection(
                         m0p,
                         title=str(m0n)+'\n'+str(m0p)+"%",
-                        title_style=normal_title_style,
+                        title_style=normal_title_style2,
                         color="#c27ce6",
                         radius=120,
                     ),
                     PieChartSection(
                         m1p,
                         title=str(m1n)+'\n'+str(m1p)+"%",
-                        title_style=normal_title_style,
+                        title_style=normal_title_style2,
                         color=colors.YELLOW,
                         radius=120,
                         title_position=0.7,
@@ -593,26 +594,26 @@ class Exoplanet(Stack):
                     PieChartSection(
                         m2p,
                         title=str(m2n)+' ' +str(m2p)+"%",
-                        title_style=normal_title_style,
+                        title_style=normal_title_style2,
                         color="#afbeed",
                         radius=120,
-                        title_position=0.9,
+                        title_position=0.8,
                     ),
                     PieChartSection(
                         m3p,
                         title=str(m3n)+' ' +str(m3p)+"%",
-                        title_style=normal_title_style,
+                        title_style=normal_title_style2,
                         color=colors.GREEN,
                         radius=120,
-                        title_position=0.9,
+                        title_position=0.8,
                     ),
                     PieChartSection(
                         mautrep,
                         title=str(mautren)+' ' +str(mautrep)+"%",
-                        title_style=normal_title_style,
+                        title_style=normal_title_style2,
                         color=colors.RED,
                         radius=120,
-                        title_position=0.4,
+                        title_position=0.2,
                     ),
                     # PieChartSection(
                     #     m5p,
@@ -684,12 +685,15 @@ class Exoplanet(Stack):
             normal_title_style = ft.TextStyle(
                 size=20, color=colors.BLACK, weight=ft.FontWeight.BOLD
             )
+            button_style = ft.ButtonStyle(
+                color=colors.BLACK, bgcolor=colors.WHITE
+            )
             # ct_input = ft.AutoComplete(
             #     suggestions=planete_list,
             #     on_select=lambda e: print(e.control.selected_index, e.selection),
             #     text_style = ft.TextStyle(size=10),
             # )
-            suggestion_list = ft.ListView(height=50)
+            suggestion_list = ft.ListView(height=30)
 
             def on_text_change(e):
                 # Filtrer les données en fonction de la saisie
@@ -698,9 +702,13 @@ class Exoplanet(Stack):
                 
                 # Limiter les résultats à 10 éléments
                 suggestion_list.controls.clear()
-                for item in filtered_data[:10]:
+                for item in filtered_data[:50]:
                     suggestion_list.controls.append(
-                        ft.TextButton(item["pl_name"], on_click=lambda e, item=item: select_item(e, item))
+                        ft.TextButton(
+                            item["pl_name"],
+                            style=button_style,
+                            on_click=lambda e, item=item: select_item(e, item)
+                        )
                     )
                 Exoplanet.update(self)
 
@@ -709,12 +717,19 @@ class Exoplanet(Stack):
                 suggestion_list.controls.clear()
                 print(item["sy_dist"])
 
-                self.table_container.content.controls[0].controls[1].content.value = str(
-                  'Planète : '+  str(item["pl_name"]) + 
-                  "\ndistance: " +  str(item["sy_dist"])+
-                  "\nEtoile: " +  str(item["hostname"])+
-                  "\nmasse(t): " +  str(item["pl_bmasse"])+
-                  "\nrayon(t): " +  str(item["pl_rade"])
+                self.table_container.content.controls[0].controls[1].content = ft.Text(
+                  'Planète: '+  str(item["pl_name"]) + " ; Distance: " +  str(item["sy_dist"])+
+                  "\nEtoile: " +  str(item["hostname"])+ " ; Année: " +  str(item["disc_year"])+
+                  "\nMasse(T): " +  str(item["pl_bmasse"])+" ; Rayon(T): " +  str(item["pl_rade"])+
+                  "\nMasse(J): " +  str(item["pl_bmassj"])+" ; Rayon(J): " +  str(item["pl_radj"])+
+                  "\nDensitéPL: " +  str(item["pl_dens"])+" ; PériodePL: " +  str(item["pl_orbper"])+
+                  "\nTempératurePL: " +  str(item["pl_eqt"])+
+                  "\nInstrument: " +  str(item["disc_telescope"])+
+                  "\nMethode: " +  str(item["discoverymethod"])+
+                  "\nSpectraltypeST: " +  str(item["st_spectype"])+" ; TempératureST: " +  str(item["st_teff"])+
+                  "\nRayonST: " +  str(item["st_rad"])+" ; MasseST: " +  str(item["st_mass"]),
+                                   
+                  color=colors.BLACK,size=12,
                     )
 
                 Exoplanet.update(self)
