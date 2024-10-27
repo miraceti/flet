@@ -33,8 +33,8 @@ print(y0)
 urlexo7 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+\
 pl_name,hostname,pl_letter,pl_bmasse,pl_bmassj,pl_rade,pl_radj,pl_orbper,pl_dens,pl_trandur,pl_ratror,\
 sy_snum,sy_pnum,sy_mnum,st_mass,st_lum,st_age,st_dens,sy_dist,disc_year,disc_telescope,discoverymethod,\
-st_spectype,st_teff,st_rad,st_mass,pl_eqt\
-+from+ps+where+default_flag=1&format=json"
+st_spectype,st_teff,st_rad,st_mass,pl_eqt,releasedate\
++from+ps&format=json"
 
 list7 = json.loads(urlopen(urlexo7).read().decode("utf-8"))
 print("keys : ",(list7[0]).keys())
@@ -445,8 +445,16 @@ class Exoplanet(Stack):
             #text {'value': '0', 'weight': 'bold', 'color': 'black', 'n': 'content'}
 
             self.table_container.content.controls[0].controls[0].content.visible=False
-            self.table_container.content.controls[0].controls[0].content = Text("",
-                                                                                size=12, weight='bold',color=colors.BLACK,)
+            self.table_container.content.controls[0].controls[0].content = Text("", size=14, weight='bold',color=colors.BLACK,theme_style=ft.TextThemeStyle.HEADLINE_SMALL)
+            self.table_container.content.controls[0].controls[1].content = Text("", size=14, weight='bold',color=colors.BLACK,theme_style=ft.TextThemeStyle.HEADLINE_SMALL)
+            self.table_container.content.controls[0].controls[2].content = Text("", size=14, weight='bold',color=colors.BLACK,theme_style=ft.TextThemeStyle.HEADLINE_SMALL)
+            self.table_container.content.controls[0].controls[3].content = Text("", size=14, weight='bold',color=colors.BLACK,theme_style=ft.TextThemeStyle.HEADLINE_SMALL)
+            self.table_container.content.controls[0].controls[4].content = Text("", size=14, weight='bold',color=colors.BLACK,theme_style=ft.TextThemeStyle.HEADLINE_SMALL)
+            self.table_container.content.controls[0].controls[5].content = Text("", size=14, weight='bold',color=colors.BLACK,theme_style=ft.TextThemeStyle.HEADLINE_SMALL)
+            self.table_container.content.controls[0].controls[6].content = Text("", size=14, weight='bold',color=colors.BLACK,theme_style=ft.TextThemeStyle.HEADLINE_SMALL)
+            self.table_container.content.controls[0].controls[7].content = Text("", size=14, weight='bold',color=colors.BLACK,theme_style=ft.TextThemeStyle.HEADLINE_SMALL)
+            self.table_container.content.controls[0].controls[8].content = Text("", size=14, weight='bold',color=colors.BLACK,theme_style=ft.TextThemeStyle.HEADLINE_SMALL)
+            self.table_container.content.controls[0].controls[9].content = Text("", size=14, weight='bold',color=colors.BLACK,theme_style=ft.TextThemeStyle.HEADLINE_SMALL)
 
             print(self.table_container.bgcolor)
             self.table_container.bgcolor = ft.colors.AMBER
@@ -463,16 +471,16 @@ class Exoplanet(Stack):
             print(self.table_container.content.controls[0].controls[1].content)
 
             #valeurs
-            self.table_container.content.controls[0].controls[0].content.value = str(plpp0_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp0_dist)+str(' parsecs')
-            self.table_container.content.controls[0].controls[1].content.value = str(plpp1_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp1_dist)+str(' parsecs')
-            self.table_container.content.controls[0].controls[2].content.value = str(plpp2_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp2_dist)+str(' parsecs')
-            self.table_container.content.controls[0].controls[3].content.value = str(plpp3_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp3_dist)+str(' parsecs')
-            self.table_container.content.controls[0].controls[4].content.value = str(plpp4_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp4_dist)+str(' parsecs')
-            self.table_container.content.controls[0].controls[5].content.value = str(plpp5_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp5_dist)+str(' parsecs')
-            self.table_container.content.controls[0].controls[6].content.value = str(plpp6_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp6_dist)+str(' parsecs')
-            self.table_container.content.controls[0].controls[7].content.value = str(plpp7_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp7_dist)+str(' parsecs')
-            self.table_container.content.controls[0].controls[8].content.value = str(plpp8_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp8_dist)+str(' parsecs')
-            self.table_container.content.controls[0].controls[9].content.value = str(plpp9_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp9_dist)+str(' parsecs')
+            self.table_container.content.controls[0].controls[0].content.value = str(plpp0_name)+str('\t\t\t\t\t')+'Dist : '+str(plpp0_dist)+str(' pcs')
+            self.table_container.content.controls[0].controls[1].content.value = str(plpp1_name)+str('\t\t\t\t\t')+'Dist : '+str(plpp1_dist)+str(' pcs')
+            self.table_container.content.controls[0].controls[2].content.value = str(plpp2_name)+str('\t\t\t\t\t')+'Dist : '+str(plpp2_dist)+str(' pcs')
+            self.table_container.content.controls[0].controls[3].content.value = str(plpp3_name)+str('\t\t\t\t\t')+'Dist : '+str(plpp3_dist)+str(' pcs')
+            self.table_container.content.controls[0].controls[4].content.value = str(plpp4_name)+str('\t\t\t\t\t')+'Dist : '+str(plpp4_dist)+str(' pcs')
+            self.table_container.content.controls[0].controls[5].content.value = str(plpp5_name)+str('\t\t\t\t\t')+'Dist : '+str(plpp5_dist)+str(' pcs')
+            self.table_container.content.controls[0].controls[6].content.value = str(plpp6_name)+str('\t\t\t\t\t')+'Dist : '+str(plpp6_dist)+str(' pcs')
+            self.table_container.content.controls[0].controls[7].content.value = str(plpp7_name)+str('\t\t\t\t\t')+'Dist : '+str(plpp7_dist)+str(' pcs')
+            self.table_container.content.controls[0].controls[8].content.value = str(plpp8_name)+str('\t\t\t\t\t')+'Dist : '+str(plpp8_dist)+str(' pcs')
+            self.table_container.content.controls[0].controls[9].content.value = str(plpp9_name)+str('\t\t\t\t\t')+'Dist : '+str(plpp9_dist)+str(' pcs')
            
             print(self.table_container.content)
 
@@ -729,7 +737,7 @@ class Exoplanet(Stack):
                   "\nSpectraltypeST: " +  str(item["st_spectype"])+" ; TempératureST: " +  str(item["st_teff"])+
                   "\nRayonST: " +  str(item["st_rad"])+" ; MasseST: " +  str(item["st_mass"]),
                                    
-                  color=colors.BLACK,size=12,
+                  color=colors.BLACK,size=13,weight=ft.FontWeight.BOLD
                     )
 
                 Exoplanet.update(self)
