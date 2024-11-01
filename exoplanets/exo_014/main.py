@@ -357,8 +357,33 @@ data_p = planete_name_list
 
 #######################################################
 ###############################################bouton 4 
+print(data_p[1])
+#on tris la liste propre obtenue par releasedate croissant
+planete_dt_decouv_list = sorted(data_p, key=lambda x: x['releasedate'],reverse=True)
 
+print("les 5 planetes les plus recentes : ",planete_dt_decouv_list[:5])
 
+#planete les plus recemment decouvertes
+plpr0_name=planete_dt_decouv_list[:10][0]['pl_name']
+plpr0_decouv=planete_dt_decouv_list[:10][0]['releasedate']
+plpr1_name=planete_dt_decouv_list[:10][1]['pl_name']
+plpr1_decouv=planete_dt_decouv_list[:10][1]['releasedate']
+plpr2_name=planete_dt_decouv_list[:10][2]['pl_name']
+plpr2_decouv=planete_dt_decouv_list[:10][2]['releasedate']
+plpr3_name=planete_dt_decouv_list[:10][3]['pl_name']
+plpr3_decouv=planete_dt_decouv_list[:10][3]['releasedate']
+plpr4_name=planete_dt_decouv_list[:10][4]['pl_name']
+plpr4_decouv=planete_dt_decouv_list[:10][4]['releasedate']
+plpr5_name=planete_dt_decouv_list[:10][5]['pl_name']
+plpr5_decouv=planete_dt_decouv_list[:10][5]['releasedate']
+plpr6_name=planete_dt_decouv_list[:10][6]['pl_name']
+plpr6_decouv=planete_dt_decouv_list[:10][6]['releasedate']
+plpr7_name=planete_dt_decouv_list[:10][7]['pl_name']
+plpr7_decouv=planete_dt_decouv_list[:10][7]['releasedate']
+plpr8_name=planete_dt_decouv_list[:10][8]['pl_name']
+plpr8_decouv=planete_dt_decouv_list[:10][8]['releasedate']
+plpr9_name=planete_dt_decouv_list[:10][9]['pl_name']
+plpr9_decouv=planete_dt_decouv_list[:10][9]['releasedate']
 #######################################################
 ###############################################bouton 5 
 
@@ -792,21 +817,21 @@ class Exoplanet(Stack):
             print(self.table_container.bgcolor)
             self.table_container.bgcolor = ft.colors.PURPLE_200
             print(self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4])
-            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="quatre"
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="Les 10 dernières planetes découvertes"
             self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].bgcolor=colors.BLACK
             self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].color=colors.PURPLE_200
 
             #valeurs
-            self.table_container.content.controls[0].controls[0].content.value = ""
-            self.table_container.content.controls[0].controls[1].content.value = ""
-            self.table_container.content.controls[0].controls[2].content.value = ""
-            self.table_container.content.controls[0].controls[3].content.value = ""
-            self.table_container.content.controls[0].controls[4].content.value = ""
-            self.table_container.content.controls[0].controls[5].content.value = ""
-            self.table_container.content.controls[0].controls[6].content.value = ""
-            self.table_container.content.controls[0].controls[7].content.value = ""
-            self.table_container.content.controls[0].controls[8].content.value = ""
-            self.table_container.content.controls[0].controls[9].content.value = ""
+            self.table_container.content.controls[0].controls[0].content.value = str(plpr0_name)+str('\t\t\t\t\t')+'Decouv : '+str(plpr0_decouv)
+            self.table_container.content.controls[0].controls[1].content.value = str(plpr1_name)+str('\t\t\t\t\t')+'Decouv : '+str(plpr1_decouv)
+            self.table_container.content.controls[0].controls[2].content.value = str(plpr2_name)+str('\t\t\t\t\t')+'Decouv : '+str(plpr2_decouv)
+            self.table_container.content.controls[0].controls[3].content.value = str(plpr3_name)+str('\t\t\t\t\t')+'Decouv : '+str(plpr3_decouv)
+            self.table_container.content.controls[0].controls[4].content.value = str(plpr4_name)+str('\t\t\t\t\t')+'Decouv : '+str(plpr4_decouv)
+            self.table_container.content.controls[0].controls[5].content.value = str(plpr5_name)+str('\t\t\t\t\t')+'Decouv : '+str(plpr5_decouv)
+            self.table_container.content.controls[0].controls[6].content.value = str(plpr6_name)+str('\t\t\t\t\t')+'Decouv : '+str(plpr6_decouv)
+            self.table_container.content.controls[0].controls[7].content.value = str(plpr7_name)+str('\t\t\t\t\t')+'Decouv : '+str(plpr7_decouv)
+            self.table_container.content.controls[0].controls[8].content.value = str(plpr8_name)+str('\t\t\t\t\t')+'Decouv : '+str(plpr8_decouv)
+            self.table_container.content.controls[0].controls[9].content.value = str(plpr9_name)+str('\t\t\t\t\t')+'Decouv : '+str(plpr9_decouv)
             
 
             Exoplanet.update(self)
