@@ -363,6 +363,23 @@ planete_dt_decouv_list = sorted(data_p, key=lambda x: x['releasedate'],reverse=T
 
 print("les 5 planetes les plus recentes : ",planete_dt_decouv_list[:5])
 
+listp1 = []
+interesting_keys = ('pl_name','releasedate')
+for i in range(0,20):
+    bigdict = planete_dt_decouv_list[i]
+    subdict = {x: bigdict[x] for x in interesting_keys if x in bigdict}
+    listp1.append(subdict)
+    i+=1
+
+print(subdict)
+print(listp1)
+#remode doubles
+listp11 = [dict(t) for t in {tuple(d.items()) for d in listp1}]
+#on tri par date
+listp2= sorted(listp11, key=lambda d: d['releasedate'], reverse=True)
+
+planete_dt_decouv_list = listp2
+
 #planete les plus recemment decouvertes
 plpr0_name=planete_dt_decouv_list[:10][0]['pl_name']
 plpr0_decouv=planete_dt_decouv_list[:10][0]['releasedate']
