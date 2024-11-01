@@ -30,18 +30,18 @@ print(y0)
 
 ############################################################
 #data de champs multiples
-urlexo7 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+\
+urlexo7 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+distinct+\
 pl_name,hostname,pl_letter,pl_bmasse,pl_bmassj,pl_rade,pl_radj,pl_orbper,pl_dens,pl_trandur,pl_ratror,\
 sy_snum,sy_pnum,sy_mnum,st_mass,st_lum,st_age,st_dens,sy_dist,disc_year,disc_telescope,discoverymethod,\
-st_spectype,st_teff,st_rad,st_mass,pl_eqt,releasedate\
+st_spectype,st_teff,st_rad,st_mass,pl_eqt\
 +from+ps&format=json"
 
 list7 = json.loads(urlopen(urlexo7).read().decode("utf-8"))
-print("keys : ",(list7[0]).keys())
-print("values : ",(list7[0]).values())
-print("items : ",(list7[0]).items())
+print("\nkeys : ",(list7[0]).keys())
+print("\nvalues : ",(list7[0]).values())
+print("\nitems : ",(list7[0]).items())
 dict_7_0 = list7[0]
-print("dict_7-0 : ",dict_7_0)
+#print("\nlist7 : ",list7)
 
 #############################################################
 #nombre de planetes par années
@@ -167,7 +167,7 @@ for planete in list7:
             distmax = planete['sy_dist']
 
 planete_la_plus_proche = pl
-print("planete la plus proche : ", pl)
+print("\nplanete la plus proche : ", pl)
 
 #tri par ordre de distance
 proche_list = sorted(planete_dist, key= lambda x: x[1])
@@ -233,9 +233,23 @@ exampleSet = planete_dist_list0
 planete_dist_list1 = list(filter(lambda d: d['sy_dist'] not in keyValList, exampleSet))
 
 #on tris la liste propre obtenue par sy_dist croissant
-planete_dist_list = sorted(planete_dist_list1, key=lambda x: x['sy_dist'])
+planete_dist_list2 = sorted(planete_dist_list1, key=lambda x: x['sy_dist'])
 
-print("les 5 planetes les plus proches : ",planete_dist_list[:5])
+listpdl1=[]
+cles=('pl_name','sy_dist')
+for i in range(0,100):
+    bigdict1=planete_dist_list2[i]
+    subdict1={x: bigdict1[x] for x in cles if x in bigdict1}
+    listpdl1.append(subdict1)
+    i+=1
+
+#suppression doublons
+listpdl2=[dict(t) for t in {tuple(d.items()) for d in listpdl1}]
+
+#tri par distance
+listpdl3 = sorted(listpdl2, key=lambda d: d['sy_dist'])
+planete_dist_list = listpdl3
+print("\nles 5 planetes les plus proches : ",planete_dist_list[:5])
 
 #################################################bouton 0
 #planete les plus proches distance
@@ -353,10 +367,20 @@ data_p = [
     for i in range(1, 5001)
 ]
 print(planete_name_list[0])
-data_p = planete_name_list
+
 
 #######################################################
 ###############################################bouton 4 
+urlexo8 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+\
+pl_name,hostname,pl_letter,pl_bmasse,pl_bmassj,pl_rade,pl_radj,pl_orbper,pl_dens,pl_trandur,pl_ratror,\
+sy_snum,sy_pnum,sy_mnum,st_mass,st_lum,st_age,st_dens,sy_dist,disc_year,disc_telescope,discoverymethod,\
+st_spectype,st_teff,st_rad,st_mass,pl_eqt,releasedate\
++from+ps+order+by+releasedate+desc+&format=json"
+
+list8 = json.loads(urlopen(urlexo8).read().decode("utf-8"))
+planete_name_list1 = sorted(list8, key= lambda x: x['pl_name'])#créer une liste ordonné par nom
+planete_name_list1[0]
+data_p = planete_name_list1
 print(data_p[1])
 #on tris la liste propre obtenue par releasedate croissant
 planete_dt_decouv_list = sorted(data_p, key=lambda x: x['releasedate'],reverse=True)
@@ -371,8 +395,8 @@ for i in range(0,20):
     listp1.append(subdict)
     i+=1
 
-print(subdict)
-print(listp1)
+print('\nsubdict:',subdict)
+print('\nlistp1:',listp1)
 #remode doubles
 listp11 = [dict(t) for t in {tuple(d.items()) for d in listp1}]
 #on tri par date
