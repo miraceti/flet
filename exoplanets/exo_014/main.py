@@ -294,7 +294,7 @@ listMD = json.loads(urlopen(urlexoMD).read().decode("utf-8"))
 print("listMD : ",listMD[:10])
 
 discoverymethod_counts = {}
-for track in planete_name_list:
+for track in listMD:
     method = track.get('discoverymethod')
     try:
         discoverymethod_counts[method]+=1
