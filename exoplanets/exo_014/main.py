@@ -31,9 +31,9 @@ print(y0)
 ############################################################
 #data de champs multiples
 urlexo7 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+distinct+\
-pl_name,hostname,pl_letter,pl_bmasse,pl_bmassj,pl_rade,pl_radj,pl_orbper,pl_dens,pl_trandur,pl_ratror,\
-sy_snum,sy_pnum,sy_mnum,st_mass,st_lum,st_age,st_dens,sy_dist,disc_year,disc_telescope,discoverymethod,\
-st_spectype,st_teff,st_rad,st_mass,pl_eqt\
+pl_name,pl_bmasse,pl_bmassj,pl_rade,pl_radj,pl_dens,pl_orbper,pl_eqt,\
+hostname,st_spectype,st_mass,st_rad,st_teff,\
+releasedate,sy_dist,disc_year,disc_telescope,discoverymethod\
 +from+ps&format=json"
 
 list7 = json.loads(urlopen(urlexo7).read().decode("utf-8"))
@@ -46,10 +46,15 @@ dict_7_0 = list7[0]
 #############################################################
 #nombre de planetes par années
 #nombre de planete par année
+urlexoYD = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+distinct+\
+pl_name,disc_year\
++from+ps&format=json"
+
+listYD = json.loads(urlopen(urlexoYD).read().decode("utf-8"))
 y0=y1=y2=y3=y4=y5=y6=y7=y8=y9=y10=0
 now = datetime.date.today()
 y0 = now.year
-for planete in list7:
+for planete in listYD:
     #print(planete['pl_name'])
     if planete['disc_year'] is None: 
         pass
@@ -99,8 +104,14 @@ print(str(y0 - 9),' : ',y10)
 #############################################################
 #############################################################
 #nombre de planetes par distances
+urlexo0 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+distinct+\
+pl_name,sy_dist\
++from+ps&format=json"
+
+list0 = json.loads(urlopen(urlexo0).read().decode("utf-8"))
+
 d10=d20=d30=d40=d50=d60=d70=d80=d90=d100=0
-for planete in list7:
+for planete in list0:
     #print(planete['pl_name'])
     if planete['sy_dist'] is None: 
         pass
@@ -152,16 +163,14 @@ distmax = 100000
 p1="vide"
 p=0
 planete_dist=[]
-for planete in list7:
+for planete in list0:
     if planete['sy_dist'] is None:
         pass
     else:
         p+=1
         planete_dist.append((planete['pl_name'], 
                              planete['sy_dist'], 
-                             planete['pl_bmasse'], 
-                             planete['pl_rade'],
-                             planete['pl_dens'],))
+                             ))
         if planete['sy_dist'] < distmax:
             pl = planete['pl_name']#planete la plus proche 
             distmax = planete['sy_dist']
@@ -186,38 +195,38 @@ ncol3 = str("ncoll3")
 ################################################tableau 0
 n0col01 = str("pl_name")
 n0col02 = str("sy_dist")
-n0col03 = str("pl_bmasse")
+n0col03 = ""
 
 n0cel01 = proche_list[0][0]
 n0cel02 = proche_list[0][1]
-n0cel03 = proche_list[0][2]
+#n0cel03 = proche_list[0][2]
 
 n0cel11 = proche_list[1][0]
 n0cel12 = proche_list[1][1]
-n0cel13 = proche_list[1][2]
+#n0cel13 = proche_list[1][2]
 
 n0cel21 = proche_list[2][0]
 n0cel22 = proche_list[2][1]
-n0cel23 = proche_list[2][2]
+#n0cel23 = proche_list[2][2]
 ##########################################################
 
 
 ##################################################tableau 1
-n1col01 = str("pl_name")
-n1col02 = str("pl_rade")
-n1col03 = str("pl_dens")
+# n1col01 = str("pl_name")
+# n1col02 = ""
+# n1col03 = ""
 
-n1cel01 = proche_list[0][0]
-n1cel02 = proche_list[0][3]
-n1cel03 = proche_list[0][4]
+# n1cel01 = proche_list[0][0]
+# n1cel02 = proche_list[0][3]
+# n1cel03 = proche_list[0][4]
 
-n1cel11 = proche_list[1][0]
-n1cel12 = proche_list[1][3]
-n1cel13 = proche_list[1][4]
+# n1cel11 = proche_list[1][0]
+# n1cel12 = proche_list[1][3]
+# n1cel13 = proche_list[1][4]
 
-n1cel21 = proche_list[2][0]
-n1cel22 = proche_list[2][3]
-n1cel23 = proche_list[2][4]
+# n1cel21 = proche_list[2][0]
+# n1cel22 = proche_list[2][3]
+# n1cel23 = proche_list[2][4]
 #########################################################
 planete_name_list = sorted(list7, key= lambda x: x['pl_name'])#créer une liste ordonné par nom
 planete_name_list[0]
@@ -277,6 +286,13 @@ plpp9_dist=planete_dist_list[:10][9]['sy_dist']
 #########################################################
 ################################################bouton 1
 #planete methode decouverte nombre
+urlexoMD = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+distinct+\
+pl_name,discoverymethod\
++from+ps+order+by+pl_name+&format=json"
+
+listMD = json.loads(urlopen(urlexoMD).read().decode("utf-8"))
+print("listMD : ",listMD[:10])
+
 discoverymethod_counts = {}
 for track in planete_name_list:
     method = track.get('discoverymethod')
@@ -285,13 +301,13 @@ for track in planete_name_list:
     except KeyError:
         discoverymethod_counts[method] = 1
 
-print('C : ',discoverymethod_counts)
+print('COUNTS : ',discoverymethod_counts)
 
 ordered_discoverymethod_counts_key = dict(sorted(discoverymethod_counts.items()))
-print('K : ',ordered_discoverymethod_counts_key)
+print('KEYS : ',ordered_discoverymethod_counts_key)
 
 ordered_discoverymethod_counts_value = sorted(discoverymethod_counts.items(), key=lambda x: x[1], reverse=True)
-print('V : ',ordered_discoverymethod_counts_value)
+print('VALUES : ',ordered_discoverymethod_counts_value)
 v = ordered_discoverymethod_counts_value
 pmdn_0_name = v[0][0]
 pmdn_0_count = v[0][1]
@@ -368,17 +384,23 @@ data_p = [
 ]
 print(planete_name_list[0])
 
+urlexo3 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+distinct+\
+pl_name,pl_bmasse,pl_bmassj,pl_rade,pl_radj,pl_dens,pl_orbper,pl_eqt,\
+hostname,st_spectype,st_mass,st_rad,st_teff,\
+sy_dist,disc_year,disc_telescope,discoverymethod\
++from+ps&format=json"
+
+list3 = json.loads(urlopen(urlexo3).read().decode("utf-8"))
+data_pSearch = list3
 
 #######################################################
 ###############################################bouton 4 
-urlexo8 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+\
-pl_name,hostname,pl_letter,pl_bmasse,pl_bmassj,pl_rade,pl_radj,pl_orbper,pl_dens,pl_trandur,pl_ratror,\
-sy_snum,sy_pnum,sy_mnum,st_mass,st_lum,st_age,st_dens,sy_dist,disc_year,disc_telescope,discoverymethod,\
-st_spectype,st_teff,st_rad,st_mass,pl_eqt,releasedate\
+urlexo4 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+\
+pl_name,releasedate\
 +from+ps+order+by+releasedate+desc+&format=json"
 
-list8 = json.loads(urlopen(urlexo8).read().decode("utf-8"))
-planete_name_list1 = sorted(list8, key= lambda x: x['pl_name'])#créer une liste ordonné par nom
+list4 = json.loads(urlopen(urlexo4).read().decode("utf-8"))
+planete_name_list1 = sorted(list4, key= lambda x: x['pl_name'])#créer une liste ordonné par nom
 planete_name_list1[0]
 data_p = planete_name_list1
 print(data_p[1])
@@ -554,26 +576,26 @@ class Exoplanet(Stack):
 
         def table_1(e):
             #nom des colonnes
-            self.datatable.columns[0].label.value=str(ncol2)
-            print(self.datatable.bgcolor)
-            self.datatable.bgcolor = ft.colors.GREEN_200
-            self.datatable.columns[0].label.value=str(n1col01)
-            self.datatable.columns[1].label.value=str(n1col02)
-            self.datatable.columns[2].label.value=str(n1col03)
+            # self.datatable.columns[0].label.value=str(ncol2)
+            # print(self.datatable.bgcolor)
+            # self.datatable.bgcolor = ft.colors.GREEN_200
+            # self.datatable.columns[0].label.value=str(n1col01)
+            # self.datatable.columns[1].label.value=str(n1col02)
+            # self.datatable.columns[2].label.value=str(n1col03)
 
             #valeur des cellules par ligne
-            self.datatable.rows[0].cells[0].content.value = str(n1cel01)
-            self.datatable.rows[0].cells[1].content.value = str(n1cel02)
-            self.datatable.rows[0].cells[2].content.value = str(n1cel03)
+            # self.datatable.rows[0].cells[0].content.value = str(n1cel01)
+            # self.datatable.rows[0].cells[1].content.value = str(n1cel02)
+            # self.datatable.rows[0].cells[2].content.value = str(n1cel03)
 
-            self.datatable.rows[1].cells[0].content.value = str(n1cel11)
-            self.datatable.rows[1].cells[1].content.value = str(n1cel12)
-            self.datatable.rows[1].cells[2].content.value = str(n1cel13)
+            # self.datatable.rows[1].cells[0].content.value = str(n1cel11)
+            # self.datatable.rows[1].cells[1].content.value = str(n1cel12)
+            # self.datatable.rows[1].cells[2].content.value = str(n1cel13)
 
-            self.datatable.rows[2].cells[0].content.value = str(n1cel21)
-            self.datatable.rows[2].cells[1].content.value = str(n1cel22)
-            self.datatable.rows[2].cells[2].content.value = str(n1cel23)
-            print(self.datatable.rows[0].cells[1].content.value)
+            # self.datatable.rows[2].cells[0].content.value = str(n1cel21)
+            # self.datatable.rows[2].cells[1].content.value = str(n1cel22)
+            # self.datatable.rows[2].cells[2].content.value = str(n1cel23)
+            # print(self.datatable.rows[0].cells[1].content.value)
 
             # self.table_container.content.controls[0].controls[0].PieChart.visible=False
             print("pichart")
@@ -772,7 +794,7 @@ class Exoplanet(Stack):
             def on_text_change(e):
                 # Filtrer les données en fonction de la saisie
                 query = e.control.value.lower()
-                filtered_data = [item for item in data_p if query in item["pl_name"].lower()]
+                filtered_data = [item for item in data_pSearch if query in item["pl_name"].lower()]
                 
                 # Limiter les résultats à 10 éléments
                 suggestion_list.controls.clear()
