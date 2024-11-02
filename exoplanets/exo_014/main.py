@@ -30,17 +30,17 @@ print(y0)
 
 ############################################################
 #data de champs multiples
-urlexo7 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+distinct+\
-pl_name,pl_bmasse,pl_bmassj,pl_rade,pl_radj,pl_dens,pl_orbper,pl_eqt,\
-hostname,st_spectype,st_mass,st_rad,st_teff,\
-releasedate,sy_dist,disc_year,disc_telescope,discoverymethod\
-+from+ps&format=json"
+# urlexo7 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+distinct+\
+# pl_name,pl_bmasse,pl_bmassj,pl_rade,pl_radj,pl_dens,pl_orbper,pl_eqt,\
+# hostname,st_spectype,st_mass,st_rad,st_teff,\
+# releasedate,sy_dist,disc_year,disc_telescope,discoverymethod\
+# +from+ps&format=json"
 
-list7 = json.loads(urlopen(urlexo7).read().decode("utf-8"))
-print("\nkeys : ",(list7[0]).keys())
-print("\nvalues : ",(list7[0]).values())
-print("\nitems : ",(list7[0]).items())
-dict_7_0 = list7[0]
+# list7 = json.loads(urlopen(urlexo7).read().decode("utf-8"))
+# print("\nkeys : ",(list7[0]).keys())
+# print("\nvalues : ",(list7[0]).values())
+# print("\nitems : ",(list7[0]).items())
+# dict_7_0 = list7[0]
 #print("\nlist7 : ",list7)
 
 #############################################################
@@ -228,7 +228,7 @@ n0cel22 = proche_list[2][1]
 # n1cel22 = proche_list[2][3]
 # n1cel23 = proche_list[2][4]
 #########################################################
-planete_name_list = sorted(list7, key= lambda x: x['pl_name'])#créer une liste ordonné par nom
+planete_name_list = sorted(list0, key= lambda x: x['pl_name'])#créer une liste ordonné par nom
 planete_name_list[0]
 
 from operator import is_not
@@ -371,18 +371,18 @@ mautrep = float("{:.2f}".format(m4p+m5p+m6p+m7p+m8p+m9p))
 mautren = "autres"
 ########################################################
 ###############################################bouton 3 
-planete_list =[]
-#suggestions=[         ft.AutoCompleteSuggestion(key="one 1", value="One"),]
-planete_list=[
-                    ft.AutoCompleteSuggestion(key="one 1", value="One"),
-                    ft.AutoCompleteSuggestion(key="two 2", value="Two"),
-                    ft.AutoCompleteSuggestion(key="three 3", value="Three"),
-                ]
-data_p = [
-    {"name": f"Language {i}", "description": f"Description for language Description for language Description for language {i}"} 
-    for i in range(1, 5001)
-]
-print(planete_name_list[0])
+# planete_list =[]
+# #suggestions=[         ft.AutoCompleteSuggestion(key="one 1", value="One"),]
+# planete_list=[
+#                     ft.AutoCompleteSuggestion(key="one 1", value="One"),
+#                     ft.AutoCompleteSuggestion(key="two 2", value="Two"),
+#                     ft.AutoCompleteSuggestion(key="three 3", value="Three"),
+#                 ]
+# data_p = [
+#     {"name": f"Language {i}", "description": f"Description for language Description for language Description for language {i}"} 
+#     for i in range(1, 5001)
+# ]
+# print(planete_name_list[0])
 
 urlexo3 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+distinct+\
 pl_name,pl_bmasse,pl_bmassj,pl_rade,pl_radj,pl_dens,pl_orbper,pl_eqt,\
