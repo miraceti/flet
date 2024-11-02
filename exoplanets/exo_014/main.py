@@ -12,7 +12,7 @@ import json
 
 import datetime
 
-
+version= " (v014f)"
 
 #######################
 urlexo1 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+count(pl_name)+as+nbe+from+ps+where+default_flag=1&format=json"
@@ -388,14 +388,14 @@ urlexo3 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+disti
 pl_name,pl_bmasse,pl_bmassj,pl_rade,pl_radj,pl_dens,pl_orbper,pl_eqt,\
 hostname,st_spectype,st_mass,st_rad,st_teff,\
 sy_dist,disc_year,disc_telescope,discoverymethod\
-+from+ps&format=json"
++from+ps+&format=json"
 
 list3 = json.loads(urlopen(urlexo3).read().decode("utf-8"))
 data_pSearch = list3
 
 #######################################################
 ###############################################bouton 4 
-urlexo4 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+\
+urlexo4 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+distinct+\
 pl_name,releasedate\
 +from+ps+order+by+releasedate+desc+&format=json"
 
@@ -1089,7 +1089,7 @@ class Exoplanet(Stack):
                                             horizontal_alignment='center',
                                             controls=[
                                                 Text(
-                                                    'EXOPLANETES CONFIRMEES',
+                                                    'EXOPLANETES CONFIRMEES'+str(version),
                                                     color=colors.LIGHT_BLUE,
                                                     size=16,
                                                     weight='bold',
