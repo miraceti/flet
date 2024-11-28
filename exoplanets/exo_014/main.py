@@ -12,7 +12,7 @@ import json
 
 import datetime
 
-version= " (v014f)"
+version= " (v014g)"
 
 #######################
 urlexo1 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+count(pl_name)+as+nbe+from+ps+where+default_flag=1&format=json"
@@ -396,8 +396,8 @@ data_pSearch = list3
 #######################################################
 ###############################################bouton 4 
 urlexo4 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+distinct+\
-pl_name,releasedate\
-+from+ps+order+by+releasedate+desc+&format=json"
+pl_name,disc_pubdate\
++from+ps+order+by+disc_pubdate+desc+&format=json"
 
 list4 = json.loads(urlopen(urlexo4).read().decode("utf-8"))
 planete_name_list1 = sorted(list4, key= lambda x: x['pl_name'])#créer une liste ordonné par nom
@@ -405,12 +405,12 @@ planete_name_list1[0]
 data_p = planete_name_list1
 print(data_p[1])
 #on tris la liste propre obtenue par releasedate croissant
-planete_dt_decouv_list = sorted(data_p, key=lambda x: x['releasedate'],reverse=True)
+planete_dt_decouv_list = sorted(data_p, key=lambda x: x['disc_pubdate'],reverse=True)
 
 print("les 5 planetes les plus recentes : ",planete_dt_decouv_list[:5])
 
 listp1 = []
-interesting_keys = ('pl_name','releasedate')
+interesting_keys = ('pl_name','disc_pubdate')
 for i in range(0,20):
     bigdict = planete_dt_decouv_list[i]
     subdict = {x: bigdict[x] for x in interesting_keys if x in bigdict}
@@ -422,31 +422,31 @@ print('\nlistp1:',listp1)
 #remode doubles
 listp11 = [dict(t) for t in {tuple(d.items()) for d in listp1}]
 #on tri par date
-listp2= sorted(listp11, key=lambda d: d['releasedate'], reverse=True)
+listp2= sorted(listp11, key=lambda d: d['disc_pubdate'], reverse=True)
 
 planete_dt_decouv_list = listp2
 
 #planete les plus recemment decouvertes
 plpr0_name=planete_dt_decouv_list[:10][0]['pl_name']
-plpr0_decouv=planete_dt_decouv_list[:10][0]['releasedate']
+plpr0_decouv=planete_dt_decouv_list[:10][0]['disc_pubdate']
 plpr1_name=planete_dt_decouv_list[:10][1]['pl_name']
-plpr1_decouv=planete_dt_decouv_list[:10][1]['releasedate']
+plpr1_decouv=planete_dt_decouv_list[:10][1]['disc_pubdate']
 plpr2_name=planete_dt_decouv_list[:10][2]['pl_name']
-plpr2_decouv=planete_dt_decouv_list[:10][2]['releasedate']
+plpr2_decouv=planete_dt_decouv_list[:10][2]['disc_pubdate']
 plpr3_name=planete_dt_decouv_list[:10][3]['pl_name']
-plpr3_decouv=planete_dt_decouv_list[:10][3]['releasedate']
+plpr3_decouv=planete_dt_decouv_list[:10][3]['disc_pubdate']
 plpr4_name=planete_dt_decouv_list[:10][4]['pl_name']
-plpr4_decouv=planete_dt_decouv_list[:10][4]['releasedate']
+plpr4_decouv=planete_dt_decouv_list[:10][4]['disc_pubdate']
 plpr5_name=planete_dt_decouv_list[:10][5]['pl_name']
-plpr5_decouv=planete_dt_decouv_list[:10][5]['releasedate']
+plpr5_decouv=planete_dt_decouv_list[:10][5]['disc_pubdate']
 plpr6_name=planete_dt_decouv_list[:10][6]['pl_name']
-plpr6_decouv=planete_dt_decouv_list[:10][6]['releasedate']
+plpr6_decouv=planete_dt_decouv_list[:10][6]['disc_pubdate']
 plpr7_name=planete_dt_decouv_list[:10][7]['pl_name']
-plpr7_decouv=planete_dt_decouv_list[:10][7]['releasedate']
+plpr7_decouv=planete_dt_decouv_list[:10][7]['disc_pubdate']
 plpr8_name=planete_dt_decouv_list[:10][8]['pl_name']
-plpr8_decouv=planete_dt_decouv_list[:10][8]['releasedate']
+plpr8_decouv=planete_dt_decouv_list[:10][8]['disc_pubdate']
 plpr9_name=planete_dt_decouv_list[:10][9]['pl_name']
-plpr9_decouv=planete_dt_decouv_list[:10][9]['releasedate']
+plpr9_decouv=planete_dt_decouv_list[:10][9]['disc_pubdate']
 #######################################################
 ###############################################bouton 5 
 
