@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+import numpy as np
 import flet
 from flet import (
     UserControl, Page, Column, Row, icons,
@@ -7,12 +9,16 @@ from flet import (
     PieChart,PieChartSection,
         )
 import flet as ft
+from flet.matplotlib_chart import MatplotlibChart
 from urllib.request import urlopen
 import json
 
 import datetime
 
-version= " (v014g)"
+
+plt.style.use('_mpl-gallery')
+
+version= " (v015a)"
 
 #######################
 urlexo1 = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+count(pl_name)+as+nbe+from+ps+where+default_flag=1&format=json"
@@ -912,14 +918,14 @@ class Exoplanet(Stack):
 
             self.table_container.content.controls[0].controls[0].content.visible=False
             self.table_container.content.controls[0].controls[0].content = Text("",
-                                                                                size=12, weight='bold',color=colors.BLACK,)
+                                                                                size=12, weight='bold',color=ft.colors.BLACK,)
 
             print(self.table_container.bgcolor)
             self.table_container.bgcolor = ft.colors.DEEP_ORANGE
             print(self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4])
             self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].value="cinq"
-            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].bgcolor=colors.BLACK
-            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].color=colors.DEEP_ORANGE
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].bgcolor=ft.colors.BLACK
+            self.inner_green_container.content.controls[0].controls[0].content.controls[0].controls[4].color=ft.colors.DEEP_ORANGE
 
             #valeurs
             self.table_container.content.controls[0].controls[0].content.value = ""
@@ -932,7 +938,26 @@ class Exoplanet(Stack):
             self.table_container.content.controls[0].controls[7].content.value = ""
             self.table_container.content.controls[0].controls[8].content.value = ""
             self.table_container.content.controls[0].controls[9].content.value = ""
-            
+
+            # make the data
+            np.random.seed(3)
+            x = 4 + np.random.normal(0, 2, 24)
+            y = 4 + np.random.normal(0, 2, len(x))
+            print("x: " ,x)
+            print("y: " ,y)
+            # size and color:
+            sizes = np.random.uniform(15, 80, len(x))
+            colors = np.random.uniform(15, 80, len(x))
+            print("sizes: " ,sizes)
+            print("colors: " ,colors)
+            # plot
+            fig, ax = plt.subplots()
+
+            ax.scatter(x, y, s=sizes, c=colors, vmin=0, vmax=100)
+
+            chart_mpl = MatplotlibChart(fig, expand=False)
+
+            self.table_container.content.controls[0].controls[0].content = chart_mpl
 
 
             Exoplanet.update(self)
@@ -994,7 +1019,7 @@ class Exoplanet(Stack):
             width=self.main.width,
             height=self.main.height * 0.40,
             border_radius=30,
-            border=ft.border.all(2,colors.BLACK),
+            border=ft.border.all(2,ft.Colors.BLACK),
             # gradient=LinearGradient(
             #     begin=alignment.top_right,
             #     end=alignment.bottom_left,
@@ -1002,7 +1027,7 @@ class Exoplanet(Stack):
             #     colors=["#333300","#ffffcc"]
             # ),
             padding=padding.only(bottom=10),
-            bgcolor=colors.AMBER,
+            bgcolor=ft.Colors.AMBER,
             content =Row(
                 controls=[
                     Column(
@@ -1012,43 +1037,43 @@ class Exoplanet(Stack):
                         controls=[
                             Container(
                                 content = Text(str(plpp0_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp0_dist)+str(' parsecs'), 
-                                               size=12, weight='bold',color=colors.BLACK,),
+                                               size=12, weight='bold',color=ft.Colors.BLACK,),
                             ),
                             Container(
                                 content = Text(str(plpp1_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp1_dist)+str(' parsecs'), 
-                                               size=12, weight='bold', color=colors.BLACK,),
+                                               size=12, weight='bold', color=ft.Colors.BLACK,),
                             ),
                             Container(
                                 content = Text(str(plpp2_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp2_dist)+str(' parsecs'), 
-                                               size=12, weight='bold',color=colors.BLACK,),
+                                               size=12, weight='bold',color=ft.Colors.BLACK,),
                             ),
                             Container(
                                 content = Text(str(plpp3_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp3_dist)+str(' parsecs'), 
-                                               size=12, weight='bold',color=colors.BLACK,),
+                                               size=12, weight='bold',color=ft.Colors.BLACK,),
                             ),
                             Container(
                                 content = Text(str(plpp4_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp4_dist)+str(' parsecs'), 
-                                               size=12, weight='bold',color=colors.BLACK,),
+                                               size=12, weight='bold',color=ft.Colors.BLACK,),
                             ),
                             Container(
                                 content = Text(str(plpp5_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp5_dist)+str(' parsecs'), 
-                                               size=12, weight='bold',color=colors.BLACK,),
+                                               size=12, weight='bold',color=ft.Colors.BLACK,),
                             ),
                             Container(
                                 content = Text(str(plpp6_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp6_dist)+str(' parsecs'), 
-                                               size=12, weight='bold',color=colors.BLACK,),
+                                               size=12, weight='bold',color=ft.Colors.BLACK,),
                             ),
                             Container(
                                 content = Text(str(plpp7_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp7_dist)+str(' parsecs'), 
-                                               size=12, weight='bold',color=colors.BLACK,),
+                                               size=12, weight='bold',color=ft.Colors.BLACK,),
                             ),
                             Container(
                                 content = Text(str(plpp8_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp8_dist)+str(' parsecs'), 
-                                               size=12, weight='bold',color=colors.BLACK,),
+                                               size=12, weight='bold',color=ft.Colors.BLACK,),
                             ),
                             Container(
                                 content = Text(str(plpp9_name)+str('\t\t\t\t\t')+'Distance : '+str(plpp9_dist)+str(' parsecs'), 
-                                               size=12, weight='bold',color=colors.BLACK,),
+                                               size=12, weight='bold',color=ft.Colors.BLACK,),
                             ),
                         ]
                     )
@@ -1090,7 +1115,7 @@ class Exoplanet(Stack):
                                             controls=[
                                                 Text(
                                                     'EXOPLANETES CONFIRMEES'+str(version),
-                                                    color=colors.LIGHT_BLUE,
+                                                    color=ft.Colors.LIGHT_BLUE,
                                                     size=16,
                                                     weight='bold',
 
@@ -1104,7 +1129,7 @@ class Exoplanet(Stack):
                                                 ),
                                                 Text(
                                                     disabled=False,
-                                                    color=colors.YELLOW,
+                                                    color=ft.Colors.YELLOW,
                                                     text_align=ft.TextAlign.CENTER,
                                                     spans=[
                                                         ft.TextSpan(
@@ -1119,29 +1144,29 @@ class Exoplanet(Stack):
                                                 Row(
                                                     [
                                                 ft.Container(
-                                                    content=ft.Text("0",color=colors.BLACK,weight='bold'),
+                                                    content=ft.Text("0",color=ft.Colors.BLACK,weight='bold'),
                                                     margin=5,
                                                     padding=5,
                                                     alignment=ft.alignment.center,
-                                                    bgcolor=ft.colors.AMBER,
+                                                    bgcolor=ft.Colors.AMBER,
                                                     width=20,
                                                     height=30,
                                                     border_radius=10,
                                                     on_click= table_0,
                                                 ),
                                                 ft.Container(
-                                                    content=ft.Text("1",color=colors.BLACK,weight='bold'),
+                                                    content=ft.Text("1",color=ft.Colors.BLACK,weight='bold'),
                                                     margin=5,
                                                     padding=5,
                                                     alignment=ft.alignment.center,
-                                                    bgcolor=ft.colors.GREEN_200,
+                                                    bgcolor=ft.Colors.GREEN_200,
                                                     width=20,
                                                     height=30,
                                                     border_radius=10,
                                                     on_click=table_1,
                                                 ),
                                                 ft.Container(
-                                                    content=ft.Text("2",color=colors.BLACK,weight='bold'),
+                                                    content=ft.Text("2",color=ft.Colors.BLACK,weight='bold'),
                                                     margin=5,
                                                     padding=5,
                                                     alignment=ft.alignment.center,
@@ -1153,11 +1178,11 @@ class Exoplanet(Stack):
                                                     on_click=table_2,
                                                 ),
                                                 ft.Container(
-                                                    content=ft.Text("3",color=colors.BLACK,weight='bold'),
+                                                    content=ft.Text("3",color=ft.Colors.BLACK,weight='bold'),
                                                     margin=5,
                                                     padding=5,
                                                     alignment=ft.alignment.center,
-                                                    bgcolor=ft.colors.RED_200,
+                                                    bgcolor=ft.Colors.RED_200,
                                                     width=20,
                                                     height=30,
                                                     border_radius=10,
@@ -1165,11 +1190,11 @@ class Exoplanet(Stack):
                                                     on_click=table_3,
                                                 ),
                                                 ft.Container(
-                                                    content=ft.Text("4",color=colors.BLACK,weight='bold'),
+                                                    content=ft.Text("4",color=ft.Colors.BLACK,weight='bold'),
                                                     margin=5,
                                                     padding=5,
                                                     alignment=ft.alignment.center,
-                                                    bgcolor=ft.colors.PURPLE_200,
+                                                    bgcolor=ft.Colors.PURPLE_200,
                                                     width=20,
                                                     height=30,
                                                     border_radius=10,
@@ -1177,11 +1202,11 @@ class Exoplanet(Stack):
                                                     on_click=table_4,
                                                 ),
                                                 ft.Container(
-                                                    content=ft.Text("5",color=colors.BLACK,weight='bold'),
+                                                    content=ft.Text("5",color=ft.Colors.BLACK,weight='bold'),
                                                     margin=5,
                                                     padding=5,
                                                     alignment=ft.alignment.center,
-                                                    bgcolor=ft.colors.DEEP_ORANGE,
+                                                    bgcolor=ft.Colors.DEEP_ORANGE,
                                                     width=20,
                                                     height=30,
                                                     border_radius=10,
@@ -1193,8 +1218,8 @@ class Exoplanet(Stack):
                                                 ),
                                                 Text(
                                                     "Les 10 planetes les plus proches",
-                                                    color=colors.AMBER,
-                                                    bgcolor=colors.BLACK,
+                                                    color=ft.Colors.AMBER,
+                                                    bgcolor=ft.Colors.BLACK,
                                                     size=15,
                                                     weight='bold',
                                                     #text_align=ft.TextAlign.CENTER,
