@@ -88,10 +88,13 @@ colors_methods = {method: plt.cm.tab10(i) for i, method in enumerate(unique_meth
 planetes_avec_distance = [p for p in data_table_dict if p['sy_dist'] is not None]
 planetes_tries_sy_dist = sorted(    planetes_avec_distance,     key=lambda x: (x.get('sy_dist') is None, x.get('sy_dist') if x.get('sy_dist') is not None else float('inf')))
 
-print(planetes_tries_sy_dist[0:10])
 
 #data année de decouverte
 planetes_avec_annee = [p for p in data_table_dict if p['disc_year'] is not None]
 planetes_tries_disc_year = sorted(    planetes_avec_annee,     key=lambda x: (x.get('disc_year') is None, x.get('disc_year') if x.get('disc_year') is not None else float('inf')))
 
-    
+#data rayon
+planetes_avec_rayon = [p for p in data_table_dict if p['pl_rade'] is not None]
+planetes_tries_pl_rade = sorted(    planetes_avec_rayon,     key=lambda x: (x.get('pl_rade') is None, x.get('pl_rade') if x.get('pl_rade') is not None else float('inf')))
+
+print(planetes_tries_pl_rade[0:10])    

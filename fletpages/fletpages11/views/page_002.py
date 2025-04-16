@@ -26,6 +26,26 @@ class page_002(Xview):
                 "sort_column": "pl_name",
                 "sort_asc": True,
             },
+            "rayon": {
+                "liste": sorted(
+                    [
+                        {
+                            "pl_name": item["pl_name"],
+                            "pl_rade": round(item["pl_rade"], 2) if item["pl_rade"] is not None else 0,
+                        }
+                        for item in md.planetes_tries_sy_dist
+                    ],
+                    key=lambda x: (x["pl_rade"] == 0, x["pl_rade"])
+                ),
+                "table": "self.table_rayon",
+                "columns": [
+                    {"key": "pl_name", "label": "Planète", "type": "text"},
+                    {"key": "pl_rade", "label": "Rayon", "type": "number"},
+                ],
+                "filter_text": None,  # Sera initialisé
+                "sort_column": "pl_name",
+                "sort_asc": True,
+            },
             "annee": {
                 "liste": sorted(
                     [
@@ -82,6 +102,8 @@ class page_002(Xview):
                 self.table_distance = table
             elif table_id == "annee":
                 self.table_annee = table
+            elif table_id == "rayon":
+                self.table_rayon = table
             # Mettre à jour le tableau initialement
             self.update_table(None, table_id)
 
@@ -149,25 +171,24 @@ class page_002(Xview):
                                             )
                                         ),
                                         ft.Tab(
-                                            text="Tab 2",
+                                            text="Rayon",
                                             icon=ft.Icon(name=ft.Icons.LOCAL_FIRE_DEPARTMENT, color=ft.colors.RED),
                                             content=ft.Container(
                                                 expand=True,
-                                                content=ft.ListView(
+                                                content=ft.Column(
                                                     expand=True,
-                                                    spacing=10,
-                                                    padding=20,
+                                                    scroll=ft.ScrollMode.AUTO,
                                                     controls=[
-                                                        ft.Card(
-                                                            elevation=30,
-                                                            content=ft.Container(
-                                                                content=ft.Text("Amazing TAB 12 content", size=50, weight=ft.FontWeight.BOLD),
-                                                                border_radius=ft.border_radius.all(20),
-                                                                bgcolor=ft.colors.RED,
-                                                                padding=45,
+                                                        ft.Text("Année de découverte", size=24, weight=ft.FontWeight.BOLD),
+                                                        self.table_configs["rayon"]["filter_text"],
+                                                        ft.Container(
+                                                            height=800,
+                                                            bgcolor=ft.colors.PINK,
+                                                            content=ft.Column(
+                                                                scroll=ft.ScrollMode.AUTO,
+                                                                controls=[self.table_rayon]
                                                             )
                                                         ),
-                                                        ft.Text("Encore du contenu très long " * 50),
                                                     ]
                                                 )
                                             )
