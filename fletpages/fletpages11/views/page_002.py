@@ -46,6 +46,26 @@ class page_002(Xview):
                 "sort_column": "pl_name",
                 "sort_asc": True,
             },
+            "masse": {
+                "liste": sorted(
+                    [
+                        {
+                            "pl_name": item["pl_name"],
+                            "pl_bmasse": round(item["pl_bmasse"], 2) if item["pl_bmasse"] is not None else 0,
+                        }
+                        for item in md.planetes_tries_sy_dist
+                    ],
+                    key=lambda x: (x["pl_bmasse"] == 0, x["pl_bmasse"])
+                ),
+                "table": "self.table_masse",
+                "columns": [
+                    {"key": "pl_name", "label": "Planète", "type": "text"},
+                    {"key": "pl_bmasse", "label": "Masse", "type": "number"},
+                ],
+                "filter_text": None,  # Sera initialisé
+                "sort_column": "pl_name",
+                "sort_asc": True,
+            },
             "annee": {
                 "liste": sorted(
                     [
@@ -104,6 +124,8 @@ class page_002(Xview):
                 self.table_annee = table
             elif table_id == "rayon":
                 self.table_rayon = table
+            elif table_id == "masse":
+                self.table_masse = table
             # Mettre à jour le tableau initialement
             self.update_table(None, table_id)
 
@@ -218,25 +240,25 @@ class page_002(Xview):
                                             )
                                         ),
                                         ft.Tab(
-                                            text="Tab 4",
+                                            text="Masse",
                                             icon=ft.Icon(name=ft.Icons.LOCAL_PHONE, color=ft.colors.BLUE),
                                             content=ft.Container(
                                                 expand=True,
-                                                content=ft.ListView(
+                                                padding=10,
+                                                content=ft.Column(
                                                     expand=True,
-                                                    spacing=10,
-                                                    padding=20,
+                                                    scroll=ft.ScrollMode.AUTO,
                                                     controls=[
-                                                        ft.Card(
-                                                            elevation=30,
-                                                            content=ft.Container(
-                                                                content=ft.Text("Amazing TAB 12 content", size=50, weight=ft.FontWeight.BOLD),
-                                                                border_radius=ft.border_radius.all(20),
-                                                                bgcolor=ft.colors.BLUE,
-                                                                padding=45,
+                                                        ft.Text("Masses des exoplanètes", size=24, weight=ft.FontWeight.BOLD),
+                                                        self.table_configs["masse"]["filter_text"],
+                                                        ft.Container(
+                                                            height=800,
+                                                            bgcolor=ft.colors.BLUE,
+                                                            content=ft.Column(
+                                                                scroll=ft.ScrollMode.AUTO,
+                                                                controls=[self.table_masse]
                                                             )
                                                         ),
-                                                        ft.Text("Encore du contenu très long " * 50),
                                                     ]
                                                 )
                                             )

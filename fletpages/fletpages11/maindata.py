@@ -97,4 +97,8 @@ planetes_tries_disc_year = sorted(    planetes_avec_annee,     key=lambda x: (x.
 planetes_avec_rayon = [p for p in data_table_dict if p['pl_rade'] is not None]
 planetes_tries_pl_rade = sorted(    planetes_avec_rayon,     key=lambda x: (x.get('pl_rade') is None, x.get('pl_rade') if x.get('pl_rade') is not None else float('inf')))
 
-print(planetes_tries_pl_rade[0:10])    
+#data masse
+planetes_avec_masse = [p for p in data_table_dict if p['pl_bmasse'] is not None]
+planetes_tries_pl_masse = sorted(    planetes_avec_masse,     key=lambda x: (x.get('pl_bmasse') is None, x.get('pl_bmasse') if x.get('pl_bmasse') is not None else float('inf')))
+
+print(planetes_tries_pl_masse[0:10])        
