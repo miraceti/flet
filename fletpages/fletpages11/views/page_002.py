@@ -53,7 +53,7 @@ class page_002(Xview):
                             "pl_name": item["pl_name"],
                             "pl_bmasse": round(item["pl_bmasse"], 2) if item["pl_bmasse"] is not None else 0,
                         }
-                        for item in md.planetes_tries_sy_dist
+                        for item in md.planetes_tries_pl_masse
                     ],
                     key=lambda x: (x["pl_bmasse"] == 0, x["pl_bmasse"])
                 ),
