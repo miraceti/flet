@@ -6,7 +6,7 @@ class page_002(Xview):
     def build(self):
         # Configuration des tableaux
         self.table_configs = {
-            "distances": {
+            "distance": {
                 "liste": sorted(
                     [
                         {
