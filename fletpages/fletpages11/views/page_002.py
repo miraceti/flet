@@ -6,7 +6,7 @@ class page_002(Xview):
     def build(self):
         # Configuration des tableaux
         self.table_configs = {
-            "distance": {
+            "distances": {
                 "liste": sorted(
                     [
                         {
@@ -178,7 +178,7 @@ class page_002(Xview):
                                                     expand=True,
                                                     scroll=ft.ScrollMode.AUTO,
                                                     controls=[
-                                                        ft.Text("Année de découverte", size=24, weight=ft.FontWeight.BOLD),
+                                                        ft.Text("Années des découvertes", size=24, weight=ft.FontWeight.BOLD),
                                                         self.table_configs["annee"]["filter_text"],
                                                         ft.Container(
                                                             height=800,
@@ -201,7 +201,7 @@ class page_002(Xview):
                                                     expand=True,
                                                     scroll=ft.ScrollMode.AUTO,
                                                     controls=[
-                                                        ft.Text("Année de découverte", size=24, weight=ft.FontWeight.BOLD),
+                                                        ft.Text("Rayons des exoplanètes", size=24, weight=ft.FontWeight.BOLD),
                                                         self.table_configs["rayon"]["filter_text"],
                                                         ft.Container(
                                                             height=800,
