@@ -101,4 +101,20 @@ planetes_tries_pl_rade = sorted(    planetes_avec_rayon,     key=lambda x: (x.ge
 planetes_avec_masse = [p for p in data_table_dict if p['pl_bmasse'] is not None]
 planetes_tries_pl_masse = sorted(    planetes_avec_masse,     key=lambda x: (x.get('pl_bmasse') is None, x.get('pl_bmasse') if x.get('pl_bmasse') is not None else float('inf')))
 
-print(planetes_tries_pl_masse[0:10])        
+#data densite
+planetes_avec_densite = [p for p in data_table_dict if p['pl_dense'] is not None]
+planetes_tries_pl_dense = sorted(    planetes_avec_densite,     key=lambda x: (x.get('pl_dense') is None, x.get('pl_dense') if x.get('pl_dense') is not None else float('inf')))
+
+#data temperature
+planetes_avec_temperature = [p for p in data_table_dict if p['pl_eqt'] is not None]
+planetes_tries_pl_temperature = sorted(    planetes_avec_temperature,     key=lambda x: (x.get('pl_eqt') is None, x.get('pl_eqt') if x.get('pl_eqt') is not None else float('inf')))
+
+#data temperature
+planetes_avec_periode = [p for p in data_table_dict if p['pl_eqt'] is not None]
+planetes_tries_pl_orbper = sorted(    planetes_avec_periode,     key=lambda x: (x.get('pl_orbper') is None, x.get('pl_orbper') if x.get('pl_orbper') is not None else float('inf')))
+
+#data methode
+planetes_avec_methode = [p for p in data_table_dict if p['discoverymethod'] is not None]
+planetes_tries_discoverymethod = sorted(    planetes_avec_methode,     key=lambda x: (x.get('discoverymethod') is None, x.get('discoverymethod') if x.get('discoverymethod') is not None else ''))
+
+print(planetes_tries_discoverymethod[0:10])        
