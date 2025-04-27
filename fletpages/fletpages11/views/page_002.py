@@ -205,7 +205,7 @@ class page_002(Xview):
                                                         self.table_configs["rayon"]["filter_text"],
                                                         ft.Container(
                                                             height=800,
-                                                            bgcolor=ft.colors.PINK,
+                                                            bgcolor=ft.colors.RED,
                                                             content=ft.Column(
                                                                 scroll=ft.ScrollMode.AUTO,
                                                                 controls=[self.table_rayon]
