@@ -130,10 +130,10 @@ df = pd.DataFrame(data_nb_planete_methode_periode)
 
 # Définir les tranches d'années
 bins = list(range(1990, 2026, 5))  # de 1990 à 2025 tous les 5 ans
-labels = [f"{bins[i]}-{bins[i+1]}" for i in range(len(bins)-1)]
+labels_tra = [f"{bins[i]}-{bins[i+1]}" for i in range(len(bins)-1)]
 
 # Ajouter une colonne pour la tranche d'années
-df['year_bin'] = pd.cut(df['disc_year'], bins=bins, labels=labels, right=False)
+df['year_bin'] = pd.cut(df['disc_year'], bins=bins, labels=labels_tra, right=False)
 
 # Filtrer les données si besoin
 df = df.dropna(subset=['year_bin', 'discoverymethod'])  # enlever les données sans année ou méthode
