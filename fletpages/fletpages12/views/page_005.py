@@ -28,7 +28,7 @@ class page_005(Xview):
 
     def build(self):
 
-        fig = self.create_graph()  # on récupère la figure
+        fig = self.create_graph()  # on récupère la figure page5
 
         return ft.View(
             vertical_alignment=ft.MainAxisAlignment.START,

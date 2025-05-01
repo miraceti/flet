@@ -37,7 +37,8 @@ class page_006(Xview):
 
     def build(self):
 
-        fig = self.create_graph()  # on récupère la figure
+        fig1 = self.create_graph()  # on récupère la figure
+        fig2 = self.create_graph()  # on récupère la figure
 
         return ft.View(
             vertical_alignment=ft.MainAxisAlignment.START,
@@ -63,7 +64,8 @@ class page_006(Xview):
                         # Utiliser un Column avec scroll activé
                         ft.Column(
                             controls=[
-                            MatplotlibChart(fig, expand=True)
+                            MatplotlibChart(fig1, expand=True),
+                            
                             ],
                             scroll=ft.ScrollMode.AUTO,  # Active le scroll si nécessaire
                             expand=True,  # Prend tout l'espace disponible

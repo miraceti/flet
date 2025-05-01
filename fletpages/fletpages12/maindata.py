@@ -1,6 +1,9 @@
 
 import requests
 import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+
 ##########################################
 #code de recuperation des données externes
 urlexo_pllist = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+distinct+\
@@ -118,3 +121,24 @@ planetes_avec_methode = [p for p in data_table_dict if p['discoverymethod'] is n
 planetes_tries_discoverymethod = sorted(    planetes_avec_methode,     key=lambda x: (x.get('discoverymethod') is None, x.get('discoverymethod') if x.get('discoverymethod') is not None else ''))
 
 print(planetes_tries_discoverymethod[0:10])        
+
+#pour graphique nombre de planetes par methode et par période
+data_nb_planete_methode_periode = data_table_dict
+
+# Convertir en DataFrame
+df = pd.DataFrame(data_nb_planete_methode_periode)
+
+# Définir les tranches d'années
+bins = list(range(1990, 2026, 5))  # de 1990 à 2025 tous les 5 ans
+labels = [f"{bins[i]}-{bins[i+1]}" for i in range(len(bins)-1)]
+
+# Ajouter une colonne pour la tranche d'années
+df['year_bin'] = pd.cut(df['disc_year'], bins=bins, labels=labels, right=False)
+
+# Filtrer les données si besoin
+df = df.dropna(subset=['year_bin', 'discoverymethod'])  # enlever les données sans année ou méthode
+
+# Grouper
+grouped = df.groupby(['year_bin', 'discoverymethod']).size().unstack(fill_value=0)
+
+print(grouped)
