@@ -3,14 +3,14 @@ from fletx import Xview
 import maindata as md
 
 TABLE_ID_COLOR_MAP = {
-    "distance": ft.colors.GREEN,
-    "annee": ft.colors.PINK,
-    "rayon": ft.colors.RED,
-    "masse": ft.colors.BLUE,
-    "densite": ft.colors.ORANGE,
-    "temperature": ft.colors.PURPLE,
-    "periode": ft.colors.YELLOW,
-    "methode": ft.colors.CYAN,
+    "distance": ft.Colors.GREEN,
+    "annee": ft.Colors.PINK,
+    "rayon": ft.Colors.RED,
+    "masse": ft.Colors.BLUE,
+    "densite": ft.Colors.ORANGE,
+    "temperature": ft.Colors.PURPLE,
+    "periode": ft.Colors.YELLOW,
+    "methode": ft.Colors.CYAN,
 }
 
 class page_002(Xview):
@@ -194,17 +194,17 @@ class page_002(Xview):
                             col["label"],
                             size=16,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.colors.WHITE,
+                            color=ft.Colors.WHITE,
                         ),
                         on_sort=lambda e, col_key=col["key"], tid=table_id: self.sort_by(col_key, tid)
                     )
                     for col in config["columns"]
                 ],
                 rows=[],
-                bgcolor=ft.colors.BLACK,
+                bgcolor=ft.Colors.BLACK,
                 column_spacing=5,
-                horizontal_lines=ft.BorderSide(1, ft.colors.WHITE),
-                vertical_lines=ft.BorderSide(1, ft.colors.WHITE),
+                horizontal_lines=ft.BorderSide(1, ft.Colors.WHITE),
+                vertical_lines=ft.BorderSide(1, ft.Colors.WHITE),
                 data_row_min_height=50,
                 heading_row_height=60,
             )
@@ -248,14 +248,14 @@ class page_002(Xview):
                                     ft.ElevatedButton(
                                         "Go to previous View",
                                         on_click=lambda e: self.go("/page_001"),
-                                        color=ft.colors.WHITE,
-                                        bgcolor=ft.colors.GREEN
+                                        color=ft.Colors.WHITE,
+                                        bgcolor=ft.Colors.GREEN
                                     ),
                                     ft.ElevatedButton(
                                         "Go to next View",
                                         on_click=lambda e: self.go("/page_003"),
-                                        color=ft.colors.WHITE,
-                                        bgcolor=ft.colors.BLUE
+                                        color=ft.Colors.WHITE,
+                                        bgcolor=ft.Colors.BLUE
                                     ),
                                 ],
                                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN
@@ -270,7 +270,7 @@ class page_002(Xview):
                                     tabs=[
                                         ft.Tab(
                                             text="Année",
-                                            icon=ft.Icon(name=ft.Icons.FAVORITE, color=ft.colors.PINK),
+                                            icon=ft.Icon(name=ft.Icons.FAVORITE, color=ft.Colors.PINK),
                                             content=ft.Container(
                                                 expand=True,
                                                 padding=10,
@@ -282,7 +282,7 @@ class page_002(Xview):
                                                         self.table_configs["annee"]["filter_text"],
                                                         ft.Container(
                                                             height=800,
-                                                            bgcolor=ft.colors.PINK,
+                                                            bgcolor=ft.Colors.PINK,
                                                             content=ft.Column(
                                                                 scroll=ft.ScrollMode.AUTO,
                                                                 controls=[self.table_annee]
@@ -294,7 +294,7 @@ class page_002(Xview):
                                         ),
                                         ft.Tab(
                                             text="Rayon",
-                                            icon=ft.Icon(name=ft.Icons.LOCAL_FIRE_DEPARTMENT, color=ft.colors.RED),
+                                            icon=ft.Icon(name=ft.Icons.LOCAL_FIRE_DEPARTMENT, color=ft.Colors.RED),
                                             content=ft.Container(
                                                 expand=True,
                                                 content=ft.Column(
@@ -305,7 +305,7 @@ class page_002(Xview):
                                                         self.table_configs["rayon"]["filter_text"],
                                                         ft.Container(
                                                             height=800,
-                                                            bgcolor=ft.colors.RED,
+                                                            bgcolor=ft.Colors.RED,
                                                             content=ft.Column(
                                                                 scroll=ft.ScrollMode.AUTO,
                                                                 controls=[self.table_rayon]
@@ -317,7 +317,7 @@ class page_002(Xview):
                                         ),
                                         ft.Tab(
                                             text="Distance",
-                                            icon=ft.Icon(name=ft.Icons.LOCAL_CAFE, color=ft.colors.GREEN),
+                                            icon=ft.Icon(name=ft.Icons.LOCAL_CAFE, color=ft.Colors.GREEN),
                                             content=ft.Container(
                                                 expand=True,
                                                 padding=10,
@@ -329,7 +329,7 @@ class page_002(Xview):
                                                         self.table_configs["distance"]["filter_text"],
                                                         ft.Container(
                                                             height=800,
-                                                            bgcolor=ft.colors.GREEN,
+                                                            bgcolor=ft.Colors.GREEN,
                                                             content=ft.Column(
                                                                 scroll=ft.ScrollMode.AUTO,
                                                                 controls=[self.table_distance]
@@ -341,7 +341,7 @@ class page_002(Xview):
                                         ),
                                         ft.Tab(
                                             text="Masse",
-                                            icon=ft.Icon(name=ft.Icons.LOCAL_PHONE, color=ft.colors.BLUE),
+                                            icon=ft.Icon(name=ft.Icons.LOCAL_PHONE, color=ft.Colors.BLUE),
                                             content=ft.Container(
                                                 expand=True,
                                                 padding=10,
@@ -353,7 +353,7 @@ class page_002(Xview):
                                                         self.table_configs["masse"]["filter_text"],
                                                         ft.Container(
                                                             height=800,
-                                                            bgcolor=ft.colors.BLUE,
+                                                            bgcolor=ft.Colors.BLUE,
                                                             content=ft.Column(
                                                                 scroll=ft.ScrollMode.AUTO,
                                                                 controls=[self.table_masse]
@@ -365,7 +365,7 @@ class page_002(Xview):
                                         ),
                                         ft.Tab(
                                             text="Densité",
-                                            icon=ft.Icon(name=ft.Icons.LOCAL_BAR, color=ft.colors.ORANGE),
+                                            icon=ft.Icon(name=ft.Icons.LOCAL_BAR, color=ft.Colors.ORANGE),
                                             content=ft.Container(
                                                 expand=True,
                                                 padding=10,
@@ -377,7 +377,7 @@ class page_002(Xview):
                                                         self.table_configs["densite"]["filter_text"],
                                                         ft.Container(
                                                             height=800,
-                                                            bgcolor=ft.colors.ORANGE,
+                                                            bgcolor=ft.Colors.ORANGE,
                                                             content=ft.Column(
                                                                 scroll=ft.ScrollMode.AUTO,
                                                                 controls=[self.table_densite]
@@ -401,7 +401,7 @@ class page_002(Xview):
                                                         self.table_configs["temperature"]["filter_text"],
                                                         ft.Container(
                                                             height=800,
-                                                            bgcolor=ft.colors.PURPLE,
+                                                            bgcolor=ft.Colors.PURPLE,
                                                             content=ft.Column(
                                                                 scroll=ft.ScrollMode.AUTO,
                                                                 controls=[self.table_temperature]
@@ -413,7 +413,7 @@ class page_002(Xview):
                                         ),
                                         ft.Tab(
                                             text="Période",
-                                            icon=ft.Icon(name=ft.Icons.ELECTRIC_BIKE, color=ft.colors.YELLOW),
+                                            icon=ft.Icon(name=ft.Icons.ELECTRIC_BIKE, color=ft.Colors.YELLOW),
                                             content=ft.Container(
                                                 expand=True,
                                                 padding=10,
@@ -425,7 +425,7 @@ class page_002(Xview):
                                                         self.table_configs["periode"]["filter_text"],
                                                         ft.Container(
                                                             height=800,
-                                                            bgcolor=ft.colors.YELLOW,
+                                                            bgcolor=ft.Colors.YELLOW,
                                                             content=ft.Column(
                                                                 scroll=ft.ScrollMode.AUTO,
                                                                 controls=[self.table_periode]
@@ -437,7 +437,7 @@ class page_002(Xview):
                                         ),
                                         ft.Tab(
                                             text="Méthode",
-                                            icon=ft.Icon(name=ft.Icons.ELECTRIC_BIKE, color=ft.colors.CYAN),
+                                            icon=ft.Icon(name=ft.Icons.ELECTRIC_BIKE, color=ft.Colors.CYAN),
                                             content=ft.Container(
                                                 expand=True,
                                                 padding=10,
@@ -449,7 +449,7 @@ class page_002(Xview):
                                                         self.table_configs["methode"]["filter_text"],
                                                         ft.Container(
                                                             height=800,
-                                                            bgcolor=ft.colors.CYAN,
+                                                            bgcolor=ft.Colors.CYAN,
                                                             content=ft.Column(
                                                                 scroll=ft.ScrollMode.AUTO,
                                                                 controls=[self.table_methode]
@@ -461,7 +461,7 @@ class page_002(Xview):
                                         ),
                                         ft.Tab(
                                             text="Tab 9",
-                                            icon=ft.Icon(name=ft.Icons.ELECTRIC_BIKE, color=ft.colors.YELLOW),
+                                            icon=ft.Icon(name=ft.Icons.ELECTRIC_BIKE, color=ft.Colors.YELLOW),
                                             content=ft.Container(
                                                 expand=True,
                                                 content=ft.ListView(
@@ -474,7 +474,7 @@ class page_002(Xview):
                                                             content=ft.Container(
                                                                 content=ft.Text("Amazing TAB 12 content", size=50, weight=ft.FontWeight.BOLD),
                                                                 border_radius=ft.border_radius.all(20),
-                                                                bgcolor=ft.colors.YELLOW,
+                                                                bgcolor=ft.Colors.YELLOW,
                                                                 padding=45,
                                                             )
                                                         ),
@@ -485,7 +485,7 @@ class page_002(Xview):
                                         ),
                                         ft.Tab(
                                             text="Tab 10",
-                                            icon=ft.Icon(name=ft.Icons.ELECTRIC_BIKE, color=ft.colors.YELLOW),
+                                            icon=ft.Icon(name=ft.Icons.ELECTRIC_BIKE, color=ft.Colors.YELLOW),
                                             content=ft.Container(
                                                 expand=True,
                                                 content=ft.ListView(
@@ -498,7 +498,7 @@ class page_002(Xview):
                                                             content=ft.Container(
                                                                 content=ft.Text("Amazing TAB 12 content", size=50, weight=ft.FontWeight.BOLD),
                                                                 border_radius=ft.border_radius.all(20),
-                                                                bgcolor=ft.colors.YELLOW,
+                                                                bgcolor=ft.Colors.YELLOW,
                                                                 padding=45,
                                                             )
                                                         ),
@@ -585,7 +585,7 @@ class page_002(Xview):
                             size=16,
                             weight=ft.FontWeight.BOLD,
                             #color=ft.colors.GREEN if table_id == "distance" else  ft.colors.PINK,
-                            color=TABLE_ID_COLOR_MAP.get(table_id, ft.colors.WHITE),
+                            color=TABLE_ID_COLOR_MAP.get(table_id, ft.Colors.WHITE),
                         )
                     )
                     for col in columns

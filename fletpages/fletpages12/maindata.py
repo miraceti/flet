@@ -139,6 +139,43 @@ df['year_bin'] = pd.cut(df['disc_year'], bins=bins, labels=labels_tra, right=Fal
 df = df.dropna(subset=['year_bin', 'discoverymethod'])  # enlever les données sans année ou méthode
 
 # Grouper
-grouped = df.groupby(['year_bin', 'discoverymethod']).size().unstack(fill_value=0)
+grouped = df.groupby(['year_bin', 'discoverymethod'],observed=False).size().unstack(fill_value=0)
 
 print(grouped)
+
+
+
+########################################PAGE 4
+# Liste des planètes
+planets4 = data_table_dict
+
+# Convertir la liste en DataFrame
+df4 = pd.DataFrame(planets4)
+
+# Filtrer les planètes ayant une valeur 'none' ou 1 dans la colonne 'pl_bmasse'
+df4_filtered = df4[(df4['pl_bmasse'] != 'none') & ((df4['pl_bmasse'] >= 0.99) & (df4['pl_bmasse'] <= 1.01)) & (df4['pl_bmasse'] > 0.00) & (df4['pl_bmasse'] < 100.00)].copy()
+df4_filtered_moins1 = df4[(df4['pl_bmasse'] != 'none') &  (df4['pl_bmasse'] > 0.00) & (df4['pl_bmasse'] < 100.00)].copy()
+
+# Convertir 'pl_bmasse' en type numérique si nécessaire
+df4_filtered.loc[:, 'pl_bmasse'] = pd.to_numeric(df4_filtered['pl_bmasse'], errors='coerce')
+df4_filtered_moins1.loc[:, 'pl_bmasse'] = pd.to_numeric(df4_filtered_moins1['pl_bmasse'], errors='coerce')
+
+# Définir les tranches
+bins4 = [0, 2, 4, 6, 8, 10, 12]
+labels4 = ['0-2', '2-4', '4-6', '6-8', '8-10','10-12']
+
+# Diviser les données en tranches
+df4_filtered.loc[:, 'mass_bin'] = pd.cut(df4_filtered['pl_bmasse'], bins=bins4, labels=labels4, include_lowest=True)
+df4_filtered_moins1.loc[:, 'mass_bin'] = pd.cut(df4_filtered_moins1['pl_bmasse'], bins=bins4, labels=labels4, include_lowest=True)
+
+# Compter le nombre de planètes dans chaque tranche
+bin4_counts = df4_filtered['mass_bin'].value_counts().sort_index()
+bin4_counts_moins1 = df4_filtered_moins1['mass_bin'].value_counts().sort_index()
+
+
+print("Nombre de planètes avec masse = 1 :", len(df4[(df4['pl_bmasse'] >= 0.90) & (df4['pl_bmasse'] <= 1.10)]))
+print("Graphique 1 (sans 1T) :\n", bin4_counts)
+print("Graphique 2 (avec 1T) :\n", bin4_counts_moins1)
+print(df4['pl_bmasse'].sort_values().unique()[0:20])  # voir les plus petites
+print(df4['pl_bmasse'].sort_values().unique()[-20:]) # voir les plus grandes
+print(df4[df4['pl_bmasse'] < 2]['pl_bmasse'].sort_values())

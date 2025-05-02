@@ -56,11 +56,11 @@ class page_003(Xview):
                         ft.Row(
                             controls=[
                                 ft.ElevatedButton("Go to previous View", on_click=lambda e: self.go("/page_002"),
-                                                    color=ft.colors.WHITE,
-                                                    bgcolor=ft.colors.GREEN),
+                                                    color=ft.Colors.WHITE,
+                                                    bgcolor=ft.Colors.GREEN),
                                 ft.ElevatedButton("Go to next View", on_click=lambda e: self.go("/page_004"),
-                                                    color=ft.colors.WHITE,
-                                                    bgcolor=ft.colors.BLUE),
+                                                    color=ft.Colors.WHITE,
+                                                    bgcolor=ft.Colors.BLUE),
                             ],
                             alignment=ft.MainAxisAlignment.SPACE_BETWEEN
                         ),
