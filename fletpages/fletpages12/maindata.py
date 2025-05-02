@@ -147,14 +147,14 @@ print(grouped)
 
 ########################################PAGE 4
 # Liste des planètes
-planets4 = data_table_dict
+planets42 = data_table_dict
 
 # Convertir la liste en DataFrame
-df4 = pd.DataFrame(planets4)
+df4 = pd.DataFrame(planets42)
 
 # Filtrer les planètes ayant une valeur 'none' ou 1 dans la colonne 'pl_bmasse'
-df4_filtered = df4[(df4['pl_bmasse'] != 'none') & ((df4['pl_bmasse'] >= 0.99) & (df4['pl_bmasse'] <= 1.01)) & (df4['pl_bmasse'] > 0.00) & (df4['pl_bmasse'] < 100.00)].copy()
-df4_filtered_moins1 = df4[(df4['pl_bmasse'] != 'none') &  (df4['pl_bmasse'] > 0.00) & (df4['pl_bmasse'] < 100.00)].copy()
+df4_filtered = df4[(df4['pl_bmasse'] != 'none') & ((df4['pl_bmasse'] >= 0.99) & (df4['pl_bmasse'] <= 1.01)) & (df4['pl_bmasse'] > 0.00) & (df4['pl_bmasse'] < 1000.00)].copy()
+df4_filtered_moins1 = df4[(df4['pl_bmasse'] != 'none') &  (df4['pl_bmasse'] > 0.00) & (df4['pl_bmasse'] < 1000.00)].copy()
 
 # Convertir 'pl_bmasse' en type numérique si nécessaire
 df4_filtered.loc[:, 'pl_bmasse'] = pd.to_numeric(df4_filtered['pl_bmasse'], errors='coerce')
@@ -179,3 +179,31 @@ print("Graphique 2 (avec 1T) :\n", bin4_counts_moins1)
 print(df4['pl_bmasse'].sort_values().unique()[0:20])  # voir les plus petites
 print(df4['pl_bmasse'].sort_values().unique()[-20:]) # voir les plus grandes
 print(df4[df4['pl_bmasse'] < 2]['pl_bmasse'].sort_values())
+
+
+#masse
+# Liste des planètes
+planets43 = data_table_dict
+
+# Convertir la liste en DataFrame
+df43 = pd.DataFrame(planets43)
+
+# Filtrer les planètes ayant une valeur 'none' ou 1 dans la colonne 'pl_bmasse'
+df43_filtered = df43[(df43['pl_rade'] != 'none') & ((df43['pl_rade'] >= 0.99) & (df43['pl_rade'] <= 1.01)) & (df43['pl_rade'] > 0.00) & (df43['pl_rade'] < 1000.00)].copy()
+
+# Convertir 'pl_bmasse' en type numérique si nécessaire
+df43_filtered.loc[:, 'pl_rade'] = pd.to_numeric(df43_filtered['pl_rade'], errors='coerce')
+
+# Définir les tranches
+bins43 = [0, 2, 4, 6, 8, 10, 12]
+labels43 = ['0-2', '2-4', '4-6', '6-8', '8-10','10-12']
+
+# Diviser les données en tranches
+df43_filtered.loc[:, 'rade_bin'] = pd.cut(df43_filtered['pl_rade'], bins=bins43, labels=labels43, include_lowest=True)
+
+# Compter le nombre de planètes dans chaque tranche
+bin43_counts = df43_filtered['rade_bin'].value_counts().sort_index()
+
+print("MASSE")
+print(df43['pl_rade'].sort_values().unique()[0:20])  # voir les plus petites
+print(df43['pl_rade'].sort_values().unique()[-20:]) # voir les plus grandes
