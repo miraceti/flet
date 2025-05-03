@@ -1,8 +1,9 @@
 import flet as ft
 from fletx import Xview
+import matplotlib
+matplotlib.use('Agg')
+
 import matplotlib.pyplot as plt
-import mplcursors
-import numpy as np
 from flet.matplotlib_chart import MatplotlibChart
 import maindata as md
 import pandas as pd
@@ -11,25 +12,25 @@ import pandas as pd
 class page_004(Xview):
     def create_graph1(self):
         fig1, ax = plt.subplots(figsize=(8, 6))
-        ax.plot(md.liste_annee, md.liste_nb, marker='o', linestyle='-', color='b', label='Nombre par année')
+        ax.plot(md.liste_annee, md.liste_nb, marker='o', linestyle='-', color='b', label='Nombre par année', linewidth=2.5)
         ax.set_title("Nombre de planètes par année", fontsize=16, fontweight='bold')
         ax.set_xlabel("Année)", fontsize=14, fontweight='bold')
         ax.set_ylabel("nombre de planètes", fontsize=14, fontweight='bold')
         ax.tick_params(axis='x', rotation=45, labelsize=12)
         ax.grid(axis='y', linestyle='--', alpha=0.7)
-        ax.legend()
+        ax.legend(loc='upper right', fontsize=12)
         plt.tight_layout()
         plt.close(fig1)
         return fig1
 
     def create_graph2(self):
         fig2, ax = plt.subplots(figsize=(8, 6))
-        ax.plot(md.bin4_counts_moins1.index, md.bin4_counts_moins1.values, marker='o', linestyle='-', color='r', label='Avec la valeur 1')
-        ax.set_title("Distribution du nombre de planètes par tranches de masse ")
-        ax.set_xlabel("Tranches de masse (en M_Terre )")
-        ax.set_ylabel("Nombre de planètes")
+        ax.plot(md.bin4_counts_moins1.index, md.bin4_counts_moins1.values, marker='o', linestyle='-', color='r', label='Avec la valeur 1', linewidth=2.5)
+        ax.set_title("Distribution du nombre de planètes par tranches de masse ", fontsize=16, fontweight='bold')
+        ax.set_xlabel("Tranches de masse (en M_Terre )", fontsize=14, fontweight='bold')
+        ax.set_ylabel("Nombre de planètes", fontsize=14, fontweight='bold')
         ax.grid(True)
-        ax.legend()
+        ax.legend(loc='upper right', fontsize=12)
         plt.tight_layout()
         plt.close(fig2)
         return fig2
@@ -42,16 +43,16 @@ class page_004(Xview):
         fig3, ax = plt.subplots(figsize=(8, 6))
 
         # Histogramme automatique
-        ax.hist(rayons, bins=100, color='skyblue', edgecolor='black')
+        ax.hist(rayons, bins=100, color='skyblue', edgecolor='black', label='Rayons des exoplanètes')
 
         # Axe Y en log si besoin
         ax.set_yscale('log')  # ou commente-le pour une échelle normale
 
-        ax.set_xlabel("Rayon (R⊕)")
-        ax.set_ylabel("Nombre de planètes (log)")
-        ax.set_title("Distribution des rayons d’exoplanètes")
+        ax.set_xlabel("Rayon (R⊕)", fontsize=14, fontweight='bold')
+        ax.set_ylabel("Nombre de planètes (log)", fontsize=14, fontweight='bold')
+        ax.set_title("Distribution des rayons d’exoplanètes", fontsize=16, fontweight='bold')
         ax.grid(True, which="both", linestyle='--', linewidth=0.5)
-
+        ax.legend(loc='upper right', fontsize=12)
         plt.tight_layout()
         plt.close(fig3)
         return fig3

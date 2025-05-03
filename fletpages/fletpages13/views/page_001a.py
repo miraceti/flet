@@ -12,7 +12,7 @@ class page_001(Xview):
 
     def build(self):
 
-        # Génération du graphique en camembert pour les masses
+         # Génération du graphique en camembert
         def create_mass_distribution_pie():
             # Extraction brute des masses
             raw_masses = [item['pl_bmasse'] for item in md.data_table_dict]
@@ -64,7 +64,7 @@ class page_001(Xview):
                 '#00FF00',  # Vert fluo  # 2–5
                 '#00BFFF',  # Bleu clair # 5–10
                 '#00008B',  # Bleu foncé # 10–100
-                '#FFA500',  # Orange     # RUPTURE
+                '#FFA500',  # Orange     # 100–1000
                 '#FF69B4',  # Rose       # >1000
                 '#00FFFF' ,  # Cyan      # Inconnue   
             ]
@@ -85,7 +85,24 @@ class page_001(Xview):
             plt.close(fig)
             return fig
 
-        # Génération du graphique en camembert pour les rayons
+        # Image base64 pour le pie chart
+        fig_mass_pie = create_mass_distribution_pie()
+
+        def generate_planet_rows(planet_list):
+            rows = []
+            for planet in planet_list:
+                rows.append(
+                    ft.DataRow(
+                        cells=[
+                            ft.DataCell(ft.Text(str(planet.get("pl_name", "-")),size=10, color=ft.Colors.WHITE)),
+                            ft.DataCell(ft.Text(f"{planet.get('sy_dist', '-'):.2f}",size=10, color=ft.Colors.WHITE)),
+                            ft.DataCell(ft.Text(f"{planet.get('pl_bmasse', '-'):.2f}" if planet.get("pl_bmasse") else "-", size=10, color=ft.Colors.WHITE)),
+                            ft.DataCell(ft.Text(f"{planet.get('pl_rade', '-'):.2f}" if planet.get("pl_rade") else "-",size=10, color=ft.Colors.WHITE)),
+                        ]
+                    )
+                )
+            return rows
+
         def create_radius_distribution_pie():
             rayons = pd.to_numeric(
                 [item['pl_rade'] for item in md.data_table_dict],
@@ -136,99 +153,16 @@ class page_001(Xview):
             plt.close(fig)
             return fig
 
-        # Génération du graphique en camembert pour les distances
-        def create_distance_distribution_pie():
-            # Extraction brute des distances
-            raw_distances = [item['sy_dist'] for item in md.data_table_dict]
 
-            # Convertir les distances connues en float
-            distances_known = pd.Series(pd.to_numeric(
-                [d for d in raw_distances if d is not None],
-                errors='coerce'
-            )).dropna()
 
-            count_unknown = len(raw_distances) - len(distances_known)
-
-            # Filtrer les distances valides (>= 10 pcs)
-            distances_known = distances_known[distances_known >= 10]
-
-            # Définir les tranches
-            bins = {
-                "10–20 pcs": ((distances_known >= 10) & (distances_known < 20)),
-                "20–30 pcs": ((distances_known >= 20) & (distances_known < 30)),
-                "30–40 pcs": ((distances_known >= 30) & (distances_known < 40)),
-                "40–50 pcs": ((distances_known >= 40) & (distances_known < 50)),
-                "50–100 pcs": ((distances_known >= 50) & (distances_known < 100)),
-                "100–200 pcs": ((distances_known >= 100) & (distances_known < 200)),
-                ">200 pcs": (distances_known >= 200),
-                "Inconnu": pd.Series([True] * count_unknown)
-            }
-
-            labels = list(bins.keys())
-            counts = [np.sum(cond) for cond in bins.values()]
-            total = np.sum(counts)
-
-            label_percentages = [
-                f"{label}\n{count} ({count/total:.1%})" for label, count in zip(labels, counts)
-            ]
-
-            colors = [
-                '#FF0000',    # Rouge vif  # 10–20
-                '#00FF00',    # Vert fluo  # 20–30
-                '#00BFFF',    # Bleu clair # 30–40
-                '#00008B',    # Bleu foncé # 40–50
-                '#FFA500',    # Orange     # 50–100
-                '#FF69B4',    # Rose       # 100–200
-                '#00FFFF',    # Cyan       # >200
-                '#FFD700'     # Or         # Inconnu
-            ]
-
-            # Création du graphique
-            fig, ax = plt.subplots(figsize=(8, 8))
-            wedges, texts = ax.pie(
-                counts,
-                labels=label_percentages,
-                colors=colors[:len(counts)],
-                startangle=140
-            )
-
-            # Appliquer style aux labels
-            for text in texts:
-                text.set_fontsize(14)
-                text.set_fontweight('bold')
-
-            ax.set_title("Répartition des planètes par tranches de distance", fontsize=14, fontweight='bold')
-            ax.axis('equal')
-            plt.tight_layout()
-            plt.close(fig)
-            return fig
-
-        # Créer les figures
-        fig_mass_pie = create_mass_distribution_pie()
         fig_radius_pie = create_radius_distribution_pie()
-        fig_distance_pie = create_distance_distribution_pie()
-
-        def generate_planet_rows(planet_list):
-            rows = []
-            for planet in planet_list:
-                rows.append(
-                    ft.DataRow(
-                        cells=[
-                            ft.DataCell(ft.Text(str(planet.get("pl_name", "-")), size=10, color=ft.Colors.WHITE)),
-                            ft.DataCell(ft.Text(f"{planet.get('sy_dist', '-'):.2f}", size=10, color=ft.Colors.WHITE)),
-                            ft.DataCell(ft.Text(f"{planet.get('pl_bmasse', '-'):.2f}" if planet.get("pl_bmasse") else "-", size=10, color=ft.Colors.WHITE)),
-                            ft.DataCell(ft.Text(f"{planet.get('pl_rade', '-'):.2f}" if planet.get("pl_rade") else "-", size=10, color=ft.Colors.WHITE)),
-                        ]
-                    )
-                )
-            return rows
 
         return ft.View(
             vertical_alignment=ft.MainAxisAlignment.START,
             horizontal_alignment=ft.CrossAxisAlignment.STRETCH,
             controls=[
                 ft.Column(
-                    expand=True,
+                    expand=True,  # << Permet aux enfants d'utiliser expand
                     controls=[
                         ft.Container(
                             content=ft.Text("ceci est la page 1", size=30),
@@ -271,8 +205,15 @@ class page_001(Xview):
                                         height=300,
                                         border_radius=10,
                                     ),
-                                    MatplotlibChart(fig_distance_pie, expand=True),
                                     MatplotlibChart(fig_radius_pie, expand=True),
+                                    ft.Container(
+                                        content=ft.Text("Non clickable"),
+                                        alignment=ft.alignment.center,
+                                        bgcolor=ft.Colors.GREEN,
+                                        width=300,
+                                        height=300,
+                                        border_radius=10,
+                                    ),
                                     ft.Container(
                                         content=ft.Text("Non clickable"),
                                         alignment=ft.alignment.center,

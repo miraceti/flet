@@ -1,7 +1,7 @@
 import flet as ft
 from fletx import Xapp, route
 from views.home_view import HomeView
-from views.page_001 import page_001
+from fletpages13.views.page_001a import page_001
 from views.page_002 import page_002
 from views.page_003 import page_003
 from views.page_004 import page_004
