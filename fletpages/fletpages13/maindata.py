@@ -207,3 +207,15 @@ bin43_counts = df43_filtered['rade_bin'].value_counts().sort_index()
 print("MASSE")
 print(df43['pl_rade'].sort_values().unique()[0:20])  # voir les plus petites
 print(df43['pl_rade'].sort_values().unique()[-20:]) # voir les plus grandes
+
+###########page 1
+###PIE amber
+
+#TABLEAU purple
+planetes_tries_sy_dist = sorted(
+    planetes_avec_distance,
+    key=lambda x: (x.get('sy_dist') is None, x.get('sy_dist') if x.get('sy_dist') is not None else float('inf'))
+)
+
+plus_proches_planetes = planetes_tries_sy_dist[:5]
+

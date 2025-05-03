@@ -28,14 +28,14 @@ class HomeView(Xview):
                                         ft.Text(
                                             "Nombre d'exoplanètes découvertes à ce jour",
                                             size=30,
-                                            color=ft.colors.WHITE,
+                                            color=ft.Colors.WHITE,
                                             text_align=ft.TextAlign.CENTER,
                                         ),
                                         ft.Text(
                                             str(md.nb_exoplanets),
                                             size=30,
-                                            color=ft.colors.RED,
-                                            bgcolor=ft.colors.BLACK,
+                                            color=ft.Colors.RED,
+                                            bgcolor=ft.Colors.BLACK,
                                             weight=ft.FontWeight.BOLD,
                                             text_align=ft.TextAlign.CENTER,
                                         ),
@@ -44,8 +44,8 @@ class HomeView(Xview):
                                                 ft.ElevatedButton(
                                                     "Go to Next View",
                                                     on_click=lambda e: self.go("/page_001"),
-                                                    color=ft.colors.WHITE,
-                                                    bgcolor=ft.colors.BLUE
+                                                    color=ft.Colors.WHITE,
+                                                    bgcolor=ft.Colors.BLUE
                                                 ),
                                             ],
                                             alignment=ft.MainAxisAlignment.END,
