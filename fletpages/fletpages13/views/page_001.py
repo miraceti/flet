@@ -66,19 +66,27 @@ class page_001(Xview):
                 '#00008B',  # Bleu foncé # 10–100
                 '#FFA500',  # Orange     # RUPTURE
                 '#FF69B4',  # Rose       # >1000
-                '#00FFFF' ,  # Cyan      # Inconnue   
+                '#AAAAAA' , # Gris      # Inconnue   
             ]
 
             # Création du graphique
-            fig, ax = plt.subplots(figsize=(8, 8))
-            wedges, texts = ax.pie(counts, labels=labels, colors=colors, startangle=140)
+            fig, ax = plt.subplots(figsize=(10, 10))
+            wedges, texts = ax.pie(counts, labels=labels, colors=colors, startangle=140, labeldistance=1.4 )
 
             # Appliquer style aux labels
             for text in texts:
                 text.set_fontsize(14)           # Taille de police
                 text.set_fontweight('bold')     # Style gras
 
-            ax.set_title("Répartition des planètes par tranches de masse", fontsize=14, fontweight='bold')
+            # ax.set_title("Répartition des planètes par tranches de masse", fontsize=14, fontweight='bold')
+            ax.set_title(
+                "Répartition des planètes par tranches de masse",
+                fontsize=20,
+                fontweight='bold',
+                backgroundcolor='lightgreen',  # ✅ couleur de fond
+                color='black',                # ✅ couleur du texte (optionnel)
+                pad=10                        # ✅ espace entre le titre et le graphique
+            )
             ax.axis('equal')  # Assure un cercle parfait
 
             plt.tight_layout()
@@ -94,8 +102,7 @@ class page_001(Xview):
             rayons_series = pd.Series(rayons)
 
             bins = {
-                "0–0.5 R⊕": ((rayons_series > 0) & (rayons_series <= 0.5)),
-                "0.5–1.0 R⊕": ((rayons_series > 0.5) & (rayons_series <= 1.0)),
+                "0.0–1.0 R⊕": ((rayons_series > 0.0) & (rayons_series <= 1.0)),
                 "1.0–1.5 R⊕": ((rayons_series > 1.0) & (rayons_series <= 1.5)),
                 "1.5–2.0 R⊕": ((rayons_series > 1.5) & (rayons_series <= 2.0)),
                 "2.0–3.0 R⊕": ((rayons_series > 2.0) & (rayons_series <= 3.0)),
@@ -115,7 +122,7 @@ class page_001(Xview):
 
             colors = [
                 'red', 'limegreen', 'deepskyblue', 'navy', 'orange',
-                'hotpink', 'cyan', 'gold', 'purple'
+                'hotpink', 'cyan',  'purple'
             ]
 
             fig, ax = plt.subplots(figsize=(10, 10))
@@ -123,14 +130,23 @@ class page_001(Xview):
                 counts,
                 labels=label_percentages,
                 colors=colors[:len(counts)],
-                startangle=140
+                startangle=140,
+                labeldistance=1.4  # augmente la distance entre le centre et les labels
             )
 
             for text in texts:
-                text.set_fontsize(13)
+                text.set_fontsize(14)
                 text.set_fontweight('bold')
 
-            ax.set_title("Répartition des planètes par tranches de rayon", fontsize=16, fontweight='bold')
+            # ax.set_title("Répartition des planètes par tranches de rayon", fontsize=20, fontweight='bold')
+            ax.set_title(
+                "Répartition des planètes par tranches de rayon",
+                fontsize=20,
+                fontweight='bold',
+                backgroundcolor='lightgreen',  # ✅ couleur de fond
+                color='black',                # ✅ couleur du texte (optionnel)
+                pad=10                        # ✅ espace entre le titre et le graphique
+            )
             ax.axis('equal')
             plt.tight_layout()
             plt.close(fig)
@@ -150,17 +166,19 @@ class page_001(Xview):
             count_unknown = len(raw_distances) - len(distances_known)
 
             # Filtrer les distances valides (>= 10 pcs)
-            distances_known = distances_known[distances_known >= 10]
+            distances_known = distances_known[distances_known >= 1]
 
             # Définir les tranches
             bins = {
-                "10–20 pcs": ((distances_known >= 10) & (distances_known < 20)),
-                "20–30 pcs": ((distances_known >= 20) & (distances_known < 30)),
-                "30–40 pcs": ((distances_known >= 30) & (distances_known < 40)),
-                "40–50 pcs": ((distances_known >= 40) & (distances_known < 50)),
+                "0–10 pcs": ((distances_known >= 0) & (distances_known < 10)),
+                "10–25 pcs": ((distances_known >= 10) & (distances_known < 25)),
+                "25–50 pcs": ((distances_known >= 25) & (distances_known < 50)),
                 "50–100 pcs": ((distances_known >= 50) & (distances_known < 100)),
-                "100–200 pcs": ((distances_known >= 100) & (distances_known < 200)),
-                ">200 pcs": (distances_known >= 200),
+                "100–250 pcs": ((distances_known >= 100) & (distances_known < 250)),
+                "250–500 pcs": ((distances_known >= 250) & (distances_known < 500)),
+                "500–1000 pcs": ((distances_known >= 500) & (distances_known < 1000)),
+                "1000–2500 pcs": ((distances_known >= 1000) & (distances_known < 2500)),
+                ">2500 pcs": (distances_known >= 2500),
                 "Inconnu": pd.Series([True] * count_unknown)
             }
 
@@ -173,23 +191,26 @@ class page_001(Xview):
             ]
 
             colors = [
-                '#FF0000',    # Rouge vif  # 10–20
-                '#00FF00',    # Vert fluo  # 20–30
-                '#00BFFF',    # Bleu clair # 30–40
-                '#00008B',    # Bleu foncé # 40–50
-                '#FFA500',    # Orange     # 50–100
-                '#FF69B4',    # Rose       # 100–200
-                '#00FFFF',    # Cyan       # >200
-                '#FFD700'     # Or         # Inconnu
+                '#FF0000',    # Rouge vif  # 0–10
+                '#00FF00',    # Vert fluo  # 10–25
+                '#00BFFF',    # Bleu clair # 25–50
+                '#00008B',    # Bleu foncé # 50–100
+                '#FFA500',    # Orange     # 100–250
+                '#FF69B4',    # Rose       # 250–500
+                '#FF8B00',    # vert foncé # 500–1000
+                '#0069B4',    # Rose       # 1000–2500
+                '#00FFFF',    # Cyan       # >2500
+                '#AAAAAA'     # gris         # Inconnu
             ]
 
             # Création du graphique
-            fig, ax = plt.subplots(figsize=(8, 8))
+            fig, ax = plt.subplots(figsize=(10, 10))
             wedges, texts = ax.pie(
                 counts,
                 labels=label_percentages,
                 colors=colors[:len(counts)],
-                startangle=140
+                startangle=140,
+                labeldistance=1.4,  # augmente la distance entre le centre et les labels
             )
 
             # Appliquer style aux labels
@@ -198,6 +219,14 @@ class page_001(Xview):
                 text.set_fontweight('bold')
 
             ax.set_title("Répartition des planètes par tranches de distance", fontsize=14, fontweight='bold')
+            ax.set_title(
+                "Répartition des planètes par tranches de distance",
+                fontsize=20,
+                fontweight='bold',
+                backgroundcolor='lightgreen',  # ✅ couleur de fond
+                color='black',                # ✅ couleur du texte (optionnel)
+                pad=10                        # ✅ espace entre le titre et le graphique
+            )
             ax.axis('equal')
             plt.tight_layout()
             plt.close(fig)
@@ -214,14 +243,43 @@ class page_001(Xview):
                 rows.append(
                     ft.DataRow(
                         cells=[
-                            ft.DataCell(ft.Text(str(planet.get("pl_name", "-")), size=10, color=ft.Colors.WHITE)),
-                            ft.DataCell(ft.Text(f"{planet.get('sy_dist', '-'):.2f}", size=10, color=ft.Colors.WHITE)),
-                            ft.DataCell(ft.Text(f"{planet.get('pl_bmasse', '-'):.2f}" if planet.get("pl_bmasse") else "-", size=10, color=ft.Colors.WHITE)),
-                            ft.DataCell(ft.Text(f"{planet.get('pl_rade', '-'):.2f}" if planet.get("pl_rade") else "-", size=10, color=ft.Colors.WHITE)),
+                            ft.DataCell(
+                                ft.Container(
+                                    content=ft.Text(str(planet.get("pl_name", "-")), size=10, color=ft.Colors.WHITE),
+                                    width=50
+                                )
+                            ),
+                            ft.DataCell(
+                                ft.Container(
+                                    content=ft.Text(f"{planet.get('sy_dist', '-'):.2f}", size=10, color=ft.Colors.WHITE),
+                                    width=50
+                                )
+                            ),
+                            ft.DataCell(
+                                ft.Container(
+                                    content=ft.Text(
+                                        f"{planet.get('pl_bmasse', '-'):.2f}" if planet.get("pl_bmasse") else "-",
+                                        size=10,
+                                        color=ft.Colors.WHITE
+                                    ),
+                                    width=50
+                                )
+                            ),
+                            ft.DataCell(
+                                ft.Container(
+                                    content=ft.Text(
+                                        f"{planet.get('pl_rade', '-'):.2f}" if planet.get("pl_rade") else "-",
+                                        size=10,
+                                        color=ft.Colors.WHITE
+                                    ),
+                                    width=50
+                                )
+                            ),
                         ]
                     )
                 )
             return rows
+
 
         return ft.View(
             vertical_alignment=ft.MainAxisAlignment.START,
@@ -231,7 +289,7 @@ class page_001(Xview):
                     expand=True,
                     controls=[
                         ft.Container(
-                            content=ft.Text("ceci est la page 1", size=30),
+                            content=ft.Text("Les répartitions", size=30),
                             alignment=ft.alignment.top_center
                         ),
                         ft.Row(
@@ -256,10 +314,27 @@ class page_001(Xview):
                                     ft.Container(
                                         content=ft.DataTable(
                                             columns=[
-                                                ft.DataColumn(ft.Text("PLANÈTE", color=ft.Colors.WHITE), numeric=False, tooltip="Nom de la planète", on_sort=None),
-                                                ft.DataColumn(ft.Text("Distance (pc)", color=ft.Colors.WHITE, size=10), tooltip="Distance en parsecs", on_sort=None),
-                                                ft.DataColumn(ft.Text("Masse", color=ft.Colors.WHITE, size=10), tooltip="Masse en M⊕", on_sort=None),
-                                                ft.DataColumn(ft.Text("Rayon", color=ft.Colors.WHITE, size=10), tooltip="Rayon en R⊕", on_sort=None),
+                                                ft.DataColumn(
+                                                    label=ft.Text("PLANÈTE", color=ft.Colors.WHITE), 
+                                                    numeric=False,
+                                                    tooltip="Nom de la planète",
+                                                    on_sort=None
+                                                ),
+                                                ft.DataColumn(
+                                                    label=ft.Text("Distance (pc)", color=ft.Colors.WHITE, size=10), 
+                                                    tooltip="Distance en parsecs",
+                                                    on_sort=None
+                                                ),
+                                                ft.DataColumn(
+                                                    label=ft.Text("Masse", color=ft.Colors.WHITE, size=10), 
+                                                    tooltip="Masse en M⊕",
+                                                    on_sort=None
+                                                ),
+                                                ft.DataColumn(
+                                                    label=ft.Text("Rayon", color=ft.Colors.WHITE, size=10), 
+                                                    tooltip="Rayon en R⊕",
+                                                    on_sort=None
+                                                ),
                                             ],
                                             rows=generate_planet_rows(md.plus_proches_planetes),
                                             bgcolor=ft.Colors.BLACK,
