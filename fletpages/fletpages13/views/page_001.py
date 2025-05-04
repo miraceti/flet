@@ -70,8 +70,8 @@ class page_001(Xview):
             ]
 
             # Création du graphique
-            fig, ax = plt.subplots(figsize=(10, 10))
-            wedges, texts = ax.pie(counts, labels=labels, colors=colors, startangle=140, labeldistance=1.4 )
+            fig, ax = plt.subplots(figsize=(12, 12))
+            wedges, texts = ax.pie(counts, labels=labels, colors=colors, startangle=140, labeldistance=1.3 )
 
             # Appliquer style aux labels
             for text in texts:
@@ -89,7 +89,9 @@ class page_001(Xview):
             )
             ax.axis('equal')  # Assure un cercle parfait
 
-            plt.tight_layout()
+            fig.subplots_adjust(left=0.1, right=0.9, top=0.85, bottom=0.15)  # ✅ ajuste les marges manuellement
+
+            #plt.tight_layout()
             plt.close(fig)
             return fig
 
@@ -125,13 +127,13 @@ class page_001(Xview):
                 'hotpink', 'cyan',  'purple'
             ]
 
-            fig, ax = plt.subplots(figsize=(10, 10))
+            fig, ax = plt.subplots(figsize=(12, 12))
             wedges, texts = ax.pie(
                 counts,
                 labels=label_percentages,
                 colors=colors[:len(counts)],
                 startangle=140,
-                labeldistance=1.4  # augmente la distance entre le centre et les labels
+                labeldistance=1.1  # augmente la distance entre le centre et les labels
             )
 
             for text in texts:
@@ -148,7 +150,10 @@ class page_001(Xview):
                 pad=10                        # ✅ espace entre le titre et le graphique
             )
             ax.axis('equal')
-            plt.tight_layout()
+
+            fig.subplots_adjust(left=0.1, right=0.9, top=0.85, bottom=0.15)  # ✅ ajuste les marges manuellement
+
+            #plt.tight_layout()
             plt.close(fig)
             return fig
 
@@ -204,13 +209,13 @@ class page_001(Xview):
             ]
 
             # Création du graphique
-            fig, ax = plt.subplots(figsize=(10, 10))
+            fig, ax = plt.subplots(figsize=(12, 12))
             wedges, texts = ax.pie(
                 counts,
                 labels=label_percentages,
                 colors=colors[:len(counts)],
                 startangle=140,
-                labeldistance=1.4,  # augmente la distance entre le centre et les labels
+                labeldistance=1.3,  # augmente la distance entre le centre et les labels
             )
 
             # Appliquer style aux labels
@@ -228,7 +233,10 @@ class page_001(Xview):
                 pad=10                        # ✅ espace entre le titre et le graphique
             )
             ax.axis('equal')
-            plt.tight_layout()
+
+            fig.subplots_adjust(left=0.1, right=0.9, top=0.85, bottom=0.15)  # ✅ ajuste les marges manuellement
+
+            #plt.tight_layout()
             plt.close(fig)
             return fig
 
@@ -246,13 +254,13 @@ class page_001(Xview):
                             ft.DataCell(
                                 ft.Container(
                                     content=ft.Text(str(planet.get("pl_name", "-")), size=10, color=ft.Colors.WHITE),
-                                    width=50
+                                    width=30
                                 )
                             ),
                             ft.DataCell(
                                 ft.Container(
                                     content=ft.Text(f"{planet.get('sy_dist', '-'):.2f}", size=10, color=ft.Colors.WHITE),
-                                    width=50
+                                    width=30
                                 )
                             ),
                             ft.DataCell(
@@ -262,7 +270,7 @@ class page_001(Xview):
                                         size=10,
                                         color=ft.Colors.WHITE
                                     ),
-                                    width=50
+                                    width=30
                                 )
                             ),
                             ft.DataCell(
@@ -272,7 +280,7 @@ class page_001(Xview):
                                         size=10,
                                         color=ft.Colors.WHITE
                                     ),
-                                    width=50
+                                    width=30
                                 )
                             ),
                         ]
