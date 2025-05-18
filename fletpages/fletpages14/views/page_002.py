@@ -1,7 +1,7 @@
 import flet as ft
 from fletx import Xview
 
-class page_010(Xview):
+class page_002(Xview):
     def build(self):
         return ft.View(
             vertical_alignment=ft.MainAxisAlignment.START,

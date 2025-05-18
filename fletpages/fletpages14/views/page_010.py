@@ -13,7 +13,7 @@ TABLE_ID_COLOR_MAP = {
     "methode": ft.Colors.CYAN,
 }
 
-class page_002(Xview):
+class page_010(Xview):
     def build(self):
         # Configuration des tableaux
         self.table_configs = {

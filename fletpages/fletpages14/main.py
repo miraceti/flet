@@ -10,7 +10,8 @@ from views.page_006 import page_006
 from views.page_007 import page_007
 from views.page_008 import page_008
 from views.page_009 import page_009
-from fletpages14.views.page_002 import page_010
+from views.page_010 import page_010
+
 
 def main(page:ft.Page):
     page.title=" EXOPLANETES  -  INFORMATIONS"
