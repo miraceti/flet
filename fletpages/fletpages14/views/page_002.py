@@ -14,7 +14,6 @@ class page_010(Xview):
                             alignment=ft.alignment.top_center
                         ),
                         ft.Row(
-                            
                             controls=[
                                     ft.ElevatedButton(
                                         "Go to previous View",
