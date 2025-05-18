@@ -217,5 +217,5 @@ planetes_tries_sy_dist = sorted(
     key=lambda x: (x.get('sy_dist') is None, x.get('sy_dist') if x.get('sy_dist') is not None else float('inf'))
 )
 
-plus_proches_planetes = planetes_tries_sy_dist[:5]
-
+plus_proches_planetes = planetes_tries_sy_dist[:100]
+print('ppp : ', plus_proches_planetes[0])

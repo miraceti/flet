@@ -71,17 +71,34 @@ class page_001(Xview):
 
             # Création du graphique
             fig, ax = plt.subplots(figsize=(12, 12))
-            wedges, texts = ax.pie(counts, labels=labels, colors=colors, startangle=140, labeldistance=1.3 )
+            #wedges, texts = ax.pie(counts, labels=labels, colors=colors, startangle=140, labeldistance=1.3 )
+
+            wedges, texts = ax.pie(
+                counts,
+                labels=labels,
+                colors=colors,
+                startangle=140,
+                labeldistance=1.3  # ✅ plus proche du graphique
+            )
 
             # Appliquer style aux labels
             for text in texts:
-                text.set_fontsize(14)           # Taille de police
+                text.set_fontsize(24)           # Taille de police
                 text.set_fontweight('bold')     # Style gras
+                # text.set_bbox(dict(facecolor='white', edgecolor='none', pad=1.0))
+
+            # Exemple de repositionnement manuel :
+            texts[0].set_position((texts[0].get_position()[0] + 0.15, texts[0].get_position()[1] + 0.05))
+            texts[1].set_position((texts[1].get_position()[0] + 0.15, texts[1].get_position()[1] - 0.05))
+            texts[2].set_position((texts[2].get_position()[0] + 0.30, texts[2].get_position()[1]))
+            texts[3].set_position((texts[3].get_position()[0] + 0.30, texts[3].get_position()[1]))
+
+            texts[6].set_position((texts[6].get_position()[0], texts[6].get_position()[1] - 0.50))
 
             # ax.set_title("Répartition des planètes par tranches de masse", fontsize=14, fontweight='bold')
             ax.set_title(
                 "Répartition des planètes par tranches de masse",
-                fontsize=20,
+                fontsize=30,
                 fontweight='bold',
                 backgroundcolor='lightgreen',  # ✅ couleur de fond
                 color='black',                # ✅ couleur du texte (optionnel)
@@ -133,17 +150,23 @@ class page_001(Xview):
                 labels=label_percentages,
                 colors=colors[:len(counts)],
                 startangle=140,
-                labeldistance=1.1  # augmente la distance entre le centre et les labels
+                labeldistance=1.01 , # augmente la distance entre le centre et les labels
+                textprops={'fontsize': 18}
             )
 
             for text in texts:
-                text.set_fontsize(14)
+                text.set_fontsize(24)
                 text.set_fontweight('bold')
+
+            texts[0].set_position((texts[0].get_position()[0] + 0.50, texts[0].get_position()[1]))
+
+            texts[3].set_position((texts[3].get_position()[0] - 0.30, texts[3].get_position()[1] - 0.50))
+            texts[4].set_position((texts[4].get_position()[0] - 0.30, texts[4].get_position()[1] - 0.10))
 
             # ax.set_title("Répartition des planètes par tranches de rayon", fontsize=20, fontweight='bold')
             ax.set_title(
                 "Répartition des planètes par tranches de rayon",
-                fontsize=20,
+                fontsize=30,
                 fontweight='bold',
                 backgroundcolor='lightgreen',  # ✅ couleur de fond
                 color='black',                # ✅ couleur du texte (optionnel)
@@ -215,22 +238,31 @@ class page_001(Xview):
                 labels=label_percentages,
                 colors=colors[:len(counts)],
                 startangle=140,
-                labeldistance=1.3,  # augmente la distance entre le centre et les labels
+                labeldistance=1.05,  # augmente la distance entre le centre et les labels
             )
 
             # Appliquer style aux labels
             for text in texts:
-                text.set_fontsize(14)
+                text.set_fontsize(24)
                 text.set_fontweight('bold')
+
+            # Exemple de repositionnement manuel :
+            texts[0].set_position((texts[0].get_position()[0], texts[0].get_position()[1]))
+            texts[1].set_position((texts[1].get_position()[0], texts[1].get_position()[1] - 0.05))
+            texts[2].set_position((texts[2].get_position()[0], texts[2].get_position()[1]))
+
+            texts[7].set_position((texts[7].get_position()[0] + 0.50, texts[7].get_position()[1] + 0.05))
+            texts[8].set_position((texts[8].get_position()[0] + 0.20, texts[8].get_position()[1] + 0.20))
+            texts[9].set_position((texts[9].get_position()[0]       , texts[9].get_position()[1] + 0.10))
 
             ax.set_title("Répartition des planètes par tranches de distance", fontsize=14, fontweight='bold')
             ax.set_title(
                 "Répartition des planètes par tranches de distance",
-                fontsize=20,
+                fontsize=30,
                 fontweight='bold',
                 backgroundcolor='lightgreen',  # ✅ couleur de fond
                 color='black',                # ✅ couleur du texte (optionnel)
-                pad=10                        # ✅ espace entre le titre et le graphique
+                pad=40                        # ✅ espace entre le titre et le graphique
             )
             ax.axis('equal')
 
@@ -320,40 +352,49 @@ class page_001(Xview):
                                 controls=[
                                     MatplotlibChart(fig_mass_pie, expand=True),
                                     ft.Container(
-                                        content=ft.DataTable(
-                                            columns=[
-                                                ft.DataColumn(
-                                                    label=ft.Text("PLANÈTE", color=ft.Colors.WHITE), 
-                                                    numeric=False,
-                                                    tooltip="Nom de la planète",
-                                                    on_sort=None
-                                                ),
-                                                ft.DataColumn(
-                                                    label=ft.Text("Distance (pc)", color=ft.Colors.WHITE, size=10), 
-                                                    tooltip="Distance en parsecs",
-                                                    on_sort=None
-                                                ),
-                                                ft.DataColumn(
-                                                    label=ft.Text("Masse", color=ft.Colors.WHITE, size=10), 
-                                                    tooltip="Masse en M⊕",
-                                                    on_sort=None
-                                                ),
-                                                ft.DataColumn(
-                                                    label=ft.Text("Rayon", color=ft.Colors.WHITE, size=10), 
-                                                    tooltip="Rayon en R⊕",
-                                                    on_sort=None
-                                                ),
-                                            ],
-                                            rows=generate_planet_rows(md.plus_proches_planetes),
-                                            bgcolor=ft.Colors.BLACK,
-                                            border=ft.border.all(1, ft.Colors.WHITE)
-                                        ),
                                         alignment=ft.alignment.center,
-                                        bgcolor=ft.Colors.PURPLE,
-                                        width=300,
+                                        bgcolor=ft.colors.BLACK,
+                                        width=440,  # ✅ élargi pour éviter tout tronquage
                                         height=300,
                                         border_radius=10,
+                                        padding=10,
+                                        content=ft.Column(
+                                            spacing=5,
+                                            controls=[
+                                                ft.Row(
+                                                    controls=[
+                                                        ft.Text("PLANÈTE", size=12, weight=ft.FontWeight.BOLD, width=120, color=ft.colors.WHITE),
+                                                        ft.Text("Distance (pc)", size=12, weight=ft.FontWeight.BOLD, width=80, color=ft.colors.WHITE),
+                                                        ft.Text("Masse", size=12, weight=ft.FontWeight.BOLD, width=60, color=ft.colors.WHITE),
+                                                        ft.Text("Rayon", size=12, weight=ft.FontWeight.BOLD, width=80, color=ft.colors.WHITE),  # ✅ élargi
+                                                    ],
+                                                    alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                                                ),
+                                                ft.Container(
+                                                    height=240,
+                                                    content=ft.ListView(
+                                                        spacing=5,
+                                                        auto_scroll=False,
+                                                        controls=[
+                                                            ft.Row(
+                                                                controls=[
+                                                                    ft.Text(p["pl_name"], width=120, color=ft.colors.WHITE),
+                                                                    ft.Text(f"{p['sy_dist']:.2f}" if p["sy_dist"] is not None else "-", width=80, color=ft.colors.WHITE),
+                                                                    ft.Text(f"{p['pl_bmasse']:.2f}" if p["pl_bmasse"] is not None else "-", width=60, color=ft.colors.WHITE),
+                                                                    ft.Text(f"{p['pl_rade']:.2f}" if p["pl_rade"] is not None else "-", width=80, color=ft.colors.WHITE),
+                                                                ],
+                                                                alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                                                            )
+                                                            for p in md.plus_proches_planetes[:100]
+                                                        ]
+                                                    )
+                                                )
+                                            ]
+                                        )
                                     ),
+
+
+
                                     MatplotlibChart(fig_distance_pie, expand=True),
                                     MatplotlibChart(fig_radius_pie, expand=True),
                                     ft.Container(
