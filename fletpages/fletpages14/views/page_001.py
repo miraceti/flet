@@ -339,9 +339,9 @@ class page_001(Xview):
                 text.set_fontweight('bold')
 
             # Exemple de repositionnement manuel :
-            texts[0].set_position((texts[0].get_position()[0] + 0.70, texts[0].get_position()[1] + 0.30))
-            texts[1].set_position((texts[1].get_position()[0] + 0.60, texts[1].get_position()[1] + 0.20))
-            texts[2].set_position((texts[2].get_position()[0], texts[2].get_position()[1] + 0.30))
+            texts[0].set_position((texts[0].get_position()[0] + 0.70, texts[0].get_position()[1] + 0.50))
+            texts[1].set_position((texts[1].get_position()[0] + 0.60, texts[1].get_position()[1] + 0.40))
+            texts[2].set_position((texts[2].get_position()[0], texts[2].get_position()[1] + 0.40))
 
             texts[3].set_position((texts[3].get_position()[0], texts[3].get_position()[1] + 0.30))
             texts[4].set_position((texts[4].get_position()[0], texts[4].get_position()[1] + 0.20))
@@ -437,13 +437,14 @@ class page_001(Xview):
             # Exemple de repositionnement manuel :
             texts[0].set_position((texts[0].get_position()[0] + 0.40, texts[0].get_position()[1] + 0.40))
             texts[1].set_position((texts[1].get_position()[0] + 0.20, texts[1].get_position()[1] + 0.20))
-            texts[2].set_position((texts[2].get_position()[0], texts[2].get_position()[1] + 0.20))
-            texts[3].set_position((texts[3].get_position()[0], texts[3].get_position()[1] + 0.10))
-            texts[4].set_position((texts[4].get_position()[0] + 0.60, texts[4].get_position()[1] - 0.20))
 
-            texts[5].set_position((texts[5].get_position()[0] + 0.80, texts[5].get_position()[1] + 0.10))
+            texts[2].set_position((texts[2].get_position()[0], texts[2].get_position()[1] + 0.00))
+            texts[3].set_position((texts[3].get_position()[0], texts[3].get_position()[1] - 0.10))
+
+            texts[4].set_position((texts[4].get_position()[0] + 0.20, texts[4].get_position()[1] - 0.20))
+            texts[5].set_position((texts[5].get_position()[0] + 0.10, texts[5].get_position()[1] - 0.20))
+
             texts[6].set_position((texts[6].get_position()[0] + 0.60, texts[6].get_position()[1] + 0.20))
-
             texts[7].set_position((texts[7].get_position()[0] - 0.20, texts[7].get_position()[1] + 0.40))
             texts[8].set_position((texts[8].get_position()[0] - 0.60, texts[8].get_position()[1] - 0.10))
             texts[9].set_position((texts[9].get_position()[0] + 0.30, texts[9].get_position()[1] - 0.30))
