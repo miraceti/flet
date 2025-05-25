@@ -102,16 +102,16 @@ class page_010(Xview):
                     [
                         {
                             "pl_name": item["pl_name"],
-                            "pl_dense": round(item["pl_dense"], 2) if item["pl_dense"] is not None else 0,
+                            "pl_dens": round(item["pl_dens"], 2) if item["pl_dens"] is not None else 0,
                         }
                         for item in md.planetes_tries_pl_dense
                     ],
-                    key=lambda x: (x["pl_dense"] == 0, x["pl_dense"])
+                    key=lambda x: (x["pl_dens"] == 0, x["pl_dens"])
                 ),
                 "table": "self.table_densite",
                 "columns": [
                     {"key": "pl_name", "label": "Planète", "type": "text"},
-                    {"key": "pl_dense", "label": "Densité", "type": "number"},
+                    {"key": "pl_dens", "label": "Densité", "type": "number"},
                 ],
                 "filter_text": None,  # Sera initialisé
                 "sort_column": "pl_name",
