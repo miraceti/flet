@@ -275,7 +275,7 @@ class page_001(Xview):
         # Génération du graphique en camembert pour les densite
         def create_densite_distribution_pie():
             # Extraction brute des distances
-            raw_densite = [item['pl_dense'] for item in md.data_table_dict]
+            raw_densite = [item['pl_dens'] for item in md.data_table_dict]
 
             # Convertir les distances connues en float
             densite_known = pd.Series(pd.to_numeric(
@@ -577,7 +577,7 @@ class page_001(Xview):
                                                                     ft.Text(p["pl_name"], width=120, color=ft.colors.WHITE),
                                                                     ft.Text(f"{p['sy_dist']:.2f}" if p["sy_dist"] is not None else "-", width=80, color=ft.colors.WHITE),
                                                                     ft.Text(f"{p['pl_eqt']:.2f}" if p["pl_eqt"] is not None else "-", width=60, color=ft.colors.WHITE),
-                                                                    ft.Text(f"{p['pl_dense']:.2f}" if p["pl_dense"] is not None else "-", width=60, color=ft.colors.WHITE),
+                                                                    ft.Text(f"{p['pl_dens']:.2f}" if p["pl_dens"] is not None else "-", width=60, color=ft.colors.WHITE),
                                                                 ],
                                                                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                                                             )

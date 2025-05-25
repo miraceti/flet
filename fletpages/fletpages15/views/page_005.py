@@ -90,8 +90,8 @@ class page_005(Xview):
                             controls=[
                             MatplotlibChart(fig1, expand=True),
                             MatplotlibChart(fig2, expand=True),
-                            MatplotlibChart(fig3, expand=True),
-                            MatplotlibChart(fig4, expand=True),
+                           # MatplotlibChart(fig3, expand=True),
+                            #MatplotlibChart(fig4, expand=True),
                             ],
                             scroll=ft.ScrollMode.AUTO,  # Active le scroll si nécessaire
                             expand=True,  # Prend tout l'espace disponible

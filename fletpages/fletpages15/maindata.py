@@ -36,7 +36,7 @@ data_table_tuple = [
 ]    
 
 #cle associés
-keys = ["pl_name","disc_year","sy_dist","discoverymethod","pl_bmasse","pl_rade","pl_orbper","pl_eqt","pl_dense"]
+keys = ["pl_name","disc_year","sy_dist","discoverymethod","pl_bmasse","pl_rade","pl_orbper","pl_eqt","pl_dens"]
 
 #conversion en liste de dict
 data_table_dict = [dict(zip(keys, tpl)) for tpl in data_table_tuple]
@@ -75,7 +75,7 @@ colors_barres = plt.cm.Paired.colors[:len(labels)]
 # Remplacer les valeurs None pour pl_rade par une valeur par défaut
 for item in data_table_dict:
     if item['pl_rade'] is None:
-        item['pl_rade'] = 1  # Remplacez par une valeur par défaut
+        item['pl_rade'] = 0  # Remplacez par une valeur par défaut
 
 # Extraire les données
 x = [item['sy_dist'] for item in data_table_dict]
@@ -105,8 +105,8 @@ planetes_avec_masse = [p for p in data_table_dict if p['pl_bmasse'] is not None]
 planetes_tries_pl_masse = sorted(    planetes_avec_masse,     key=lambda x: (x.get('pl_bmasse') is None, x.get('pl_bmasse') if x.get('pl_bmasse') is not None else float('inf')))
 
 #data densite
-planetes_avec_densite = [p for p in data_table_dict if p['pl_dense'] is not None]
-planetes_tries_pl_dense = sorted(    planetes_avec_densite,     key=lambda x: (x.get('pl_dense') is None, x.get('pl_dense') if x.get('pl_dense') is not None else float('inf')))
+planetes_avec_densite = [p for p in data_table_dict if p['pl_dens'] is not None]
+planetes_tries_pl_dense = sorted(    planetes_avec_densite,     key=lambda x: (x.get('pl_dens') is None, x.get('pl_dens') if x.get('pl_dens') is not None else float('inf')))
 
 #data temperature
 planetes_avec_temperature = [p for p in data_table_dict if p['pl_eqt'] is not None]

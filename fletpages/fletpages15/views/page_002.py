@@ -10,7 +10,7 @@ class page_002(Xview):
                 ft.Column(
                     controls=[
                         ft.Container(
-                            content=ft.Text("ceci est la page 2", size=30),#old 10
+                            content=ft.Text("Températures", size=30),#old 10
                             alignment=ft.alignment.top_center
                         ),
                         ft.Row(
