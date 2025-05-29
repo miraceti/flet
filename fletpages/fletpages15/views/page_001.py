@@ -537,7 +537,7 @@ class page_001(Xview):
                                                                 ],
                                                                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                                                             )
-                                                            for p in md.plus_proches_planetes[:100]
+                                                            for p in md.plus_proches_planetes[:1000]
                                                         ]
                                                     )
                                                 )
@@ -581,7 +581,7 @@ class page_001(Xview):
                                                                 ],
                                                                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                                                             )
-                                                            for p in md.plus_proches_planetes[:100]
+                                                            for p in md.plus_proches_planetes[:1000]
                                                         ]
                                                     )
                                                 )

@@ -217,7 +217,7 @@ planetes_tries_sy_dist = sorted(
     key=lambda x: (x.get('sy_dist') is None, x.get('sy_dist') if x.get('sy_dist') is not None else float('inf'))
 )
 
-plus_proches_planetes = planetes_tries_sy_dist[:100]
+plus_proches_planetes = planetes_tries_sy_dist[:1000]
 print('ppp : ', plus_proches_planetes[0])
 print(df43['pl_eqt'].sort_values().unique()[0:20])  # voir les plus froide
 print(df43['pl_eqt'].sort_values().unique()[-20:]) # voir les plus chaudes
