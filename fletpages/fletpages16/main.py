@@ -15,6 +15,8 @@ from views.page_010 import page_010
 
 def main(page:ft.Page):
     page.title=" EXOPLANETES  -  INFORMATIONS"
+     # Icône personnalisée
+    page.window.icon = "/assets/icon.png"  # Chemin vers ton icône personnalisée
 
     Xapp(
         page=page,

@@ -3,60 +3,26 @@ from fletx import Xview
 import maindata as md
 
 class HomeView(Xview):
-    def __init__(self, page=None, state=None, params=None):
-        print("Initializing HomeView")
-        super().__init__(page=page, state=state, params=params)
-        self.page = page
-        self.state = state
-        self.params = params
-
     def build(self):
-        print("Building the view")
-
-        # Conteneur pour le texte de la version
-        version_bubble = ft.Container(
-            content=ft.Text("Version de l'application: 16.b",
-                weight=ft.FontWeight.BOLD,  # Texte en gras
-                color=ft.colors.BLACK,  # Texte en noir
-                ),
-            bgcolor=ft.colors.BLUE_50,
-            padding=10,
-            border_radius=ft.border_radius.all(10),
-            visible=False,  # Initialement invisible
-        )
-
-        def show_version(e):
-            # Basculer la visibilité du conteneur
-            version_bubble.visible = not version_bubble.visible
-            self.page.update()
-
-        # Bouton pour afficher/masquer la version
-        show_version_button = ft.TextButton(
-            "À propos",
-            icon=ft.icons.INFO_OUTLINE,
-            on_click=show_version
-        )
-
-        # Utiliser un Row pour aligner le bouton et la bulle horizontalement
-        about_row = ft.Row(
-            controls=[
-                show_version_button,
-                version_bubble
-            ],
-            alignment=ft.MainAxisAlignment.START,
-        )
-
         return ft.View(
             controls=[
                 ft.Container(
+                    #width=400,  # Largeur fixe
+                    #height=700,  # Hauteur fixe
                     content=ft.Stack(
                         controls=[
+                            # ✅ Image de fond locale
                             ft.Image(
                                 src="exo1.jpg",
+                                #width=400,
+                                #height=700,
                                 expand=True,
                                 fit=ft.ImageFit.COVER,
                             ),
+                            # ✅ Contenu par-dessus l'image
                             ft.Container(
+                                #width=400,
+                                #height=700,
                                 content=ft.Column(
                                     controls=[
                                         ft.Text(
@@ -91,11 +57,6 @@ class HomeView(Xview):
                                 ),
                                 padding=40,
                                 alignment=ft.alignment.top_center,
-                            ),
-                            ft.Container(
-                                content=about_row,
-                                left=10,
-                                bottom=10,
                             )
                         ]
                     ),

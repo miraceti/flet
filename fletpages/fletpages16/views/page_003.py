@@ -45,11 +45,12 @@ class page_003(Xview):
         point_size = 60
 
         # Tracé
-        plt.figure(figsize=(10, 6))
+        #plt.figure(figsize=(10, 6))
+        fig1, ax = plt.subplots(figsize=(8, 6))
 
         for method in selected_methods:
             subset = filtered_df[filtered_df['discoverymethod'] == method]
-            plt.scatter(
+            ax.scatter(
                 subset['pl_rade'], subset['pl_dens'],
                 s=point_size,
                 color=colors[method],
@@ -60,31 +61,41 @@ class page_003(Xview):
 
         # Légende des méthodes (couleur)
         legend_handles_methods = [
-            plt.scatter([], [], s=point_size, color=colors[method], label=method, alpha=0.7, edgecolors='w')
+            ax.scatter([], [], s=point_size, color=colors[method], label=method, alpha=0.7, edgecolors='w')
             for method in selected_methods
         ]
-        plt.legend(
+
+        ax.set_title("Planètes découvertes : Rayon vs Densité", fontsize=18, fontweight='bold')
+        ax.set_xlabel("Rayon (R⊕)", fontsize=16 , fontweight='bold')
+        ax.set_ylabel("Densité (g/cm³)", fontsize=16 , fontweight='bold')
+        ax.set_xscale('log')
+        ax.set_yscale('log')
+
+        # ✅ Chiffres axes X et Y en gras et plus grands
+        for label in ax.get_xticklabels():
+            label.set_fontsize(12)
+            label.set_fontweight('bold')
+        for label in ax.get_yticklabels():
+            label.set_fontsize(12)
+            label.set_fontweight('bold')
+        ax.grid(True, linestyle='--', alpha=0.6)
+        #ax.legend(loc='upper right', fontsize=12,prop={'weight': 'bold'})
+        ax.legend(
             handles=legend_handles_methods,
             title="Méthodes de découverte",
-            fontsize=10,
-            title_fontsize=11,
-            loc="lower right",
-            bbox_to_anchor=(1, 0)
+            fontsize=12,
+            # title_fontsize=11,
+            loc="upper right",
+            #bbox_to_anchor=(1, 0),
+            frameon=True,
+            title_fontproperties={'weight': 'bold', 'size':16},  # Titre de la légende en gras
+            prop={'weight': 'bold', 'size':12},
         )
 
-        # Titre et axes
-        plt.title("Planètes découvertes : Rayon vs Densité", fontsize=16)
-        plt.xlabel("Rayon (R⊕)", fontsize=14)
-        plt.ylabel("Densité (g/cm³)", fontsize=14)
-        plt.xscale('log')
-        plt.yscale('log')
-        plt.grid(True, linestyle='--', alpha=0.6)
         plt.tight_layout()
+        plt.close(fig1)
 
-        fig=plt.gcf()
-        plt.close(fig)
-
-        return fig
+        return fig1
     
 
     def create_graph2(self):
@@ -125,11 +136,12 @@ class page_003(Xview):
         point_size = 60
 
         # Tracé
-        plt.figure(figsize=(10, 6))
+        #plt.figure(figsize=(10, 6))
+        fig2, ax = plt.subplots(figsize=(8, 6))
 
         for method in selected_methods:
             subset = filtered_df[filtered_df['discoverymethod'] == method]
-            plt.scatter(
+            ax.scatter(
                 subset['pl_rade'], subset['pl_dens'],
                 s=point_size,
                 color=colors[method],
@@ -140,32 +152,42 @@ class page_003(Xview):
 
         # Légende des méthodes
         legend_handles_methods = [
-            plt.scatter([], [], s=point_size, color=colors[method], label=method, alpha=0.7, edgecolors='w')
+            ax.scatter([], [], s=point_size, color=colors[method], label=method, alpha=0.7, edgecolors='w')
             for method in selected_methods
         ]
-        plt.legend(
+
+        ax.set_title("Planètes découvertes : Rayon vs Densité (R ≤ 100)", fontsize=18, fontweight='bold')
+        ax.set_xlabel("Rayon (R⊕)", fontsize=16 , fontweight='bold')
+        ax.set_ylabel("Densité (g/cm³)", fontsize=16 , fontweight='bold')
+        ax.set_xscale('log')
+        ax.set_yscale('log')
+
+        # ✅ Chiffres axes X et Y en gras et plus grands
+        for label in ax.get_xticklabels():
+            label.set_fontsize(12)
+            label.set_fontweight('bold')
+        for label in ax.get_yticklabels():
+            label.set_fontsize(12)
+            label.set_fontweight('bold')
+        ax.grid(True)
+        #ax.legend(loc='upper right', fontsize=12,prop={'weight': 'bold'})
+        ax.legend(
             handles=legend_handles_methods,
             title="Méthodes de découverte",
-            fontsize=10,
-            title_fontsize=11,
-            loc="lower right",
-            bbox_to_anchor=(1, 0)
+            fontsize=12,
+            # title_fontsize=11,
+            loc="upper right",
+            #bbox_to_anchor=(1, 0),
+            frameon=True,
+            title_fontproperties={'weight': 'bold', 'size':16},  # Titre de la légende en gras
+            prop={'weight': 'bold', 'size':12},
         )
-
-        # Titre et axes
-        plt.title("Planètes découvertes : Rayon vs Densité (R ≤ 100)", fontsize=16)
-        plt.xlabel("Rayon (R⊕)", fontsize=14)
-        plt.ylabel("Densité (g/cm³)", fontsize=14)
-        plt.xscale('log')
-        plt.yscale('log')
-        plt.grid(True, linestyle='--', alpha=0.6)
         plt.tight_layout()
+        plt.close(fig2)
 
-        fig=plt.gcf()
-        plt.close(fig)
-
-        return fig
-    
+        return fig2
+          
+       
     def create_graph3(self):
         # Convertir en DataFrame
         df = pd.DataFrame(md.data_table_dict)
@@ -204,11 +226,12 @@ class page_003(Xview):
         point_size = 60
 
         # Tracé
-        plt.figure(figsize=(10, 6))
+        #plt.figure(figsize=(10, 6))
+        fig3, ax = plt.subplots(figsize=(8, 6))
 
         for method in selected_methods:
             subset = filtered_df[filtered_df['discoverymethod'] == method]
-            plt.scatter(
+            ax.scatter(
                 subset['pl_rade'], subset['pl_dens'],
                 s=point_size,
                 color=colors[method],
@@ -219,31 +242,42 @@ class page_003(Xview):
 
         # Légende des méthodes
         legend_handles_methods = [
-            plt.scatter([], [], s=point_size, color=colors[method], label=method, alpha=0.7, edgecolors='w')
+            plt.Line2D([0], [0], marker='o', color='w', label=method,
+                    markerfacecolor=colors[method], markersize=np.sqrt(point_size), alpha=0.7)
             for method in selected_methods
         ]
-        plt.legend(
+
+        ax.set_title("Planètes découvertes : Rayon vs Densité (R ≤ 10)", fontsize=18, fontweight='bold')
+        ax.set_xlabel("Rayon (R⊕)", fontsize=16 , fontweight='bold')
+        ax.set_ylabel("Densité (g/cm³)", fontsize=16 , fontweight='bold')
+        ax.set_xscale('log')
+        ax.set_yscale('log')
+
+        # ✅ Chiffres axes X et Y en gras et plus grands
+        for label in ax.get_xticklabels():
+            label.set_fontsize(12)
+            label.set_fontweight('bold')
+        for label in ax.get_yticklabels():
+            label.set_fontsize(12)
+            label.set_fontweight('bold')
+        ax.grid(True, linestyle='--', alpha=0.6)
+
+        ax.legend(
             handles=legend_handles_methods,
             title="Méthodes de découverte",
-            fontsize=10,
-            title_fontsize=11,
-            loc="lower right",
-            bbox_to_anchor=(1, 0)
+            fontsize=12,
+            # title_fontsize=12,
+            loc="lower left",  # Positionner la légende à gauche
+            # bbox_to_anchor=(1, 0),
+            frameon=True,
+            title_fontproperties={'weight': 'bold', 'size':16},  # Titre de la légende en gras
+            prop={'weight': 'bold', 'size':12},
         )
 
-        # Titre et axes
-        plt.title("Planètes découvertes : Rayon vs Densité (R ≤ 100)", fontsize=16)
-        plt.xlabel("Rayon (R⊕)", fontsize=14)
-        plt.ylabel("Densité (g/cm³)", fontsize=14)
-        plt.xscale('log')
-        plt.yscale('log')
-        plt.grid(True, linestyle='--', alpha=0.6)
         plt.tight_layout()
+        plt.close(fig3)
 
-        fig=plt.gcf()
-        plt.close(fig)
-
-        return fig
+        return fig3
 
 
     def build(self):
